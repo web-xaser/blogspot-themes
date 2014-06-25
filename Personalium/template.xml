@@ -4,22 +4,8 @@
 <head>
  <meta expr:charset='data:blog.encoding'/>
  <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible'/>
- <b:if cond='data:blog.isMobile'>
-  <meta content='width=device-width, height=device-height, initial-scale=1.0' name='viewport'/>
- <b:else/>
-  <meta content='width=1000px' name='viewport'/>
- </b:if>
- <title>
-  <b:if cond='data:blog.url == data:blog.homepageUrl'>
-   <data:blog.title/>
-  <b:else/>
-   <b:if cond='data:blog.pageType == &quot;error_page&quot;'>
-    <data:blog.title/>
-   <b:else/>
-    <data:blog.pageName/><b:if cond='data:blog.pageName'> - </b:if><data:blog.title/>
-   </b:if>
-  </b:if>
- </title>
+ <meta content='width=1000px' name='viewport'/>
+ <title><b:if cond='data:blog.pageName'><data:blog.pageName/> | </b:if><data:blog.title/></title>
  <b:skin><![CDATA[
 /* ---------- RESET ---------- */
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
@@ -28,7 +14,6 @@ border: 0;
 outline: 0;
 padding: 0;
 font-style: normal;
-vertical-align: baseline;
 }
 html {
 -ms-text-size-adjust: 100%;
@@ -36,7 +21,7 @@ html {
 -webkit-text-size-adjust: 100%;
 -webkit-font-smoothing: antialiased;
 }
-article, aside, figcaption, figure, footer, header, hgroup, main, nav, section, cite {
+figcaption, figure, cite {
 display: block;
 }
 audio, canvas, video {
@@ -45,6 +30,9 @@ vertical-align: baseline;
 }
 img, a img {
 border: 0;
+}
+i {
+font-style: italic;
 }
 table {
 border-collapse: collapse;
@@ -58,7 +46,6 @@ margin: 0;
 }
 .widget ul {
 padding: .5em 0 .2em;
-line-height: 1;
 }
 .widget {
 line-height: 1;
@@ -123,11 +110,15 @@ text-transform: uppercase;
 .blog-title a:hover {
 color: #888;
 }
-.nav {
+.blog-description {
+font: normal normal 1em/1.5 Arial, sans-serif;
+color: #222;
+}
+.navigation {
 text-align: center;
 background-color: #fff;
 }
-.nav::before, .nav::after {
+.navigation::before, .navigation::after {
 content: '';
 width: 100%;
 height: 7px;
@@ -143,14 +134,19 @@ background: linear-gradient(to bottom, #369 33%,#fff 33%,#fff 66%,#369 66%,#369 
 display: inline;
 }
 .menu li a {
+font: normal normal 1em Arial, sans-serif;
+color: #369;
 padding: 15px 10px;
 text-transform: uppercase;
+}
+.menu li a:hover {
+color: #69C;
 }
 .dropdown-menu {
 display: none;
 }
 /* ---------- POST ---------- */
-.content {
+.main-outer {
 max-width: 1000px;
 margin: 0 auto;
 padding: 1em;
@@ -161,6 +157,8 @@ padding: 20px;
 margin-bottom: 1em;
 text-align: center;
 background-color: #f5f5ff;
+font: normal normal 1em/1.5 Arial, sans-serif;
+color: #222;
 }
 .post-title a {
 font: normal normal 1.5em/1.25 Arial, sans-serif;
@@ -173,6 +171,12 @@ color: #888;
 font: bold normal 0.75em/1.5 Arial, sans-serif;
 color: #555;
 }
+.post-header a, .post-footer a, .comment-header a {
+color: #369;
+}
+.post-header a:hover, .post-footer a:hover, .comment-header a:hover {
+color: #69C;
+} 
 .post-author, address {
 display: inline;
 }
@@ -184,8 +188,11 @@ text-align: right;
 padding: 5px 10px;
 border-radius: 25px;
 border: 1px solid #369;
+font: normal normal 1em/1.5 Arial, sans-serif;
+color: #369;
 }
 .post-jump a:hover {
+color: #69c;
 border-color: #69c;
 }
 .post-jump a:active {
@@ -197,15 +204,20 @@ background-color: #369;
 margin: .5em 0 2em;
 }
 .blog-pager a {
+color: #369;
 padding: 8px 15px;
 border-radius: 25px;
 font: bold normal 1em/1.5 Arial, sans-serif;
 border: 2px solid #369;
 }
+.blog-pager a:hover {
+color: #69c;
+border-color: #69c;
+}
 .blog-pager a:active {
 color: #fff;
 border-color: transparent;
-background-color: #69C;
+background-color: #369;
 }
 .newer-link {
 float: left;
@@ -216,12 +228,17 @@ float: right;
 /* ---------- POST BODY ---------- */
 .post-body {
 margin: .5em 0;
+font: normal normal 1em/1.5 Arial, sans-serif;
+color: #222;
 }
 .post-body a {
+color: #369;
 text-decoration: underline;
 }
 .post-body > h1, .post-body  > h2, .post-body > h3, .post-body > h4, .post-body > h5, .post-body > h6 {
 margin: .5em 0;
+font: normal normal 1em/1.5 Arial, sans-serif;
+color: #222;
 }
 .post-body > h1 {
 font-size: 150% !important;
@@ -242,6 +259,7 @@ font-size: 110% !important;
 font-size: 90% !important;
 }
 .post-body blockquote {
+color: #222;
 padding: 15px;
 margin: .5em 0;
 border-radius: 3px;
@@ -250,6 +268,7 @@ font: normal normal 1.1em/1.5 Arial, sans-serif;
 background-color: #f5f5ff;
 }
 .post-body blockquote cite {
+color: #222;
 text-align: right;
 font: italic normal 0.9em/1.5 Arial, sans-serif;
 }
@@ -263,6 +282,9 @@ border-radius: 3px;
 }
 .post-body figcaption, .post-body .tr-caption {
 padding: 5px;
+border-radius: 3px;
+font: normal normal 1em/1.5 Arial, sans-serif;
+color: #222;
 }
 .widget .post-body ul, .widget .post-body ol {
 margin: 0;
@@ -280,6 +302,7 @@ font: bold normal 0.7em/1.5 Arial, sans-serif;
 text-align: right;
 }
 .comments h4 {
+color: #222;
 margin: .5em 0;
 font: normal normal 1.25em/1.5 Arial, sans-serif;
 }
@@ -314,6 +337,8 @@ background-image: url(//lh6.googleusercontent.com/-_c_fuS27eEE/Uu_bdrhUBAI/AAAAA
 }
 .comments-block .comment-body {
 margin: .25em 0;
+font: normal normal 1em/1.5 Arial, sans-serif;
+color: #222;
 }
 /* ---------- FOOTER ---------- */
 footer {
@@ -323,6 +348,12 @@ text-align: center;
 font: normal normal 1em Arial, sans-serif;
 color: #555;
 background-color: #fff;
+}
+footer a {
+color: #369;
+}
+footer a:hover {
+color: #69C;
 }
 /* ---------- MEDIA QUERIES ---------- */
 @media all and (max-width: 600px) {
@@ -414,7 +445,8 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
    </b:includable>
   </b:widget>
  </b:section>
- <header>
+ <div class='content-outer content-inner'>
+ <header class='header-outer'>
   <b:section class='header-inner' id='header' maxwidgets='1' showaddelement='no'>
    <b:widget id='Header1' locked='true' title='Personalium (заголовок)' type='Header'>
     <b:includable id='main'>
@@ -434,7 +466,7 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
    </b:widget>
   </b:section>
  </header>
- <div class='nav'>
+ <div class='tabs-outer'>
   <b:section class='navigation' id='navigation' maxwidgets='1' showaddelement='no'>
    <b:widget id='PageList1' locked='true' title='Страницы' type='PageList'>
     <b:includable id='main'>
@@ -453,7 +485,7 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
    </b:widget>
   </b:section>
  </div>
- <div class='content'>
+ <div class='main-outer'>
   <b:section class='main' id='main' showaddelement='true'>
    <b:widget id='Blog1' locked='true' title='Сообщения блога' type='Blog'>
     <b:includable id='main' var='top'>
@@ -833,7 +865,7 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
    </b:widget>
   </b:section>
  </div>
- <footer>
+ <footer class='footer-outer'>
   <b:section class='footer' id='footer' showaddelement='no'>
    <b:widget id='Attribution1' locked='true' title='' type='Attribution'>
     <b:includable id='main'>
@@ -851,5 +883,6 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
    </b:widget>
   </b:section>
  </footer>
+ </div>
 </body>
 </html>
