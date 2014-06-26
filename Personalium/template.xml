@@ -94,23 +94,31 @@ background-color: #fff;
 header {
 width: 100%;
 text-align: center;
-padding-bottom: 1em;
 background-color: #fff;
 }
-.header-image {
-width: auto;
-max-width: 100%;
+.header-float-image {
+width: 46px;
+height: 46px;
 }
-.blog-title a {
+.header-full-image {
+height: 70px;
+max-width: 100%;
+padding-bottom: 1em;
+}
+.blog-title {
 letter-spacing: 3px;
-font: normal normal 2em/1.5 Arial, sans-serif;
+font: normal normal 4em/1.5 Arial, sans-serif;
 color: #555;
 text-transform: uppercase;
+}
+.blog-title a {
+color: #555;
 }
 .blog-title a:hover {
 color: #888;
 }
 .blog-description {
+padding: .5em 0;
 font: normal normal 1em/1.5 Arial, sans-serif;
 color: #222;
 }
@@ -130,16 +138,16 @@ background: -o-linear-gradient(top, #369 33%,#fff 33%,#fff 66%,#369 66%,#369 100
 background: -ms-linear-gradient(top, #369 33%,#fff 33%,#fff 66%,#369 66%,#369 100%);
 background: linear-gradient(to bottom, #369 33%,#fff 33%,#fff 66%,#369 66%,#369 100%);
 }
-.menu li {
+.PageList li {
 display: inline;
 }
-.menu li a {
+.PageList li a {
 font: normal normal 1em Arial, sans-serif;
 color: #369;
-padding: 15px 10px;
+padding: 10px;
 text-transform: uppercase;
 }
-.menu li a:hover {
+.PageList li a:hover {
 color: #69C;
 }
 .dropdown-menu {
@@ -358,24 +366,37 @@ color: #69C;
 /* ---------- MEDIA QUERIES ---------- */
 @media all and (max-width: 600px) {
  html .Header h1 {
-  font-size: 150%;
+  font-size: 200%;
+ }
+ .header-float-image {
+  width: 23px;
+  height: 23px;
+ }
+ .header-full-image {
+  height: 50px;
  }
 }
-@media all and (max-width: 520px) {
+@media all and (max-width: 480px) {
  .navbar, .menu {
   display: none;
  }
  html .Header h1 {
-  font-size: 100%;
+  font-size: 150%;
+  padding: .75em 0 0;
  }
- .navigation {
-  margin: 0 1em;
+ .header-float-image {
+  width: 18px;
+  height: 18px;
+ }
+ .header-full-image {
+ height: 30px;
+ padding: .75em 0 0;
  }
  .dropdown-menu {
   display: inline-block;
   border: 1px solid #ccc;
   height: 35px;
-  width: 100%;
+  width: 90%;
  }
  header {
   padding-bottom: 0;
@@ -445,15 +466,26 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
    </b:includable>
   </b:widget>
  </b:section>
- <div class='content-outer content-inner'>
+ <div class='content-outer'>
  <header class='header-outer'>
   <b:section class='header-inner' id='header' maxwidgets='1' showaddelement='no'>
    <b:widget id='Header1' locked='true' title='Personalium (заголовок)' type='Header'>
     <b:includable id='main'>
      <b:if cond='data:useImage'>
-      <a expr:href='data:blog.homepageUrl'><img class='header-image' expr:src='data:sourceUrl' expr:title='data:title'/></a>
+	  <b:if cond='data:imagePlacement == &quot;BEHIND&quot;'>
+	   <h1 class='blog-title'>
+        <a expr:href='data:blog.homepageUrl'><img class='header-float-image' expr:src='data:sourceUrl' expr:title='data:title' expr:alt='data:title'/></a>
+		<b:include name='title'/>
+       </h1>
+	   <b:include name='description'/>
+	  <b:else/>
+	   <a expr:href='data:blog.homepageUrl'><img class='header-full-image' expr:src='data:sourceUrl' expr:alt='data:title' expr:title='data:title'/></a>
+	   <b:if cond='data:imagePlacement == &quot;BEFORE_DESCRIPTION&quot;'>
+	    <b:include name='description'/>
+	   </b:if>
+	  </b:if>
      <b:else/>
-      <b:include name='title'/>
+      <h1 class='blog-title'><b:include name='title'/></h1>
       <b:include name='description'/>
      </b:if>
     </b:includable>
@@ -461,7 +493,11 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
      <div class='blog-description'><data:description/></div>
     </b:includable>
     <b:includable id='title'>
-     <h1 class='blog-title'><a expr:href='data:blog.homepageUrl'><data:title/></a></h1>
+     <b:if cond='data:blog.url == data:blog.homepageUrl'>
+	  <data:title/>
+	 <b:else/>
+	  <a expr:href='data:blog.homepageUrl'><data:title/></a>
+	 </b:if>
     </b:includable>
    </b:widget>
   </b:section>
@@ -470,17 +506,22 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
   <b:section class='navigation' id='navigation' maxwidgets='1' showaddelement='no'>
    <b:widget id='PageList1' locked='true' title='Страницы' type='PageList'>
     <b:includable id='main'>
+	
      <ul class='menu'>
       <b:loop values='data:links' var='link'>
        <li><a expr:href='data:link.href'><data:link.title/></a></li>
       </b:loop>
      </ul>
      <select class='dropdown-menu' onchange='window.location.href = this.options[this.selectedIndex].value;'>
-      <option selected='selected' value=''>Меню</option> 
-      <b:loop values='data:links' var='link'>
-       <option expr:value='data:link.href'><data:link.title/></option>
+	  <b:loop values='data:links' var='link'>
+	   <b:if cond='data:link.isCurrentPage'>
+        <option expr:value='data:link.href' selected='selected'><data:link.title/></option>
+       <b:else/>
+	    <option expr:value='data:link.href'><data:link.title/></option>
+       </b:if>
       </b:loop>
      </select>
+	 
     </b:includable>
    </b:widget>
   </b:section>
