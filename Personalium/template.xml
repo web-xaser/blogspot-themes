@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html>
-<html b:version='2' expr:dir='data:blog.languageDirection' lang='ru' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<html b:version='2' expr:dir='data:blog.languageDirection' expr:lang='data:blog.locale' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
 <head>
  <meta expr:charset='data:blog.encoding'/>
  <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible'/>
@@ -168,8 +168,11 @@ background-color: #f5f5ff;
 font: normal normal 1em/1.5 Arial, sans-serif;
 color: #222;
 }
+.post-title {
+font: normal normal 2.25em/1.25 Arial, sans-serif;
+color: #555;
+}
 .post-title a {
-font: normal normal 1.5em/1.25 Arial, sans-serif;
 color: #555;
 }
 .post-title a:hover {
@@ -187,6 +190,17 @@ color: #69C;
 } 
 .post-author, address {
 display: inline;
+}
+.post-social-links {
+margin: .5em 0;
+}
+.share-button:link {
+-webkit-transition: 0;
+-moz-transition: 0;
+-ms-transition: 0;
+-o-transition: 0;
+transition: 0;
+margin-left: -4px;
 }
 .post-jump {
 margin: .5em 0;
@@ -402,7 +416,7 @@ color: #69C;
   padding-bottom: 0;
  }
  .post-title a {
-  font-size: 125%;
+  font-size: 75%;
  }
  .post-title {
   padding-bottom: .3em;
@@ -506,7 +520,6 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
   <b:section class='navigation' id='navigation' maxwidgets='1' showaddelement='no'>
    <b:widget id='PageList1' locked='true' title='Страницы' type='PageList'>
     <b:includable id='main'>
-	
      <ul class='menu'>
       <b:loop values='data:links' var='link'>
        <li><a expr:href='data:link.href'><data:link.title/></a></li>
@@ -521,7 +534,6 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
        </b:if>
       </b:loop>
      </select>
-	 
     </b:includable>
    </b:widget>
   </b:section>
@@ -534,7 +546,7 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
      <b:loop values='data:posts' var='post'>
       <b:include data='post' name='post'/>
       <b:if cond='data:blog.pageType == &quot;item&quot;'>
-       <b:if cond='data:blog.isMobile'><b:else/>
+       <b:if cond='data:blog.isMobile == &quot;false&quot;'>
         <b:include data='post' name='comments'/>
        </b:if>
       </b:if>
@@ -654,13 +666,19 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
     <b:includable id='post' var='post'>
      <article class='post'>
       <b:if cond='data:post.title'>
-       <h2 class='post-title'><a expr:href='data:post.url'><data:post.title/></a></h2>
+       <h2 class='post-title'>
+	    <b:if cond='data:blog.url != data:post.url'>
+		 <a expr:href='data:post.url'><data:post.title/></a>
+		<b:else/>
+		 <data:post.title/>
+		</b:if>
+	   </h2>
       </b:if>
       <b:if cond='data:blog.pageType != &quot;static_page&quot;'>
        <div class='post-header'>
         <time expr:datetime='data:post.timestampISO8601' pubdate='pubdate'><data:top.timestampLabel/> <data:post.date/> <b:if cond='data:top.showTimestamp'>at <data:post.timestamp/></b:if></time>
         <b:if cond='data:post.author'>
-         <div class='post-author'><data:top.authorLabel/> <a expr:href='data:post.authorProfileUrl + &quot;?rel=author&quot;' rel='nofollow' target='_blank'><data:post.author/></a></div>
+         <div class='post-author'><data:top.authorLabel/> <b:if cond='data:post.authorProfileUrl'><a expr:href='data:post.authorProfileUrl + &quot;?rel=author&quot;' rel='nofollow' target='_blank'><data:post.author/></a><b:else/><data:post.author/></b:if></div>
         </b:if>
         <b:if cond='data:top.showLocation'>
          <b:if cond='data:post.location'>
@@ -685,12 +703,49 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
           </b:loop>
          </div>
         </b:if>
+		<b:include data='post' name='shareButtons'/>
        </div>
       </b:if>
      </article>
     </b:includable>
     <b:includable id='postQuickEdit' var='post'/>
-    <b:includable id='shareButtons' var='post'/>
+    <b:includable id='shareButtons' var='post'>
+	 <div class='post-social-links'>
+      <b:if cond='data:top.showEmailButton'>
+       <a class='goog-inline-block share-button sb-email' expr:href='data:post.sharePostUrl + &quot;&amp;target=email&quot;' expr:title='data:top.emailThisMsg' target='_blank'>
+        <span class='share-button-link-text'><data:top.emailThisMsg/></span>
+       </a>
+      </b:if>
+      <b:if cond='data:top.showBlogThisButton'>
+       <a class='goog-inline-block share-button sb-blog' expr:href='data:post.sharePostUrl + &quot;&amp;target=blog&quot;' expr:onclick='&quot;window.open(this.href, \&quot;_blank\&quot;, \&quot;height=632,width=734\&quot;); return false;&quot;' expr:title='data:top.blogThisMsg' target='_blank'>
+        <span class='share-button-link-text'><data:top.blogThisMsg/></span>
+       </a>
+      </b:if>
+      <b:if cond='data:top.showTwitterButton'>
+       <a class='goog-inline-block share-button sb-twitter' expr:href='data:post.sharePostUrl + &quot;&amp;target=twitter&quot;' expr:title='data:top.shareToTwitterMsg' target='_blank'>
+        <span class='share-button-link-text'><data:top.shareToTwitterMsg/></span>
+       </a>
+      </b:if>
+      <b:if cond='data:top.showFacebookButton'>
+       <a class='goog-inline-block share-button sb-facebook' expr:href='data:post.sharePostUrl + &quot;&amp;target=facebook&quot;' expr:onclick='&quot;window.open(this.href, \&quot;_blank\&quot;, \&quot;height=430,width=640\&quot;); return false;&quot;' expr:title='data:top.shareToFacebookMsg' target='_blank'>
+        <span class='share-button-link-text'><data:top.shareToFacebookMsg/></span>
+       </a>
+      </b:if>
+      <b:if cond='data:top.showOrkutButton'>
+       <a class='goog-inline-block share-button sb-orkut' expr:href='data:post.sharePostUrl + &quot;&amp;target=orkut&quot;' expr:title='data:top.shareToOrkutMsg' target='_blank'>
+        <span class='share-button-link-text'><data:top.shareToOrkutMsg/></span>
+       </a>
+      </b:if>
+      <b:if cond='data:top.showPinterestButton'>
+       <a class='goog-inline-block share-button sb-pinterest' expr:href='data:post.sharePostUrl + &quot;&amp;target=pinterest&quot;' expr:title='data:top.shareToPinterestMsg' target='_blank'>
+        <span class='share-button-link-text'><data:top.shareToPinterestMsg/></span>
+       </a>
+      </b:if>
+      <b:if cond='data:top.showDummy'>
+       <div class='goog-inline-block dummy-container'><data:post.dummyTag/></div>
+      </b:if>
+     </div>
+	</b:includable>
     <b:includable id='status-message'>
      <b:if cond='data:navMessage'>
       <div class='status'><data:navMessage/></div>
