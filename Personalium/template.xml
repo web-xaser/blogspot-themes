@@ -333,8 +333,10 @@ padding: 0;
 }
 /* ---------- ORDINARY COMMENTS ---------- */
 .comments-pager {
-font: bold normal 0.7em/1.5 Arial, sans-serif;
+font: bold normal 0.9em/1.5 Arial, sans-serif;
+color: #777;
 text-align: right;
+padding: .5em 0;
 }
 .comments h4 {
 color: #222;
@@ -404,6 +406,12 @@ padding: .5em 0;
 text-align: center;
 background-color: #f5f5f5;
 }
+.comments .not-allowed {
+padding: 1em 0;
+font-weight: bold;
+text-align: center;
+background-color: #f5f5f5;
+}
 .comments .comments-content .loadmore {
 margin: 1em 0 3em;
 }
@@ -438,6 +446,9 @@ margin: 1em 0 1em 5.7em;
 }
 .comments .thread-toggle, .comments #bc_0_0I {
 display: none !important;
+}
+.post-feeds {
+margin: 1em 0;
 }
 /* ---------- FOOTER ---------- */
 footer {
@@ -647,10 +658,11 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
       <b:includable id='comment-form' var='post'>
        <div class='comment-form' id='comment-form'>
         <h4><data:postCommentMsg/></h4>
-        <data:blogCommentMessage/>
-        <data:blogTeamBlogMessage/>
         <a expr:href='data:post.commentFormIframeSrc' id='comment-editor-src'/>
-        <iframe allowtransparency='true' class='blogger-iframe-colorize blogger-comment-from-post' frameborder='0' height='410' id='comment-editor' name='comment-editor' src='' width='100%'/>
+        <iframe allowtransparency='true' class='blogger-iframe-colorize blogger-comment-from-post' frameborder='0' height='220' id='comment-editor' name='comment-editor' src='' width='100%'/>
+		<b:if cond='data:blogTeamBlogMessage'>
+		 <div class='not-allowed'><data:blogTeamBlogMessage/></div>
+		</b:if>
         <data:post.friendConnectJs/>
         <data:post.cmtfpIframe/>
         <script type='text/javascript'>
@@ -680,8 +692,8 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
        </b:if>
       </b:includable>
       <b:includable id='comments' var='post'>
-       <div class='comments' id='comments'>
-        <b:if cond='data:post.allowComments'>
+	   <b:if cond='data:post.allowComments'>
+        <div class='comments' id='comments'>
          <h4><data:post.commentLabelFull/></h4>
          <div class='comments-block'>
           <b:loop values='data:post.comments' var='comment'>
@@ -716,11 +728,12 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
            <a expr:class='data:post.newLinkClass' expr:href='data:post.newerLinkUrl'><data:post.newerLinkText/></a>
           </div>
          </b:if>
+		 <b:include name='feedLinks'/>
          <b:if cond='data:post.embedCommentForm'>
           <b:if cond='data:post.allowNewComments'>
            <b:include data='post' name='comment-form'/>
           <b:else/>
-           <div style='padding: 25px 0; text-align: center; font-size: 16px; color: #333; background-color: #f0f0f0;'><data:post.noNewCommentsText/></div>
+           <div class='not-allowed'><data:post.noNewCommentsText/></div>
           </b:if>
          <b:else/>
           <b:if cond='data:post.allowComments'>
@@ -729,16 +742,31 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
            </div>
           </b:if>
          </b:if>
-        </b:if>
-        <b:if cond='data:post.showCmtPopup'>
-         <div id='comment-popup'>
-          <iframe allowtransparency='true' frameborder='0' id='comment-actions' name='comment-actions' scrolling='no'/>
-         </div>
-        </b:if>
-       </div>
+         <b:if cond='data:post.showCmtPopup'>
+          <div id='comment-popup'>
+           <iframe allowtransparency='true' frameborder='0' id='comment-actions' name='comment-actions' scrolling='no'/>
+          </div>
+         </b:if>
+        </div>
+	   </b:if>
       </b:includable>
-      <b:includable id='feedLinks'/>
-      <b:includable id='feedLinksBody' var='links'/>
+      <b:includable id='feedLinks'>
+	   <b:loop values='data:posts' var='post'>
+		<b:if cond='data:post.allowComments'>
+		 <b:if cond='data:post.feedLinks'>
+		  <div class='post-feeds'>
+		   <b:include data='post.feedLinks' name='feedLinksBody'/>
+		  </div>
+		 </b:if>
+		</b:if>
+	   </b:loop>
+	  </b:includable>
+      <b:includable id='feedLinksBody' var='links'>
+	   <data:feedLinksMsg/>
+	   <b:loop values='data:links' var='f'>
+	    <a expr:href='data:f.url + &quot;?alt=rss&quot;' target='_blank' type='application/rss+xml' rel='nofollow'><data:f.name/></a>
+	   </b:loop>
+	  </b:includable>
       <b:includable id='iframe_comments' var='post'>
        <b:if cond='data:post.allowIframeComments'>
         <script expr:src='data:post.iframeCommentSrc' type='text/javascript'/>
@@ -878,7 +906,10 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
       <b:includable id='threaded-comment-form' var='post'>
        <div class='comment-form' id='comment-form'>
         <a expr:href='data:post.commentFormIframeSrc' id='comment-editor-src'/>
-        <iframe allowtransparency='true' class='blogger-iframe-colorize blogger-comment-from-post' frameborder='0' height='410' id='comment-editor' name='comment-editor' src='' width='100%'/>
+        <iframe allowtransparency='true' class='blogger-iframe-colorize blogger-comment-from-post' frameborder='0' height='220' id='comment-editor' name='comment-editor' src='' width='100%'/>
+		<b:if cond='data:blog.TeamBlogMessage'>
+		 <div class='not-allowed'><data:blog.TeamBlogMessage/></div>
+		</b:if>
         <data:post.friendConnectJs/>
         <data:post.cmtfpIframe/>
         <script type='text/javascript'>
@@ -1054,7 +1085,7 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
       </b:includable>
       <b:includable id='threaded_comments' var='post'>
        <div class='comments' id='comments'>
-        <h4><data:post.commentLabelFull/>:</h4>
+        <h4><data:post.commentLabelFull/></h4>
         <div class='comments-content'>
          <b:if cond='data:post.embedCommentForm'>
           <b:include data='post' name='threaded_comment_js'/>
@@ -1062,10 +1093,11 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
          <style type='text/css'>.comment { position: relative; } </style>
          <div id='comment-holder'><data:post.commentHtml/></div>
         </div>
+		<b:include name='feedLinks'/>
         <b:if cond='data:post.allowNewComments'>
          <b:include data='post' name='threaded-comment-form'/>
         <b:else/>
-         <data:post.noNewCommentsText/>
+         <div class='not-allowed'><data:post.noNewCommentsText/></div>
         </b:if>
         <b:if cond='data:showCmtPopup'>
          <div id='comment-popup'>
