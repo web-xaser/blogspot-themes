@@ -327,7 +327,7 @@ max-width: 100%;
 width: auto;
 }
 /* ---------- COMMENTS ---------- */
-.comments, .comments .comments-content, .comments .comments-content .comment-thread, .comments .comment-replybox-thread, .comments .comments-content .comment:first-child, .comments .comments-content .comment, .comments .comments-content .comment-header {
+.comments, .comments .comments-content, .comments .comments-content .comment-thread, .comments .comment-replybox-thread, .comments .comments-content .comment-header {
 margin: 0;
 padding: 0;
 }
@@ -348,6 +348,7 @@ padding-left: 90px;
 }
 .comment {
 min-height: 100px;
+margin: 1.5em 0;
 }
 .comments-block .avatar-image-container, .comments .avatar-image-container {
 left: 0;
@@ -387,6 +388,16 @@ margin: .5em 0;
 font: normal normal 1em/1.5 Arial, sans-serif;
 color: #222;
 text-align: left;
+}
+.comments-block .comment-footer {
+margin: 0;
+font: bold normal .9em Arial, sans-serif;
+}
+.comments-block .comment-footer a {
+color: #369;
+}
+.comments-block .comment-footer a:hover {
+color: #69c;
 }
 .iframe-comments-link {
 cursor: pointer;
@@ -440,6 +451,10 @@ font: normal normal .9em Arial, sans-serif;
 .comments .comment .comment-action a:hover {
 color: #69c;
 text-decoration: none;
+}
+.comments .comments-content .comment {
+padding: 0 !important;
+margin: 1.5em 0 !important;
 }
 .comments .comments-content .comment-replies {
 margin: 1em 0 1em 5.7em;
@@ -656,7 +671,8 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
       <b:includable id='backlinkDeleteIcon' var='backlink'/>
       <b:includable id='backlinks' var='post'/>
       <b:includable id='comment-form' var='post'>
-       <div class='comment-form' id='comment-form'>
+       <div class='comment-form'>
+	    <a name='comment-form'/>
         <h4><data:postCommentMsg/></h4>
         <a expr:href='data:post.commentFormIframeSrc' id='comment-editor-src'/>
         <iframe allowtransparency='true' class='blogger-iframe-colorize blogger-comment-from-post' frameborder='0' height='220' id='comment-editor' name='comment-editor' src='' width='100%'/>
@@ -671,9 +687,11 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
        </div>
       </b:includable>
       <b:includable id='commentDeleteIcon' var='comment'>
-       <a expr:href='data:comment.deleteUrl' expr:title='data:top.deleteCommentMsg'>
-        <img src='http://www.blogger.com/img/icon_delete13.gif' style='display: inline; height: 9px;'/>
-       </a>
+	   <span expr:class='&quot;item-control &quot; + data:comment.adminClass'>
+	    <div class='comment-footer'>
+         <a expr:href='data:comment.deleteUrl'><data:top.deleteCommentMsg/></a>
+		</div>
+	   </span>
       </b:includable>
       <b:includable id='comment_count_picker' var='post'>
        | <a expr:href='data:post.addCommentUrl'>
@@ -693,7 +711,7 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
       </b:includable>
       <b:includable id='comments' var='post'>
 	   <b:if cond='data:post.allowComments'>
-        <div class='comments' id='comments'>
+        <div class='comments'>
          <h4><data:post.commentLabelFull/></h4>
          <div class='comments-block'>
           <b:loop values='data:post.comments' var='comment'>
@@ -709,7 +727,6 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
              <b:if cond='data:comment.inReplyTo'>
               in reply to <a expr:href='&quot;#&quot; + data:comment.inReplyTo'>this comment</a>
              </b:if>
-             <b:include data='comment' name='commentDeleteIcon'/>
             </div>
             <div class='comment-body'>
              <b:if cond='data:comment.isDeleted'>
@@ -718,6 +735,7 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
               <data:comment.body/>
              </b:if>
             </div>
+			<b:include data='comment' name='commentDeleteIcon'/>
            </div>
           </b:loop>
          </div>
@@ -904,7 +922,8 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
        </b:if>
       </b:includable>
       <b:includable id='threaded-comment-form' var='post'>
-       <div class='comment-form' id='comment-form'>
+       <div class='comment-form'>
+	    <a name='comment-form'/>
         <a expr:href='data:post.commentFormIframeSrc' id='comment-editor-src'/>
         <iframe allowtransparency='true' class='blogger-iframe-colorize blogger-comment-from-post' frameborder='0' height='220' id='comment-editor' name='comment-editor' src='' width='100%'/>
 		<b:if cond='data:blog.TeamBlogMessage'>
@@ -1084,7 +1103,7 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
        </script>
       </b:includable>
       <b:includable id='threaded_comments' var='post'>
-       <div class='comments' id='comments'>
+       <div class='comments'>
         <h4><data:post.commentLabelFull/></h4>
         <div class='comments-content'>
          <b:if cond='data:post.embedCommentForm'>
