@@ -231,7 +231,7 @@ border-color: transparent;
 background-color: #369;
 }
 .blog-pager {
-margin: 2em 0;
+margin: 1em 0;
 }
 .blog-pager a {
 color: #369;
@@ -424,7 +424,7 @@ text-align: center;
 background-color: #f5f5f5;
 }
 .comments .comments-content .loadmore {
-margin: 1em 0 3em;
+display: none;
 }
 .comments .comment-block {
 padding-left: 95px;
@@ -440,9 +440,7 @@ color: #69c;
 display: inline;
 }
 .comments .comments-content .icon.blog-author {
-background-size: 18px;
-background-repeat: no-repeat;
-background-image: url(data:image/png;base64,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);
+display: none;
 }
 .comments .comment .comment-action a {
 color: #369;
@@ -716,12 +714,13 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
          <div class='comments-block'>
           <b:loop values='data:post.comments' var='comment'>
            <div class='comment' expr:id='data:comment.id'>
+		    <a expr:name='data:comment.anchorName'/>
             <b:if cond='data:blog.enabledCommentProfileImages'>
              <data:comment.authorAvatarImage/>
             </b:if>
             <div class='comment-header'>
              <data:comment.author/> 
-             <time><a expr:href='data:post.url + &quot;#&quot; + data:comment.id' rel='nofollow' title='link to comment'>
+             <time><a expr:href='data:comment.url' rel='nofollow' title='link to comment'>
               <data:comment.timestamp/>
              </a></time>
              <b:if cond='data:comment.inReplyTo'>
@@ -741,9 +740,13 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
          </div>
          <b:if cond='data:post.commentPagingRequired'>
           <div class='comments-pager'>
-           <a expr:class='data:post.oldLinkClass' expr:href='data:post.olderLinkUrl'><data:post.olderLinkText/></a>
-           &#160; <data:post.commentRangeText/> &#160;
-           <a expr:class='data:post.newLinkClass' expr:href='data:post.newerLinkUrl'><data:post.newerLinkText/></a>
+		   <b:if cond='data:post.hasOlderlinks'>
+            <a expr:class='data:post.oldLinkClass' expr:href='data:post.olderLinkUrl'><data:post.olderLinkText/></a>
+		   </b:if>
+           <data:post.commentRangeText/>
+		   <b:if cond='data:post.hasNewerLinks'>
+            <a expr:class='data:post.newLinkClass' expr:href='data:post.newerLinkUrl'><data:post.newerLinkText/></a>
+		   </b:if>
           </div>
          </b:if>
 		 <b:include name='feedLinks'/>
@@ -821,22 +824,30 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
         </b:if>
         <b:if cond='data:blog.pageType != &quot;static_page&quot;'>
          <div class='post-header'>
-          <time expr:datetime='data:post.timestampISO8601' pubdate='pubdate'>
-           <data:top.timestampLabel/>
-           <data:post.date/>
-           <b:if cond='data:top.showTimestamp'>
-            at <data:post.timestamp/>
-           </b:if>
-          </time>
-          <b:if cond='data:post.author'>
-           <div class='post-author'>
-            <data:top.authorLabel/>
-            <b:if cond='data:post.authorProfileUrl'>
-             <a expr:href='data:post.authorProfileUrl + &quot;?rel=author&quot;' rel='nofollow' target='_blank'><data:post.author/></a>
-            <b:else/>
-             <data:post.author/>
+		  <b:if cond='data:post.dateHeader'>
+           <time expr:datetime='data:post.timestampISO8601' pubdate='pubdate'>
+		    <b:if cond='data:top.showTimestamp'>
+             <data:top.timestampLabel/>
+			</b:if>
+            <data:post.date/>
+            <b:if cond='data:top.showTimestamp'>
+             <data:post.timestamp/>
             </b:if>
-           </div>
+           </time>
+		  </b:if>
+		  <b:if cond='data:top.showAuthor'>
+           <b:if cond='data:post.author'>
+            <div class='post-author'>
+             <data:top.authorLabel/>
+             <b:if cond='data:post.authorProfileUrl'>
+              <a expr:href='data:post.authorProfileUrl + &quot;?rel=author&quot;' rel='nofollow' target='_blank'>
+			   <data:post.author/>
+			  </a>
+             <b:else/>
+              <data:post.author/>
+             </b:if>
+            </div>
+		   </b:if>
           </b:if>
           <b:if cond='data:top.showLocation'>
            <b:if cond='data:post.location'>
@@ -871,7 +882,9 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
             </b:loop>
            </div>
           </b:if>
-          <b:include data='post' name='shareButtons'/>
+		  <b:if cond='data:post.sharePostUrl'>
+           <b:include data='post' name='shareButtons'/>
+		  </b:if>
          </div>
         </b:if>
        </article>
@@ -1112,6 +1125,17 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
          <style type='text/css'>.comment { position: relative; } </style>
          <div id='comment-holder'><data:post.commentHtml/></div>
         </div>
+		<b:if cond='data:post.commentPagingRequired'>
+		 <div class='comments-pager'>
+		  <b:if cond='data:post.hasOlderLinks'>
+		   <a expr:class='data:post.oldLinkClass' expr:href='data:post.olderLinkUrl'><data:post.olderLinkText/></a>
+		  </b:if>
+		  <data:post.commentRangeText/>
+		  <b:if cond='data:post.hasNewerLinks'>
+		   <a expr:class='data:post.newLinkClass' expr:href='data:post.newerLinkUrl'><data:post.newerLinkText/></a>
+		  </b:if>
+		 </div>
+		</b:if>
 		<b:include name='feedLinks'/>
         <b:if cond='data:post.allowNewComments'>
          <b:include data='post' name='threaded-comment-form'/>
