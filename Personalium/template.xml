@@ -48,7 +48,7 @@ border-spacing: 0;
 td, th {
 padding: 0;
 }
-.widget, .widget-content, .section, .Header h1 {
+.widget, .widget-content, .section, .Header h1, .widget .post-body li, .widget li, .BlogArchive #ArchiveList ul.flat li {
 margin: 0;
 }
 .widget ul {
@@ -68,28 +68,28 @@ content: '';
 }
 /* ---------- MAIN ---------- */
 body {
-font: normal normal 100%/1.5 Arial, sans-serif;
 color: #222;
 background-color: #fff;
+font: normal normal 100%/1.5 Arial, sans-serif;
 }
 a:link {
+color: #369;
+text-decoration: none;
+background: transparent;
 -webkit-transition: all .3s ease;
 -moz-transition: all .3s ease;
 -ms-transition: all .3s ease;
 -o-transition: all .3s ease;
 transition: all .3s ease;
-background: transparent;
-text-decoration: none;
-color: #369;
 }
 a:active, a:hover {
+outline: 0;
+color: #69c;
 -webkit-transition: all .3s ease;
 -moz-transition: all .3s ease;
 -ms-transition: all .3s ease;
 -o-transition: all .3s ease;
 transition: all .3s ease;
-color: #69C;
-outline: 0;
 }
 a:visited {
 color: #609;
@@ -108,16 +108,16 @@ width: 46px;
 height: 46px;
 }
 .header-full-image {
-max-height: 70px;
-max-width: 100%;
 width: auto;
+max-width: 100%;
+max-height: 70px;
 padding-bottom: 1em;
 }
 .blog-title {
-letter-spacing: 3px;
-font: normal normal 4em/1.5 Arial, sans-serif;
 color: #555;
+letter-spacing: 3px;
 text-transform: uppercase;
+font: normal normal 4em/1.5 Arial, sans-serif;
 }
 .blog-title a {
 color: #555;
@@ -126,9 +126,9 @@ color: #555;
 color: #888;
 }
 .blog-description {
+color: #222;
 padding: .5em 0;
 font: normal normal 1em/1.5 Arial, sans-serif;
-color: #222;
 }
 .navigation {
 text-align: center;
@@ -139,46 +139,47 @@ content: '';
 width: 100%;
 height: 7px;
 display: inline-block;
-background: -moz-linear-gradient(top, #369 33%, #fff 33%, #fff 66%, #369 66%, #369 100%);
 background: -webkit-gradient(linear, left top, left bottom, color-stop(33%,#369), color-stop(33%,#fff), color-stop(66%,#fff), color-stop(66%,#369), color-stop(100%,#369));
+background: -moz-linear-gradient(top, #369 33%, #fff 33%, #fff 66%, #369 66%, #369 100%);
 background: -webkit-linear-gradient(top, #369 33%,#fff 33%,#fff 66%,#369 66%,#369 100%);
-background: -o-linear-gradient(top, #369 33%,#fff 33%,#fff 66%,#369 66%,#369 100%);
 background: -ms-linear-gradient(top, #369 33%,#fff 33%,#fff 66%,#369 66%,#369 100%);
+background: -o-linear-gradient(top, #369 33%,#fff 33%,#fff 66%,#369 66%,#369 100%);
 background: linear-gradient(to bottom, #369 33%,#fff 33%,#fff 66%,#369 66%,#369 100%);
 }
 .PageList li {
 display: inline;
 }
 .PageList li a {
-font: normal normal 1em Arial, sans-serif;
 color: #369;
 padding: 10px;
 text-transform: uppercase;
+font: normal normal 1em Arial, sans-serif;
 }
 .PageList li a:hover {
-color: #69C;
+color: #69c;
 }
 .dropdown-menu {
 display: none;
 }
 /* ---------- POST ---------- */
 .main-outer {
-max-width: 1000px;
-margin: 0 auto;
 padding: 1em;
+margin: 0 auto;
+max-width: 1000px;
 background-color: #fff;
 }
 .status {
+color: #222;
 padding: 20px;
 margin-bottom: 1em;
 text-align: center;
 background-color: #f5f5ff;
 font: normal normal 1em/1.5 Arial, sans-serif;
-color: #222;
 }
 .post-title {
-font: normal normal 2.25em/1.25 Arial, sans-serif;
 color: #555;
+display: inline-block;
+font: normal normal 2.25em/1.25 Arial, sans-serif;
 }
 .post-title a {
 color: #555;
@@ -187,8 +188,8 @@ color: #555;
 color: #888;
 }
 .post-header, .post-footer {
-font: normal normal 0.9em/1.5 Arial, sans-serif;
 color: #555;
+font: normal normal 0.9em/1.5 Arial, sans-serif;
 }
 .post-header a, .post-footer a, .comment-header a {
 color: #369;
@@ -203,11 +204,11 @@ display: inline;
 margin: .5em 0;
 }
 .share-button:link {
--webkit-transition: 0;
--moz-transition: 0;
--ms-transition: 0;
--o-transition: 0;
-transition: 0;
+-webkit-transition: none;
+-moz-transition: none;
+-ms-transition: none;
+-o-transition: none;
+transition: none;
 margin-left: -4px;
 }
 .post-jump {
@@ -215,11 +216,11 @@ margin: .5em 0;
 text-align: right;
 }
 .post-jump a {
+color: #369;
 padding: 5px 10px;
 border-radius: 25px;
 border: 1px solid #369;
 font: normal normal 1em/1.5 Arial, sans-serif;
-color: #369;
 }
 .post-jump a:hover {
 color: #69c;
@@ -227,8 +228,8 @@ border-color: #69c;
 }
 .post-jump a:active {
 color: #fff;
-border-color: transparent;
 background-color: #369;
+border-color: transparent;
 }
 .blog-pager {
 margin: 1em 0;
@@ -237,8 +238,8 @@ margin: 1em 0;
 color: #369;
 padding: 8px 15px;
 border-radius: 25px;
-font: bold normal 1em/1.5 Arial, sans-serif;
 border: 2px solid #369;
+font: bold normal 1em/1.5 Arial, sans-serif;
 }
 .blog-pager a:hover {
 color: #69c;
@@ -246,8 +247,8 @@ border-color: #69c;
 }
 .blog-pager a:active {
 color: #fff;
-border-color: transparent;
 background-color: #369;
+border-color: transparent;
 }
 .newer-link {
 float: left;
@@ -257,18 +258,19 @@ float: right;
 }
 /* ---------- POST BODY ---------- */
 .post-body {
-margin: .5em 0;
-font: normal normal 1em/1.5 Arial, sans-serif;
 color: #222;
+margin: 1em 0;
+font: normal normal 1em/1.5 Arial, sans-serif;
 }
 .post-body a {
 color: #369;
 text-decoration: underline;
 }
 .post-body > h1, .post-body  > h2, .post-body > h3, .post-body > h4, .post-body > h5, .post-body > h6 {
+color: #555;
 margin: .5em 0;
+border-bottom: 1px solid #ccc;
 font: normal normal 1em/1.5 Arial, sans-serif;
-color: #222;
 }
 .post-body > h1 {
 font-size: 150% !important;
@@ -289,32 +291,32 @@ font-size: 110% !important;
 font-size: 90% !important;
 }
 .post-body blockquote {
-color: #222;
+color: #333;
 padding: 15px;
 margin: .5em 0;
 border-radius: 3px;
 text-align: center;
-font: normal normal 1.1em/1.5 Arial, sans-serif;
 background-color: #f5f5ff;
+font: normal normal 1.1em/1.5 Arial, sans-serif;
 }
 .post-body blockquote cite {
-color: #222;
+color: #555;
 text-align: right;
 font: italic normal 0.9em/1.5 Arial, sans-serif;
 }
 .post-body img {
-margin: .5em 0;
-max-width: 100%;
 width: auto;
 padding: 3px;
-border: 1px solid #e0e0e0;
+margin: .5em 0;
+max-width: 100%;
 border-radius: 3px;
+border: 1px solid #e0e0e0;
 }
 .post-body figcaption, .post-body .tr-caption {
+color: #222;
 padding: 5px;
 border-radius: 3px;
 font: normal normal 1em/1.5 Arial, sans-serif;
-color: #222;
 }
 .widget .post-body ul, .widget .post-body ol {
 margin: 0;
@@ -322,9 +324,9 @@ line-height: 1.5;
 padding-left: 25px;
 }
 .separator {
+width: auto;
 margin: .5em 0;
 max-width: 100%;
-width: auto;
 }
 /* ---------- COMMENTS ---------- */
 .comments, .comments .comments-content, .comments .comments-content .comment-thread, .comments .comment-replybox-thread, .comments .comments-content .comment-header {
@@ -333,10 +335,10 @@ padding: 0;
 }
 /* ---------- ORDINARY COMMENTS ---------- */
 .comments-pager {
-font: bold normal 0.9em/1.5 Arial, sans-serif;
 color: #777;
-text-align: right;
 padding: .5em 0;
+text-align: right;
+font: bold normal 0.9em/1.5 Arial, sans-serif;
 }
 .comments h4 {
 color: #222;
@@ -347,8 +349,14 @@ font: normal normal 1.25em/1.5 Arial, sans-serif;
 padding-left: 90px;
 }
 .comment {
-min-height: 100px;
 margin: 1.5em 0;
+min-height: 100px;
+}
+.comment::last-child {
+margin: 1.5em 0 0;
+}
+.comments cite {
+display: inline;
 }
 .comments-block .avatar-image-container, .comments .avatar-image-container {
 left: 0;
@@ -374,8 +382,8 @@ background-position: center center;
 background-image: url(data:image/png;base64,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);
 }
 .comments-block .comment-header, .comments .comments-content .comment-header {
-font: bold normal .9em Arial, sans-serif;
 color: #777;
+font: bold normal .9em Arial, sans-serif;
 }
 .comments-block .comment-header a, .comments .comments-content .comment-header a {
 color: #369;
@@ -384,10 +392,10 @@ color: #369;
 color: #69c;
 }
 .comments-block .comment-body, .comments .comments-content .comment-content {
-margin: .5em 0;
-font: normal normal 1em/1.5 Arial, sans-serif;
 color: #222;
+margin: .5em 0;
 text-align: left;
+font: normal normal 1em/1.5 Arial, sans-serif;
 }
 .comments-block .comment-footer {
 margin: 0;
@@ -400,8 +408,8 @@ color: #369;
 color: #69c;
 }
 .iframe-comments-link {
-cursor: pointer;
 padding: 1em 0;
+cursor: pointer;
 text-align: center;
 background-color: #f5f5f5;
 }
@@ -423,12 +431,9 @@ font-weight: bold;
 text-align: center;
 background-color: #f5f5f5;
 }
-.comments .comments-content .loadmore {
-display: none;
-}
 .comments .comment-block {
-padding-left: 95px;
 margin-left: 0;
+padding-left: 95px;
 }
 .comments .comments-content .user a, .comments .comments-content .datetime a {
 color: #369;
@@ -438,9 +443,6 @@ color: #69c;
 }
 .comments .comments-content .comment-header cite {
 display: inline;
-}
-.comments .comments-content .icon.blog-author {
-display: none;
 }
 .comments .comment .comment-action a {
 color: #369;
@@ -454,10 +456,13 @@ text-decoration: none;
 padding: 0 !important;
 margin: 1.5em 0 !important;
 }
+.comments .comments-content .comment::last-child {
+margin: 1.5em 0 0 !important;
+}
 .comments .comments-content .comment-replies {
 margin: 1em 0 1em 5.7em;
 }
-.comments .thread-toggle, .comments #bc_0_0I {
+.comments .thread-toggle, .comments .comments-content .loadmore, .comments .comments-content .icon.blog-author {
 display: none !important;
 }
 .post-feeds {
@@ -465,12 +470,12 @@ margin: 1em 0;
 }
 /* ---------- FOOTER ---------- */
 footer {
+color: #555;
 width: 100%;
 padding: 1em 0;
 text-align: center;
-font: normal normal 1em Arial, sans-serif;
-color: #555;
 background-color: #fff;
+font: normal normal 1em Arial, sans-serif;
 }
 footer a {
 color: #369;
@@ -508,10 +513,10 @@ max-height: 30px;
 padding: .75em 0 0;
 }
 .dropdown-menu {
+width: 90%;
+height: 35px;
 display: inline-block;
 border: 1px solid #ccc;
-height: 35px;
-width: 90%;
 }
 header {
 padding-bottom: 0;
@@ -672,11 +677,11 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
        <div class='comment-form'>
 	    <a name='comment-form'/>
         <h4><data:postCommentMsg/></h4>
-        <a expr:href='data:post.commentFormIframeSrc' id='comment-editor-src'/>
-        <iframe allowtransparency='true' class='blogger-iframe-colorize blogger-comment-from-post' frameborder='0' height='220' id='comment-editor' name='comment-editor' src='' width='100%'/>
 		<b:if cond='data:blogTeamBlogMessage'>
 		 <div class='not-allowed'><data:blogTeamBlogMessage/></div>
 		</b:if>
+        <a expr:href='data:post.commentFormIframeSrc' id='comment-editor-src'/>
+        <iframe allowtransparency='true' class='blogger-iframe-colorize blogger-comment-from-post' frameborder='0' height='220' id='comment-editor' name='comment-editor' src='' width='100%'/>
         <data:post.friendConnectJs/>
         <data:post.cmtfpIframe/>
         <script type='text/javascript'>
@@ -824,17 +829,17 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
         </b:if>
         <b:if cond='data:blog.pageType != &quot;static_page&quot;'>
          <div class='post-header'>
-		  <b:if cond='data:post.dateHeader'>
-           <time expr:datetime='data:post.timestampISO8601' pubdate='pubdate'>
-		    <b:if cond='data:top.showTimestamp'>
-             <data:top.timestampLabel/>
-			</b:if>
+          <time expr:datetime='data:post.timestampISO8601' pubdate='pubdate'>
+		   <b:if cond='data:top.showTimestamp'>
+            <data:top.timestampLabel/>
+		   </b:if>
+		   <b:if cond='data:post.dateHeader'>
             <data:post.date/>
-            <b:if cond='data:top.showTimestamp'>
-             <data:post.timestamp/>
-            </b:if>
-           </time>
-		  </b:if>
+		   </b:if>
+           <b:if cond='data:top.showTimestamp'>
+            <data:post.timestamp/>
+           </b:if>
+          </time>
 		  <b:if cond='data:top.showAuthor'>
            <b:if cond='data:post.author'>
             <div class='post-author'>
@@ -869,7 +874,7 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
         <div class='post-body'><data:post.body/></div>
         <b:if cond='data:post.hasJumpLink'>
          <div class='post-jump'>
-          <a expr:href='data:post.url'><data:post.jumpText/></a>  
+          <a expr:href='data:post.url + &quot;#more&quot;'><data:post.jumpText/></a>  
          </div>
         </b:if>
         <b:if cond='data:blog.pageType == &quot;item&quot;'>
@@ -937,11 +942,11 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
       <b:includable id='threaded-comment-form' var='post'>
        <div class='comment-form'>
 	    <a name='comment-form'/>
-        <a expr:href='data:post.commentFormIframeSrc' id='comment-editor-src'/>
-        <iframe allowtransparency='true' class='blogger-iframe-colorize blogger-comment-from-post' frameborder='0' height='220' id='comment-editor' name='comment-editor' src='' width='100%'/>
 		<b:if cond='data:blog.TeamBlogMessage'>
 		 <div class='not-allowed'><data:blog.TeamBlogMessage/></div>
 		</b:if>
+        <a expr:href='data:post.commentFormIframeSrc' id='comment-editor-src'/>
+        <iframe allowtransparency='true' class='blogger-iframe-colorize blogger-comment-from-post' frameborder='0' height='220' id='comment-editor' name='comment-editor' src='' width='100%'/>
         <data:post.friendConnectJs/>
         <data:post.cmtfpIframe/>
         <script type='text/javascript'>
