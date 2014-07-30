@@ -4,6 +4,13 @@
  <head>
   <title><b:if cond='data:blog.pageName'><data:blog.pageName/> | </b:if><data:blog.title/></title>
   <b:skin><![CDATA[
+/*
+* Theme Name: Personalium
+* Theme Description: Minimalist Blogger/Blogspot template for personal blog
+* Theme License: MIT License (http://web-xaser.mit-license.org)
+* Author: Pavel Chistyakov
+* Author URL: http://www.web-xaser.ru
+*/
 /* ---------- RESET ---------- */
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
 margin: 0;
@@ -494,6 +501,7 @@ width: 100%;
   <b:if cond='data:blog.isMobile'>
    <meta content='width=device-width,height=device-height,initial-scale=1.0' name='viewport'/>
    <style>
+    /* ---------- MOBILE STYLES -------- */
     .main-outer, .post-body {
      margin: 0;
     }
@@ -552,6 +560,9 @@ width: 100%;
     }
     .comments .comment-block {
      padding-left: 35px;
+    }
+    .comments .comments-content .comment-replies {
+     margin: 1em 0 1em 2.4em;
     }
     .comments-block .comment-header, .comments .comments-content .comment-header, .comment-action, .comments-pager, .post-feeds {
      font: bold normal .8em Arial, sans-serif;
@@ -697,11 +708,11 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
       <b:includable id='backlinks' var='post'/>
       <b:includable id='comment-form' var='post'>
        <div class='comment-form'>
-	    <a name='comment-form'/>
+        <a name='comment-form'/>
         <h4><data:postCommentMsg/></h4>
-		<b:if cond='data:blogTeamBlogMessage'>
-		 <div class='not-allowed'><data:blogTeamBlogMessage/></div>
-		</b:if>
+	      <b:if cond='data:blogTeamBlogMessage'>
+	       <div class='not-allowed'><data:blogTeamBlogMessage/></div>
+	      </b:if>
         <a expr:href='data:post.commentFormIframeSrc' id='comment-editor-src'/>
         <iframe allowtransparency='true' class='blogger-iframe-colorize blogger-comment-from-post' frameborder='0' height='220' id='comment-editor' name='comment-editor' src='' width='100%'/>
         <data:post.friendConnectJs/>
@@ -712,11 +723,11 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
        </div>
       </b:includable>
       <b:includable id='commentDeleteIcon' var='comment'>
-	   <span expr:class='&quot;item-control &quot; + data:comment.adminClass'>
-	    <div class='comment-footer'>
+       <span expr:class='&quot;item-control &quot; + data:comment.adminClass'>
+        <div class='comment-footer'>
          <a expr:href='data:comment.deleteUrl'><data:top.deleteCommentMsg/></a>
-		</div>
-	   </span>
+        </div>
+       </span>
       </b:includable>
       <b:includable id='comment_count_picker' var='post'>
        | <a expr:href='data:post.addCommentUrl'>
@@ -735,13 +746,13 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
        </b:if>
       </b:includable>
       <b:includable id='comments' var='post'>
-	   <b:if cond='data:post.allowComments'>
+       <b:if cond='data:post.allowComments'>
         <div class='comments'>
          <h4><data:post.commentLabelFull/></h4>
          <div class='comments-block'>
           <b:loop values='data:post.comments' var='comment'>
            <div class='comment' expr:id='data:comment.id'>
-		    <a expr:name='data:comment.anchorName'/>
+            <a expr:name='data:comment.anchorName'/>
             <b:if cond='data:blog.enabledCommentProfileImages'>
              <data:comment.authorAvatarImage/>
             </b:if>
@@ -761,22 +772,22 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
               <data:comment.body/>
              </b:if>
             </div>
-			<b:include data='comment' name='commentDeleteIcon'/>
+            <b:include data='comment' name='commentDeleteIcon'/>
            </div>
           </b:loop>
          </div>
          <b:if cond='data:post.commentPagingRequired'>
           <div class='comments-pager'>
-		   <b:if cond='data:post.hasOlderlinks'>
+           <b:if cond='data:post.hasOlderlinks'>
             <a expr:class='data:post.oldLinkClass' expr:href='data:post.olderLinkUrl'><data:post.olderLinkText/></a>
-		   </b:if>
+           </b:if>
            <data:post.commentRangeText/>
-		   <b:if cond='data:post.hasNewerLinks'>
+           <b:if cond='data:post.hasNewerLinks'>
             <a expr:class='data:post.newLinkClass' expr:href='data:post.newerLinkUrl'><data:post.newerLinkText/></a>
-		   </b:if>
+           </b:if>
           </div>
          </b:if>
-		 <b:include name='feedLinks'/>
+         <b:include name='feedLinks'/>
          <b:if cond='data:post.embedCommentForm'>
           <b:if cond='data:post.allowNewComments'>
            <b:include data='post' name='comment-form'/>
@@ -796,27 +807,27 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
           </div>
          </b:if>
         </div>
-	   </b:if>
+       </b:if>
       </b:includable>
       <b:includable id='feedLinks'>
-	   <b:loop values='data:posts' var='post'>
-	    <b:if cond='data:post.allowComments'>
-		 <b:if cond='data:post.feedLinks'>
-		  <div class='post-feeds'>
-		   <b:include data='post.feedLinks' name='feedLinksBody'/>
-		  </div>
-		 </b:if>
-		</b:if>
-	   </b:loop>
-	  </b:includable>
+       <b:loop values='data:posts' var='post'>
+        <b:if cond='data:post.allowComments'>
+         <b:if cond='data:post.feedLinks'>
+		      <div class='post-feeds'>
+		       <b:include data='post.feedLinks' name='feedLinksBody'/>
+		      </div>
+		     </b:if>
+		    </b:if>
+	     </b:loop>
+	    </b:includable>
       <b:includable id='feedLinksBody' var='links'>
-	   <data:feedLinksMsg/>
-	   <b:loop values='data:links' var='f'>
-	    <a expr:href='data:f.url + &quot;?alt=rss&quot;' target='_blank' type='application/rss+xml' rel='nofollow'>
-	     <data:f.name/>
-	    </a>
-	   </b:loop>
-	  </b:includable>
+	     <data:feedLinksMsg/>
+	     <b:loop values='data:links' var='f'>
+	      <a expr:href='data:f.url + &quot;?alt=rss&quot;' target='_blank' type='application/rss+xml' rel='nofollow'>
+	       <data:f.name/>
+	      </a>
+	     </b:loop>
+	    </b:includable>
       <b:includable id='iframe_comments' var='post'>
        <b:if cond='data:post.allowIframeComments'>
         <script expr:src='data:post.iframeCommentSrc' type='text/javascript'/>
@@ -981,29 +992,29 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
         <b:if cond='data:blog.pageType != &quot;static_page&quot;'>
          <div class='post-header'>
           <time expr:datetime='data:post.timestampISO8601' pubdate='pubdate'>
-		   <b:if cond='data:top.showTimestamp'>
+		       <b:if cond='data:top.showTimestamp'>
             <data:top.timestampLabel/>
-		   </b:if>
-		   <b:if cond='data:post.dateHeader'>
+		       </b:if>
+		       <b:if cond='data:post.dateHeader'>
             <data:post.date/>
-		   </b:if>
+		       </b:if>
            <b:if cond='data:top.showTimestamp'>
             <data:post.timestamp/>
            </b:if>
           </time>
-		  <b:if cond='data:top.showAuthor'>
+		      <b:if cond='data:top.showAuthor'>
            <b:if cond='data:post.author'>
             <div class='post-author'>
              <data:top.authorLabel/>
              <b:if cond='data:post.authorProfileUrl'>
               <a expr:href='data:post.authorProfileUrl + &quot;?rel=author&quot;' rel='nofollow' target='_blank'>
-			   <data:post.author/>
-			  </a>
+			         <data:post.author/>
+			        </a>
              <b:else/>
               <data:post.author/>
              </b:if>
             </div>
-		   </b:if>
+		       </b:if>
           </b:if>
           <b:if cond='data:top.showLocation'>
            <b:if cond='data:post.location'>
@@ -1038,9 +1049,9 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
             </b:loop>
            </div>
           </b:if>
-		  <b:if cond='data:post.sharePostUrl'>
+		      <b:if cond='data:post.sharePostUrl'>
            <b:include data='post' name='shareButtons'/>
-		  </b:if>
+		      </b:if>
          </div>
         </b:if>
        </article>
@@ -1092,10 +1103,10 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
       </b:includable>
       <b:includable id='threaded-comment-form' var='post'>
        <div class='comment-form'>
-	    <a name='comment-form'/>
-		<b:if cond='data:blog.TeamBlogMessage'>
-		 <div class='not-allowed'><data:blog.TeamBlogMessage/></div>
-		</b:if>
+	      <a name='comment-form'/>
+	  	  <b:if cond='data:blog.TeamBlogMessage'>
+		     <div class='not-allowed'><data:blog.TeamBlogMessage/></div>
+		    </b:if>
         <a expr:href='data:post.commentFormIframeSrc' id='comment-editor-src'/>
         <iframe allowtransparency='true' class='blogger-iframe-colorize blogger-comment-from-post' frameborder='0' height='220' id='comment-editor' name='comment-editor' src='' width='100%'/>
         <data:post.friendConnectJs/>
@@ -1281,18 +1292,18 @@ where: document.getElementById(&quot;navbar-iframe-container&quot;),
          <style type='text/css'>.comment { position: relative; } </style>
          <div id='comment-holder'><data:post.commentHtml/></div>
         </div>
-		<b:if cond='data:post.commentPagingRequired'>
-		 <div class='comments-pager'>
-		  <b:if cond='data:post.hasOlderLinks'>
-		   <a expr:class='data:post.oldLinkClass' expr:href='data:post.olderLinkUrl'><data:post.olderLinkText/></a>
-		  </b:if>
-		  <data:post.commentRangeText/>
-		  <b:if cond='data:post.hasNewerLinks'>
-		   <a expr:class='data:post.newLinkClass' expr:href='data:post.newerLinkUrl'><data:post.newerLinkText/></a>
-		  </b:if>
-		 </div>
-		</b:if>
-		<b:include name='feedLinks'/>
+		    <b:if cond='data:post.commentPagingRequired'>
+		     <div class='comments-pager'>
+		      <b:if cond='data:post.hasOlderLinks'>
+		       <a expr:class='data:post.oldLinkClass' expr:href='data:post.olderLinkUrl'><data:post.olderLinkText/></a>
+		      </b:if>
+		      <data:post.commentRangeText/>
+		      <b:if cond='data:post.hasNewerLinks'>
+		       <a expr:class='data:post.newLinkClass' expr:href='data:post.newerLinkUrl'><data:post.newerLinkText/></a>
+		      </b:if>
+		     </div>
+		    </b:if>
+		    <b:include name='feedLinks'/>
         <b:if cond='data:post.allowNewComments'>
          <b:include data='post' name='threaded-comment-form'/>
         <b:else/>
