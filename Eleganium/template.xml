@@ -755,21 +755,12 @@ margin: 5px 0;
           </b:includable>
           <b:includable id='threaded-comment-form' var='post'>
             <div class='comment-form'>
-              <b:if cond='data:mobile'>
-                <p>
-                  <data:blogCommentMessage/>
-                </p>
-                <data:blogTeamBlogMessage/>
-                <a expr:href='data:post.commentFormIframeSrc' id='comment-editor-src'/>
-                <iframe allowtransparency='true' class='blogger-iframe-colorize blogger-comment-from-post' frameborder='0' height='410' id='comment-editor' name='comment-editor' src='' style='display: none' width='100%'/>
-                <b:else/>
-                <p>
-                  <data:blogCommentMessage/>
-                </p>
-                <data:blogTeamBlogMessage/>
-                <a expr:href='data:post.commentFormIframeSrc' id='comment-editor-src'/>
-                <iframe allowtransparency='true' class='blogger-iframe-colorize blogger-comment-from-post' frameborder='0' height='410' id='comment-editor' name='comment-editor' src='' width='100%'/>
+              <a name='comment-form'/>
+              <b:if cond='data:blog.TeamBlogMessage'>
+                <data:blog.TeamBlogMessage/>
               </b:if>
+              <a expr:href='data:post.commentFormIframeSrc' id='comment-editor-src'/>
+              <iframe allowtransparency='true' class='blogger-iframe-colorize blogger-comment-from-post' frameborder='0' height='220' id='comment-editor' name='comment-editor' src='' width='100%'/>
               <data:post.friendConnectJs/>
               <data:post.cmtfpIframe/>
               <script type='text/javascript'>
@@ -946,10 +937,9 @@ margin: 5px 0;
             </script>
           </b:includable>
           <b:includable id='threaded_comments' var='post'>
-            <div class='comments' id='comments'>
-              <h4 class='uppercase'>
+            <div class='comments'>
+              <h4>
                 <data:post.commentLabelFull/>
-                :
               </h4>
               <div class='comments-content'>
                 <b:if cond='data:post.embedCommentForm'>
@@ -959,13 +949,11 @@ margin: 5px 0;
                   <data:post.commentHtml/>
                 </div>
               </div>
-              <p class='comment-footer'>
-                <b:if cond='data:post.allowNewComments'>
-                  <b:include data='post' name='threaded-comment-form'/>
-                  <b:else/>
-                  <data:post.noNewCommentsText/>
-                </b:if>
-              </p>
+              <b:if cond='data:post.allowNewComments'>
+                <b:include data='post' name='threaded-comment-form'/>
+              <b:else/>
+                <data:post.noNewCommentsText/>
+              </b:if>
               <b:if cond='data:showCmtPopup'>
                 <div id='comment-popup'>
                   <iframe allowtransparency='true' frameborder='0' id='comment-actions' name='comment-actions' scrolling='no'/>
