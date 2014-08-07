@@ -745,7 +745,57 @@ margin: 5px 0;
             </article>
           </b:includable>
           <b:includable id='postQuickEdit' var='post'/>
-          <b:includable id='shareButtons' var='post'/>
+          <b:includable id='shareButtons' var='post'>
+            <div class='post-social-links'>
+              <b:if cond='data:top.showEmailButton'>
+                <a class='goog-inline-block share-button sb-email' expr:href='data:post.sharePostUrl + &quot;&amp;target=email&quot;' expr:title='data:top.emailThisMsg' target='_blank'>
+                  <span class='share-button-link-text'>
+                    <data:top.emailThisMsg/>
+                  </span>
+                </a>
+              </b:if>
+              <b:if cond='data:top.showBlogThisButton'>
+                <a class='goog-inline-block share-button sb-blog' expr:href='data:post.sharePostUrl + &quot;&amp;target=blog&quot;' expr:onclick='&quot;window.open(this.href, \&quot;_blank\&quot;, \&quot;height=632,width=734\&quot;); return false;&quot;' expr:title='data:top.blogThisMsg' target='_blank'>
+                  <span class='share-button-link-text'>
+                    <data:top.blogThisMsg/>
+                  </span>
+                </a>
+              </b:if>
+              <b:if cond='data:top.showTwitterButton'>
+                <a class='goog-inline-block share-button sb-twitter' expr:href='data:post.sharePostUrl + &quot;&amp;target=twitter&quot;' expr:title='data:top.shareToTwitterMsg' target='_blank'>
+                  <span class='share-button-link-text'>
+                    <data:top.shareToTwitterMsg/>
+                  </span>
+                </a>
+              </b:if>
+              <b:if cond='data:top.showFacebookButton'>
+                <a class='goog-inline-block share-button sb-facebook' expr:href='data:post.sharePostUrl + &quot;&amp;target=facebook&quot;' expr:onclick='&quot;window.open(this.href, \&quot;_blank\&quot;, \&quot;height=430,width=640\&quot;); return false;&quot;' expr:title='data:top.shareToFacebookMsg' target='_blank'>
+                  <span class='share-button-link-text'>
+                    <data:top.shareToFacebookMsg/>
+                  </span>
+                </a>
+              </b:if>
+              <b:if cond='data:top.showOrkutButton'>
+                <a class='goog-inline-block share-button sb-orkut' expr:href='data:post.sharePostUrl + &quot;&amp;target=orkut&quot;' expr:title='data:top.shareToOrkutMsg' target='_blank'>
+                  <span class='share-button-link-text'>
+                    <data:top.shareToOrkutMsg/>
+                  </span>
+                </a>
+              </b:if>
+              <b:if cond='data:top.showPinterestButton'>
+                <a class='goog-inline-block share-button sb-pinterest' expr:href='data:post.sharePostUrl + &quot;&amp;target=pinterest&quot;' expr:title='data:top.shareToPinterestMsg' target='_blank'>
+                  <span class='share-button-link-text'>
+                    <data:top.shareToPinterestMsg/>
+                  </span>
+                </a>
+              </b:if>
+              <b:if cond='data:top.showDummy'>
+                <div class='goog-inline-block dummy-container'>
+                  <data:post.dummyTag/>
+                </div>
+              </b:if>
+            </div>
+          </b:includable>
           <b:includable id='status-message'>
             <b:if cond='data:navMessage'>
               <div class='status'>
