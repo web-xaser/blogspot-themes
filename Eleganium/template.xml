@@ -535,24 +535,32 @@ margin: 5px 0;
       <b:section class='content' id='main' showaddelement='no'>
         <b:widget id='Blog1' locked='true' title='Blog Posts' type='Blog'>
           <b:includable id='main' var='top'>
-            <b:include data='top' name='status-message'/>
-            <b:loop values='data:posts' var='post'>
-              <b:include data='post' name='post'/>
-              <b:if cond='data:blog.pageType == &quot;item&quot;'>
-                <b:include data='post' name='comments'/>
+            <b:if cond='data:mobile == &quot;false&quot;'>
+              <b:include data='top' name='status-message'/>
+              <b:loop values='data:posts' var='post'>
+                <b:include data='post' name='post'/>
+                <b:if cond='data:blog.pageType == &quot;item&quot;'>
+                  <b:if cond='data:post.showThreadedComments'>
+                    <b:include data='post' name='threaded_comments'/>
+                  <b:else/>
+                    <b:include data='post' name='comments'/>
+                  </b:if>
+                </b:if>
+              </b:loop>
+              <b:if cond='data:blog.pageType != &quot;static_page&quot;'>
+                <b:if cond='data:blog.pageType != &quot;error_page&quot;'>
+                  <b:include name='nextprev'/>
+                </b:if>
               </b:if>
-            </b:loop>
-            <b:if cond='data:blog.pageType != &quot;static_page&quot;'>
-              <b:if cond='data:blog.pageType != &quot;error_page&quot;'>
-                <b:include name='nextprev'/>
-              </b:if>
+            <b:else/>
+              <b:include name='mobile-main'/>
             </b:if>
           </b:includable>
           <b:includable id='backlinkDeleteIcon' var='backlink'/>
           <b:includable id='backlinks' var='post'/>
           <b:includable id='comment-form' var='post'>
             <div class='comment-form'>
-              <h4 class='uppercase'>
+              <h4>
                 <data:postCommentMsg/>
               </h4>
               <data:blogCommentMessage/>
@@ -572,14 +580,9 @@ margin: 5px 0;
             </a>
           </b:includable>
           <b:includable id='comment_count_picker' var='post'>
-            <b:if cond='data:post.commentSource == 1'>
-              <span class='cmt_count_iframe_holder' expr:data-count='data:post.numComments' expr:data-onclick='data:post.addCommentOnclick' expr:data-post-url='data:post.url' expr:data-url='data:post.canonicalUrl'/>
-              <b:else/>
-              <a class='comment-link' expr:href='data:post.addCommentUrl' expr:onclick='data:post.addCommentOnclick'>
-                <data:post.commentLabelFull/>
-                :
-              </a>
-            </b:if>
+            <a expr:href='data:post.addCommentUrl'>
+              <data:post.commentLabelFull/>
+            </a>
           </b:includable>
           <b:includable id='comment_picker' var='post'>
             <b:if cond='data:post.commentSource == 1'>
@@ -595,7 +598,7 @@ margin: 5px 0;
           <b:includable id='comments' var='post'>
             <div class='comments'>
               <b:if cond='data:post.allowComments'>
-                <h4 class='uppercase'>
+                <h4>
                   <data:post.commentLabelFull/>
                 </h4>
                 <dl class='comments-block'>
@@ -673,14 +676,14 @@ margin: 5px 0;
           <b:includable id='nextprev'>
             <div class='blog-pager uppercase'>
               <b:if cond='data:newerPageUrl'>
-                <a class='newer-link' expr:href='data:newerPageUrl'>
+                <a class='newer-link' expr:href='data:newerPageUrl' rel='next'>
                   &#8592; 
                   <data:newerPageTitle/>
                 </a>
               </b:if>
               &#160;
               <b:if cond='data:olderPageUrl'>
-                <a class='older-link' expr:href='data:olderPageUrl'>
+                <a class='older-link' expr:href='data:olderPageUrl' rel='prev'>
                   <data:olderPageTitle/>
                   &#8594;
                 </a>
