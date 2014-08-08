@@ -693,15 +693,22 @@ margin: 5px 0;
           <b:includable id='post' var='post'>
             <article class='post'>
               <b:if cond='data:post.dateHeader'>
-                <time class='uppercase' pubdate=''>
+                <time class='uppercase' pubdate='pubdate' expr:datetime='data:post.timestampISO8601'>
                   <data:post.dateHeader/>
+                  <b:if cond='data:top.showTimestamp'>
+                    (<data:post.timestamp/>)
+                  </b:if>
                 </time>
               </b:if>
               <b:if cond='data:post.title'>
                 <h2 class='post-title'>
-                  <a expr:href='data:post.url'>
+                  <b:if cond='data:blog.url != data:post.url'>
+                    <a expr:href='data:post.url'>
+                      <data:post.title/>
+                    </a>
+                  <b:else/>
                     <data:post.title/>
-                  </a>
+                  </b:if>
                 </h2>
               </b:if>
               <div class='post-body'>
@@ -709,6 +716,44 @@ margin: 5px 0;
               </div>
               <b:if cond='data:blog.pageType != &quot;static_page&quot;'>
                 <div class='post-footer uppercase'>
+                  <b:if cond='data:top.showAuthor'>
+                    <b:if cond='data:post.author'>
+                      <div class='post-author'>
+                        <b:if cond='data:post.authorProfileUrl'>
+                          <a expr:href='data:post.authorProfileUrl + &quot;?rel=author&quot;' rel='nofollow' target='_blank'>
+                            <data:post.author/>
+                          </a>
+                        <b:else/>
+                          <data:post.author/>
+                        </b:if>
+                      </div>
+                    </b:if>
+                  </b:if>
+                  <b:if cond='data:top.showLocation'>
+                    <b:if cond='data:post.location'>
+                      &#160; / &#160;
+                      <address class='post-location'>
+                        <a expr:href='data:post.location.mapsUrl' rel='nofollow' target='_blank'>
+                          <data:post.location.name/>
+                        </a>
+                      </address>
+                    </b:if>
+                  </b:if>
+                  <b:if cond='data:blog.pageType != &quot;item&quot;'>
+                    <b:if cond='data:post.allowComments'>
+                      &#160; / &#160; 
+                      <div class='post-comment-count'>
+                        <b:include data='post' name='comment_count_picker'/>
+                      </div>
+                    </b:if>
+                  </b:if>
+                  <b:if cond='data:post.hasJumpLink'>
+                    <div class='post-jump'>
+                      <a expr:href='data:post.url + &quot;#more&quot;'>
+                        <data:post.jumpText/>
+                      </a>
+                    </div>
+                  </b:if>
                   <b:if cond='data:post.labels'>
                     <div class='post-labels'>
                       <b:loop values='data:post.labels' var='label'>
@@ -720,28 +765,10 @@ margin: 5px 0;
                       </b:loop>
                     </div>
                   </b:if>
-                  <b:if cond='data:post.author'>
-                    &#160; / &#160;
-                    <div class='post-author'>
-                      <a expr:href='data:post.authorProfileUrl + &quot;?rel=author&quot;' rel='nofollow' target='_blank'>
-                        <data:post.author/>
-                      </a>
-                    </div>
-                  </b:if>
-                  <b:if cond='data:blog.pageType != &quot;item&quot;'>
-                    <b:if cond='data:post.allowComments'>
-                      &#160; / &#160; 
-                      <div class='post-comment-count'>
-                        <data:post.commentLabelFull/>
-                      </div>
+                  <b:if cond='data:blog.pageType == &quot;item&quot;'>
+                    <b:if cond='data:post.sharePostUrl'>
+                      <b:include date='post' name='shareButtons'/>
                     </b:if>
-                  </b:if>
-                  <b:if cond='data:post.hasJumpLink'>
-                    <div class='post-jump'>
-                      <a expr:href='data:post.url'>
-                        <data:post.jumpText/>
-                      </a>
-                    </div>
                   </b:if>
                 </div>
               </b:if>
