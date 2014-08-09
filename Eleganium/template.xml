@@ -13,10 +13,9 @@
       </b:if>
       <data:blog.title/>
     </title>
-    <b:skin>
-      <![CDATA[
+    <b:skin><![CDATA[
 /* ---------- MAIN ---------- */
-#navbar-iframe {
+#navbar-iframe, #uds-searchControl {
 display:none;
 }
 * {
@@ -28,6 +27,8 @@ box-sizing: border-box;
 }
 html {
 -webkit-font-smoothing: antialiased;
+-moz-font-smoothing: antialiased;
+font-smoothing: antialiased;
 }
 body {
 margin: 0;
@@ -42,11 +43,6 @@ text-decoration: none;
 border: 0;
 outline: 0;
 opacity: 1;
--webkit-transition: all .1s linear;
--moz-transition: all .1s linear;
--o-transition: all .1s linear;
--ms-transition: all .1s linear;
-transition: all .1s linear;
 color: #333;
 }
 a:hover,a:active {
@@ -93,7 +89,7 @@ clear: both;
 }
 .content {
 height: auto;
-margin: 0 50px;
+padding: 1em;
 background-color: #fff;
 }
 .footer {
@@ -101,12 +97,12 @@ width: 100%;
 clear: both;
 text-align: center;
 padding: 20px 0;
-font: bold normal 0.7em Arial, sans-serif;
-color: #888;
+font: bold normal .75em Arial, sans-serif;
+color: #222;
 background-color: #fff;
 }
 .footer a {
-color: #888;
+color: #222;
 }
 /* ---------- HEADER ---------- */
 .float-header {
@@ -133,24 +129,19 @@ background-repeat: repeat;
 background-position: left top;
 }
 .blog-title {
-font: normal normal 1.75em/1.5 Arial, sans-serif;
-letter-spacing: 3px;
+font: normal normal 2em/1.5 Arial, sans-serif;
+letter-spacing: 5px;
 }
 .blog-title, .blog-title a {
 color: #fff;
 }
 .blog-description {
 color: #fff;
-padding: 5px 0;
-font: normal normal .8em/1.75 Arial, sans-serif;
+font: normal normal 1em/1.75 Arial, sans-serif;
 }
 .menu li {
 list-style-type: none;
 display: inline;
-}
-.social-img {
-width: 16px;
-height: 16px;
 }
 .PageList {
 float: left;
@@ -162,7 +153,7 @@ text-align: center;
 .menu li a {
 padding: 15px 10px;
 color: #222;
-font: bold normal .8em Arial, sans-serif;
+font: bold normal .75em Arial, sans-serif;
 }
 .CustomSearch {
 float: right;
@@ -177,7 +168,7 @@ height: 35px;
 padding: 0 10px;
 border: 1px solid #ccc;
 background-color: #fff;
-font: normal normal .8em Arial, sans-serif;
+font: normal normal .75em Arial, sans-serif;
 color: #888;
 }
 .search-input::-webkit-input-placeholder {
@@ -199,28 +190,38 @@ background-color: #f0f0f0;
 }
 /* ---------- POST ---------- */
 .post {
-margin: 25px 0;
+margin: 1em 1em 2em;
 }
-.post-title a {
-padding: 5px 0;
-font: normal normal 1.25em/1.25 Arial, sans-serif;
+.post-title {
+font: normal normal 1.75em/1.25 Arial, sans-serif;
+}
+.post-title, .post-title a {
 color: #333;
 }
 .post time {
 color: #888;
-font: normal normal .7em Arial, sans-serif;
+font: bold normal .75em Arial, sans-serif;
 }
 .post-footer {
-font: bold normal .7em/1.5 Arial, sans-serif;
+color: #888;
+font: bold normal .75em/1.5 Arial, sans-serif;
 }
-.post-labels a, .post-author a, .post-comment-count, .post-jump a {
+.post-labels a, .post-author a, .post-comment-count a, .post-jump a, .post-location a {
 color: #888;
 }
-.post-comment-count, .post-author, .post-labels {
+.post-comment-count, .post-author, .post-location {
 display: inline;
 }
+.post-location {
+font-style: normal;
+}
+.post-labels, .post-social-links {
+margin-top: .5em;
+}
+.share-button {
+margin: 0 -2px;
+}
 .post-jump {
-display: inline;
 float: right;
 }
 .newer-link {
@@ -231,8 +232,8 @@ float: right;
 }
 .blog-pager {
 width: 100%;
-margin-top: 15px;
-font: bold normal 0.7em/1.5 Arial, sans-serif;
+margin: 1em 0;
+font: normal normal 1em/1.5 Arial, sans-serif;
 clear: both;
 display: inline-block;
 }
@@ -241,7 +242,7 @@ color: #222;
 }
 /* ---------- POST BODY ---------- */
 .post-body {
-padding: 0 0 10px;
+padding: 0 0 .4em;
 clear: both;
 color: #222;
 font: normal normal 100%/1.5 Arial, sans-serif;
@@ -320,17 +321,17 @@ color: #444;
 padding: 5px;
 }
 /* ---------- COMMENTS ---------- */
+.comments {
+margin: 0 1em;
+}
 .comments-pager {
 font-size: .7em;
 font-weight: bold;
 text-align: right;
 }
 .comments h4 {
-margin: 0 0 15px;
-padding: 5px 0;
-font-weight: 400;
-font-size: 1em;
-letter-spacing: 1px;
+margin: .5em 0;
+font: 400 normal 1.25em Arial, sans-serif;
 }
 .comments-block {
 padding-left: 80px;
@@ -434,8 +435,7 @@ font-size: 1em;
 margin: 5px 0;
 }
 }
-]]>
-    </b:skin>
+    ]]></b:skin>
     <b:include data='blog' name='all-head-content'/>
   </head>
   <body>
