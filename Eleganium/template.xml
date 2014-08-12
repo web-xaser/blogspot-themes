@@ -9,7 +9,7 @@
     <title>
       <b:if cond='data:blog.pageName'>
         <data:blog.pageName/>
-        - 
+        -
       </b:if>
       <data:blog.title/>
     </title>
@@ -190,7 +190,7 @@ background-color: #f0f0f0;
 }
 /* ---------- POST ---------- */
 .post {
-margin: 1em 1em 2em;
+padding: 1em;
 }
 .post-title {
 font: normal normal 1.75em/1.25 Arial, sans-serif;
@@ -325,16 +325,19 @@ padding: 5px;
 margin: 0 1em;
 }
 .comments-pager {
-font-size: .7em;
-font-weight: bold;
 text-align: right;
+font: bold normal .75em Arial, sans-serif;
 }
 .comments h4 {
-margin: .5em 0;
-font: 400 normal 1.25em Arial, sans-serif;
+font: 400 normal 1.5em Arial, sans-serif;
 }
 .comments-block {
-padding-left: 80px;
+padding: 15px 90px 0;
+}
+.comments-block .comment {
+min-height: 83px;
+margin-bottom: 1em;
+border-bottom: 1px solid #888;
 }
 .comments-block .avatar-image-container {
 max-height: 64px;
@@ -342,8 +345,7 @@ height: 64px;
 width: 64px;
 float: left;
 position: absolute;
-left: 0px;
-border: 2px solid #efefef;
+left: 0;
 }
 .comments-block .avatar-image-container img {
 max-width: 64px;
@@ -359,19 +361,48 @@ background-position: center center;
 background-repeat: no-repeat;
 }
 .comments-block .comment-author {
-padding: 5px 0;
-font-size: .7em;
 color: #333;
+font: bold normal .8em Arial, sans-serif;
 }
 .comments-block .comment-body {
-font-size: 1em;
-margin: 10px 0;
+margin: .5em 0;
+font: normal normal 1em Arial, sans-serif;
 }
 .comments-block .comment-footer {
-padding: 5px 0;
-font-size: .7em;
-margin: 10px 0 20px;
+margin: 0;
+font: normal normal .8em Arial, sans-serif;
+}
+.comments-block .comment-footer, .comments-block .comment-footer a {
+color: #888;
+}
+.deleted-comment {
+color: #888;
+padding-top: 1em;
+font: normal normal 1.25em Arial, sans-serif;
+}
+.add-comment {
 color: #333;
+display: block;
+padding: 1em 0;
+margin-top: 1em;
+text-align: center;
+background-color: #efefef;
+font: normal normal 1.25em Arial, sans-serif;
+}
+.team-comment {
+color: #333;
+padding: .5em 0;
+text-align: center;
+background-color: #efefef;
+font: bold normal 1em Arial, sans-serif;
+}
+.not-allowed {
+color: #333;
+padding: 1em 0;
+margin-top: 1em;
+text-align: center;
+background-color: #efefef;
+font: normal normal 1.25em Arial, sans-serif;
 }
 @media all and (max-width: 920px) {
 .header-full-image {
@@ -564,9 +595,13 @@ margin: 5px 0;
                 <data:postCommentMsg/>
               </h4>
               <data:blogCommentMessage/>
-              <data:blogTeamBlogMessage/>
+              <b:if cond='data:blogTeamBlogMessage'>
+                <div class='team-comment'>
+                  <data:blogTeamBlogMessage/>
+                </div>
+              </b:if>
               <a expr:href='data:post.commentFormIframeSrc' id='comment-editor-src'/>
-              <iframe allowtransparency='true' class='blogger-iframe-colorize blogger-comment-from-post' frameborder='0' height='410' id='comment-editor' name='comment-editor' src='' width='100%'/>
+              <iframe allowtransparency='true' class='blogger-iframe-colorize blogger-comment-from-post' frameborder='0' height='220' id='comment-editor' name='comment-editor' src='' width='100%'/>
               <data:post.friendConnectJs/>
               <data:post.cmtfpIframe/>
               <script type='text/javascript'>
@@ -575,8 +610,9 @@ margin: 5px 0;
             </div>
           </b:includable>
           <b:includable id='commentDeleteIcon' var='comment'>
-            <a expr:href='data:comment.deleteUrl' expr:title='data:top.deleteCommentMsg'>
-              <img src='http://www.blogger.com/img/icon_delete13.gif' style='display: inline; height: 9px;'/>
+            |
+            <a expr:href='data:comment.deleteUrl'>
+              <data:top.deleteCommentMsg/>
             </a>
           </b:includable>
           <b:includable id='comment_count_picker' var='post'>
@@ -601,38 +637,52 @@ margin: 5px 0;
                 <h4>
                   <data:post.commentLabelFull/>
                 </h4>
-                <dl class='comments-block'>
+                <div class='comments-block'>
                   <b:loop values='data:post.comments' var='comment'>
-                    <dt class='comment-author uppercase'>
-                      <b:if cond='data:blog.enabledCommentProfileImages'>
-                        <data:comment.authorAvatarImage/>
-                      </b:if>
-                      <data:comment.author/>
-                      :
-                    </dt>
-                    <dd class='comment-body'>
+                    <div class='comment' expr:id='data:comment.id'>
                       <b:if cond='data:comment.isDeleted'>
-                        <div style='font-style: italic; color: #888;'>
+                        <div class='deleted-comment'>
                           <data:comment.body/>
                         </div>
-                        <b:else/>
-                        <data:comment.body/>
+                      <b:else/>
+                        <div class='comment-author'>
+                          <b:if cond='data:blog.enabledCommentProfileImages'>
+                            <data:comment.authorAvatarImage/>
+                          </b:if>
+                          <b:if cond='data:comment.authorUrl'>
+                            <a expr:href='data:comment.authorUrl'>
+                              <data:comment.author/>
+                            </a>
+                          <b:else/>
+                            <data:comment.author/>
+                          </b:if>
+                          <data:commentPostedByMsg/>
+                          <b:if cond='data:comment.inReplyTo'>
+                            in reply to
+                            <a expr:href='&quot;#&quot; + data:comment.inReplyTo'>
+                              this comment
+                            </a>
+                          </b:if>
+                        </div>
+                        <div class='comment-body'>
+                          <data:comment.body/>
+                        </div>
+                        <div class='comment-footer'>
+                          <a expr:href='data:post.url + &quot;#&quot; + data:comment.id'>
+                            <data:comment.timestamp/>
+                          </a>
+                          <b:include data='comment' name='commentDeleteIcon'/>
+                        </div>
                       </b:if>
-                    </dd>
-                    <dd class='comment-footer uppercase'>
-                      <data:comment.timestamp/>
-                      <b:include data='comment' name='commentDeleteIcon'/>
-                    </dd>
+                    </div>
                   </b:loop>
-                </dl>
+                </div>
                 <b:if cond='data:post.commentPagingRequired'>
                   <div class='comments-pager uppercase'>
                     <a expr:class='data:post.oldLinkClass' expr:href='data:post.olderLinkUrl'>
                       <data:post.olderLinkText/>
                     </a>
-                    &#160; 
                     <data:post.commentRangeText/>
-                    &#160;
                     <a expr:class='data:post.newLinkClass' expr:href='data:post.newerLinkUrl'>
                       <data:post.newerLinkText/>
                     </a>
@@ -641,14 +691,14 @@ margin: 5px 0;
                 <b:if cond='data:post.embedCommentForm'>
                   <b:if cond='data:post.allowNewComments'>
                     <b:include data='post' name='comment-form'/>
-                    <b:else/>
-                    <div style='padding: 25px 0; text-align: center; font-size: 16px; color: #333; background-color: #f0f0f0;'>
+                  <b:else/>
+                    <div class='not-allowed'>
                       <data:post.noNewCommentsText/>
                     </div>
                   </b:if>
-                  <b:else/>
+                <b:else/>
                   <b:if cond='data:post.allowComments'>
-                    <a expr:href='data:post.addCommentUrl' expr:onclick='data:post.addCommentOnclick'>
+                    <a expr:href='data:post.addCommentUrl' expr:onclick='data:post.addCommentOnclick' class='add-comment'>
                       <data:postCommentMsg/>
                     </a>
                   </b:if>
@@ -677,7 +727,7 @@ margin: 5px 0;
             <div class='blog-pager uppercase'>
               <b:if cond='data:newerPageUrl'>
                 <a class='newer-link' expr:href='data:newerPageUrl' rel='next'>
-                  &#8592; 
+                  &#8592;
                   <data:newerPageTitle/>
                 </a>
               </b:if>
@@ -741,7 +791,7 @@ margin: 5px 0;
                   </b:if>
                   <b:if cond='data:blog.pageType != &quot;item&quot;'>
                     <b:if cond='data:post.allowComments'>
-                      &#160; / &#160; 
+                      &#160; / &#160;
                       <div class='post-comment-count'>
                         <b:include data='post' name='comment_count_picker'/>
                       </div>
@@ -761,13 +811,13 @@ margin: 5px 0;
                           #
                           <data:label.name/>
                         </a>
-                        &#160; 
+                        &#160;
                       </b:loop>
                     </div>
                   </b:if>
                   <b:if cond='data:blog.pageType == &quot;item&quot;'>
                     <b:if cond='data:post.sharePostUrl'>
-                      <b:include date='post' name='shareButtons'/>
+                      <b:include data='post' name='shareButtons'/>
                     </b:if>
                   </b:if>
                 </div>
@@ -836,8 +886,10 @@ margin: 5px 0;
           <b:includable id='threaded-comment-form' var='post'>
             <div class='comment-form'>
               <a name='comment-form'/>
-              <b:if cond='data:blog.TeamBlogMessage'>
-                <data:blog.TeamBlogMessage/>
+              <b:if cond='data:blogTeamBlogMessage'>
+                <div class='team-comment'>
+                  <data:blogTeamBlogMessage/>
+                </div>
               </b:if>
               <a expr:href='data:post.commentFormIframeSrc' id='comment-editor-src'/>
               <iframe allowtransparency='true' class='blogger-iframe-colorize blogger-comment-from-post' frameborder='0' height='220' id='comment-editor' name='comment-editor' src='' width='100%'/>
