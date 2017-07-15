@@ -2,17 +2,10 @@
 <!DOCTYPE html>
 <html b:version='2' expr:dir='data:blog.languageDirection' expr:lang='data:blog.locale' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
   <head>
-    <title>
-      <b:if cond='data:blog.pageName'>
-        <data:blog.pageName/>
-        |
-      </b:if>
-      <data:blog.title/>
-    </title>
-    <b:skin>
-      <![CDATA[
-*/
-----------
+    <title><b:if cond='data:blog.pageName'><data:blog.pageName/> | </b:if><data:blog.title/></title>
+    <meta content='width=device-width, initial-scale=1' name='viewport'/>
+    <b:skin><![CDATA[
+*/ ----------
 Theme Name: Journalium
 Theme URL: https://github.com/web-xaser/journalium
 Author: Pavel Chistyakov
@@ -263,7 +256,7 @@ position: absolute;
 bottom: 10px;
 left: 15%;
 }
-.post-comment-link {
+#edit-pencil {
 margin-left: 32px;
 border-bottom: 1px dotted #fff;
 }
@@ -278,7 +271,9 @@ bottom: 10px;
 right: 15%;
 }
 .post-preview-right address {
+display: inline;
 font-style: normal;
+border-bottom: 1px dotted #fff;
 }
 .post-footer {
 display: flex;
@@ -351,6 +346,7 @@ width: 100%;
 max-width: 916px;
 margin: 1em auto;
 text-align: justify;
+text-indent: 2em;
 }
 .post-body > h1, .post-body  > h2, .post-body > h3, .post-body > h4, .post-body > h5, .post-body > h6 {
 width: 100%;
@@ -379,11 +375,12 @@ font-style: italic;
 font-size: 90% !important;
 font-style: italic;
 }
-.post-body figure {
+.post-body figure, .post-body .post-iframe {
 width: 100%;
 max-width: 916px;
 margin: 1em auto;
 text-align: center;
+display: block;
 }
 .post-body figcaption {
 color: #90A4AE;
@@ -416,6 +413,7 @@ width: 100%;
 max-width: 916px;
 margin: 1em auto;
 text-align: center;
+text-indent: 0;
 }
 .post-body .tr-caption {
 font-size: 1em !important;
@@ -439,6 +437,17 @@ margin: .5em 0;
 max-width: 100%;
 width: auto;
 }
+#post-feed {
+background-color: #90A4AE;
+border-radius: 3px;
+color: #fff;
+padding: 3.5px 8px;
+font-size: .9em;
+display: inline-table;
+}
+#post-feed:hover {
+background-color: #B0BEC5;
+}
 /* ---------- FOOTER ---------- */
 .footer-outer {
 border-top: 1px solid #d5d5d5;
@@ -456,7 +465,7 @@ color: #90A4AE;
 }
 /* ---------- MEDIA QUERIES ---------- */
 @media all and (max-width: 1012px) {
-.post-body > h1, .post-body  > h2, .post-body > h3, .post-body > h4, .post-body > h5, .post-body > h6, .post-body p, .post-body figure {
+.post-body > h1, .post-body  > h2, .post-body > h3, .post-body > h4, .post-body > h5, .post-body > h6, .post-body p, .post-body figure, .post-body cite {
 padding: 0 1em;
 }
 .post-footer {
@@ -496,6 +505,9 @@ width: 100%;
 .post-header {
 padding: 50px 1em;
 }
+.post time, .post-title, .post-jump {
+padding: 0 16px !important;
+}
 .post-author {
 font-size: 1em;
 }
@@ -503,28 +515,41 @@ font-size: 1em;
 font-size: 2em;
 }
 .post-preview-left, .post-preview-right {
-display: inline-block;
+display: block;
 font-size: 1em;
 position: relative;
 bottom: 0;
 right: 0;
 left: 0;
 }
-.post-comment-link {
-margin: 0 8px;
+#edit-pencil {
+display: none;
 }
-.post-body p, .post-body figcaption, .post-body ul, .post-body ol {
+.post-body p, .post-body figcaption, .post-body ul, .post-body ol, .post-body cite, .post-body .hljs, .post-jump a {
 font-size: .9em;
+}
+.post-body .hljs {
+white-space: pre-wrap;
+}
+.post-footer {
+display: block;
+text-align: center;
+}
+#post-feed {
+margin: 8px 0;
 }
 .blog-pager {
-margin: 2em 1em;
+margin: 1em;
 width: auto;
 max-width: 100%;
-font-size: .9em;
+font-size: 1em;
+}
+.footer-outer {
+padding: 1.5em 1em;
+font-size: 1em;
 }
 }
-]]>
-    </b:skin>
+]]></b:skin>
     <b:if cond='data:blog.pageType != &quot;item&quot; and data:blog.pageType != &quot;static_page&quot;'>
       <style type='text/css'>
         .post {
@@ -551,6 +576,7 @@ font-size: .9em;
       </style>
     </b:if>
     <b:include data='blog' name='all-head-content'/>
+    <link href='//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css' rel='stylesheet'/>
     <link href='//cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css' rel='stylesheet'/>
     <link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/default.min.css' rel='stylesheet'/>
     <link href='//cdnjs.cloudflare.com/ajax/libs/featherlight/1.5.0/featherlight.min.css' rel='stylesheet'/>
@@ -559,31 +585,35 @@ font-size: .9em;
     <script src='//cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js'/>
     <script src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js'/>
     <script src='//cdnjs.cloudflare.com/ajax/libs/featherlight/1.5.0/featherlight.min.js'/>
-    <script type='text/javascript'>
-      hljs.initHighlightingOnLoad();</script>
+    <script type='text/javascript'>hljs.initHighlightingOnLoad();</script>
   </head>
   <body>
     <div class='layout'>
       <header class='header-outer'>
         <b:section class='header-inner' id='header' showaddelement='no'>
-          <b:widget id='Header1' locked='true' title='Journalium (Header)' type='Header' version='1' visible='true'>
+          <b:widget id='Header1' locked='true' title='Journalium (Header)' type='Header' version='1'>
+            <b:widget-settings>
+              <b:widget-setting name='displayUrl'/>
+              <b:widget-setting name='displayHeight'>0</b:widget-setting>
+              <b:widget-setting name='sectionWidth'>790</b:widget-setting>
+              <b:widget-setting name='useImage'>false</b:widget-setting>
+              <b:widget-setting name='shrinkToFit'>false</b:widget-setting>
+              <b:widget-setting name='imagePlacement'>BEHIND</b:widget-setting>
+              <b:widget-setting name='displayWidth'>0</b:widget-setting>
+            </b:widget-settings>
             <b:includable id='main'>
-              <h1 class='blog-title'>
-                <b:include name='title'/>
-              </h1>
+              <h1 class='blog-title'><b:include name='title'/></h1>
             </b:includable>
             <b:includable id='description'/>
             <b:includable id='title'>
               <b:if cond='data:blog.url == data:blog.homepageUrl'>
                 <data:title/>
                 <b:else/>
-                <a expr:href='data:blog.homepageUrl'>
-                  <data:title/>
-                </a>
+                <a expr:href='data:blog.homepageUrl'><data:title/></a>
               </b:if>
             </b:includable>
           </b:widget>
-          <b:widget id='BlogSearch1' locked='true' mobile='no' title='Search' type='BlogSearch' version='1' visible='true'>
+          <b:widget id='BlogSearch1' locked='true' mobile='no' title='Search' type='BlogSearch' version='1'>
             <b:includable id='main'>
               <div class='search-form'>
                 <form expr:action='data:blog.homepageUrl + &quot;search/&quot;' method='get'>
@@ -612,27 +642,22 @@ font-size: .9em;
               </style>
             </b:includable>
           </b:widget>
-          <b:widget id='PageList1' locked='true' title='Pages' type='PageList' version='1' visible='true'>
+          <b:widget id='PageList1' locked='true' title='Pages' type='PageList' version='1'>
+            <b:widget-settings>
+              <b:widget-setting name='homeTitle'>Homepage</b:widget-setting>
+            </b:widget-settings>
             <b:includable id='main'>
               <ul class='menu'>
                 <b:loop values='data:links' var='link'>
-                  <li>
-                    <a expr:href='data:link.href'>
-                      <data:link.title/>
-                    </a>
-                  </li>
+                  <li><a expr:href='data:link.href'><data:link.title/></a></li>
                 </b:loop>
               </ul>
               <select class='dropdown-menu' onchange='window.location.href = this.options[this.selectedIndex].value;'>
                 <b:loop values='data:links' var='link'>
                   <b:if cond='data:link.isCurrentPage'>
-                    <option expr:value='data:link.href' selected='selected'>
-                      <data:link.title/>
-                    </option>
-                    <b:else/>
-                    <option expr:value='data:link.href'>
-                      <data:link.title/>
-                    </option>
+                    <option expr:value='data:link.href' selected='selected'><data:link.title/></option>
+                  <b:else/>
+                    <option expr:value='data:link.href'><data:link.title/></option>
                   </b:if>
                 </b:loop>
               </select>
@@ -641,7 +666,32 @@ font-size: .9em;
         </b:section>
       </header>
       <b:section class='main-outer' id='main' showaddelement='no'>
-        <b:widget id='Blog1' locked='true' title='Blog Posts' type='Blog' version='1' visible='true'>
+        <b:widget id='Blog1' locked='true' title='Blog Posts' type='Blog' version='1'>
+          <b:widget-settings>
+            <b:widget-setting name='showDateHeader'>true</b:widget-setting>
+            <b:widget-setting name='style.textcolor'>#000000</b:widget-setting>
+            <b:widget-setting name='showShareButtons'>true</b:widget-setting>
+            <b:widget-setting name='authorLabel'>Author</b:widget-setting>
+            <b:widget-setting name='showCommentLink'>false</b:widget-setting>
+            <b:widget-setting name='style.urlcolor'>#008000</b:widget-setting>
+            <b:widget-setting name='showAuthor'>true</b:widget-setting>
+            <b:widget-setting name='style.linkcolor'>#0000ff</b:widget-setting>
+            <b:widget-setting name='style.unittype'>TextAndImage</b:widget-setting>
+            <b:widget-setting name='style.bgcolor'>#ffffff</b:widget-setting>
+            <b:widget-setting name='timestampLabel'>in</b:widget-setting>
+            <b:widget-setting name='reactionsLabel'>Reactions</b:widget-setting>
+            <b:widget-setting name='showAuthorProfile'>false</b:widget-setting>
+            <b:widget-setting name='style.layout'>1x1</b:widget-setting>
+            <b:widget-setting name='showLabels'>true</b:widget-setting>
+            <b:widget-setting name='showLocation'>true</b:widget-setting>
+            <b:widget-setting name='showTimestamp'>true</b:widget-setting>
+            <b:widget-setting name='postsPerAd'>1</b:widget-setting>
+            <b:widget-setting name='showBacklinks'>false</b:widget-setting>
+            <b:widget-setting name='style.bordercolor'>#ffffff</b:widget-setting>
+            <b:widget-setting name='showInlineAds'>false</b:widget-setting>
+            <b:widget-setting name='backlinksLabel'>Backlinks</b:widget-setting>
+            <b:widget-setting name='showReactions'>false</b:widget-setting>
+          </b:widget-settings>
           <b:includable id='main' var='top'>
             <b:include data='top' name='status-message'/>
             <b:loop values='data:posts' var='post'>
@@ -653,9 +703,195 @@ font-size: .9em;
             <b:if cond='data:blog.pageType != &quot;item&quot; and data:blog.pageType != &quot;static_page&quot; and data:blog.pageType != &quot;error_page&quot;'>
               <b:include name='nextprev'/>
             </b:if>
+            <b:include name='blogAdminWidget'/>
           </b:includable>
           <b:includable id='backlinkDeleteIcon' var='backlink'/>
           <b:includable id='backlinks' var='post'/>
+          <b:includable id='blogAdminWidget'>
+            <!-- Blog Admin Widget (made with https://github.com/nobitagit/material-floating-button) -->
+            <b:if cond='data:blog.isMobile'>
+              <style type='text/css'>
+                .blog-admin { display: none !important; }
+              </style>
+            </b:if>
+            <div class='item-control blog-admin'>
+              <style type='text/css'>
+                .mfb-component--br {
+                  box-sizing: border-box;
+                  position: fixed;
+                  right: 16px;
+                  bottom: 16px;
+                  white-space: nowrap;
+                  z-index: 10;
+                  padding-left: 0 !important;
+                  list-style: none;
+                }
+                .mfb-component--br *, .mfb-component--br *:before, .mfb-component--br *:after {
+                  box-sizing: inherit;
+                }
+                .mfb-component__button--main, .mfb-component__button--child {
+                  background-color: #f0f0f0 !important;
+                  display: inline-block;
+                  position: relative;
+                  border: none;
+                  border-radius: 50%;
+                  box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);
+                  cursor: pointer;
+                  outline: none;
+                  padding: 0;
+                  color: #f1f1f1;
+                }
+                .mfb-component__button--main:hover, .mfb-component__button--child:hover {
+                  opacity: 1;
+                }
+                .mfb-component__list {
+                  list-style: none;
+                  margin: 0;
+                  padding: 0;
+                }
+                .mfb-component__list &gt; li {
+                  display: block;
+                  position: absolute;
+                  top: 0;
+                  right: 9px;
+                  padding: 10px 0;
+                  margin: -10px 0;
+                }
+                .mfb-component__icon, .mfb-component__main-icon--active, .mfb-component__main-icon--resting, .mfb-component__child-icon {
+                  position: absolute;
+                  font-size: 18px;
+                  text-align: center;
+                  line-height: 56px;
+                  width: 100%;
+                }
+                .mfb-component__wrap {
+                  padding: 0 !important;
+                }
+                [data-mfb-toggle=&quot;hover&quot;]:hover .mfb-component__icon, [data-mfb-toggle=&quot;hover&quot;]:hover .mfb-component__main-icon--active, [data-mfb-toggle=&quot;hover&quot;]:hover .mfb-component__main-icon--resting, [data-mfb-toggle=&quot;hover&quot;]:hover .mfb-component__child-icon {
+                  -webkit-transform: scale(1) rotate(0deg);
+                  transform: scale(1) rotate(0deg);
+                }
+                .mfb-component__button--main {
+                  height: 56px;
+                  width: 56px;
+                  z-index: 20;
+                }
+                .mfb-component__button--child {
+                  height: 38px;
+                  width: 38px;
+                }
+                .mfb-component__main-icon--active, .mfb-component__main-icon--resting {
+                  -webkit-transform: scale(1) rotate(360deg);
+                  transform: scale(1) rotate(360deg);
+                  -webkit-transition: -webkit-transform 150ms cubic-bezier(0.4, 0, 1, 1);
+                  transition: transform 150ms cubic-bezier(0.4, 0, 1, 1);
+                }
+                .mfb-component__child-icon {
+                  line-height: 38px;
+                  font-size: 18px;
+                }
+                .mfb-component__main-icon--active {
+                  opacity: 0;
+                }
+                [data-mfb-toggle=&quot;hover&quot;]:hover .mfb-component__main-icon {
+                  -webkit-transform: scale(1) rotate(0deg);
+                  transform: scale(1) rotate(0deg);
+                }
+                [data-mfb-toggle=&quot;hover&quot;]:hover .mfb-component__main-icon--resting {
+                  opacity: 0;
+                  position: absolute !important;
+                }
+                [data-mfb-toggle=&quot;hover&quot;]:hover .mfb-component__main-icon--active {
+                  opacity: 1;
+                }
+                .mfb-component--br.mfb-slidein .mfb-component__list li {
+                  opacity: 0;
+                  transition: all 0.3s;
+                }
+                .mfb-component--br.mfb-slidein[data-mfb-toggle=&quot;hover&quot;]:hover .mfb-component__list li {
+                  opacity: 1;
+                }
+                .mfb-component--br.mfb-slidein[data-mfb-toggle=&quot;hover&quot;]:hover .mfb-component__list li:nth-child(1) {
+                  -webkit-transform: translateY(-50px);
+                  transform: translateY(-50px);
+                }
+                .mfb-component--br.mfb-slidein[data-mfb-toggle=&quot;hover&quot;]:hover .mfb-component__list li:nth-child(2) {
+                  -webkit-transform: translateY(-100px);
+                  transform: translateY(-100px);
+                }
+                .mfb-component--br.mfb-slidein[data-mfb-toggle=&quot;hover&quot;]:hover .mfb-component__list li:nth-child(3) {
+                  -webkit-transform: translateY(-150px);
+                  transform: translateY(-150px);
+                }
+                .mfb-component--br.mfb-slidein[data-mfb-toggle=&quot;hover&quot;]:hover .mfb-component__list li:nth-child(4) {
+                  -webkit-transform: translateY(-200px);
+                  transform: translateY(-200px);
+                }
+                .mfb-component--br.mfb-slidein[data-mfb-toggle=&quot;hover&quot;]:hover .mfb-component__list li:nth-child(5) {
+                  -webkit-transform: translateY(-250px);
+                  transform: translateY(-250px);
+                }
+                .mfb-component--br.mfb-slidein[data-mfb-toggle=&quot;hover&quot;]:hover .mfb-component__list li:nth-child(6) {
+                  -webkit-transform: translateY(-300px);
+                  transform: translateY(-300px);
+                }
+                [data-mfb-label]:after {
+                  content: attr(data-mfb-label);
+                  opacity: 0;
+                  transition: all .5s;
+                  background: rgba(0, 0, 0, .9);
+                  padding: 4px 8px;
+                  border-radius: 3px;
+                  color: rgba(255, 255, 255, .8);
+                  font-size: 12px;
+                  font-weight: 700;
+                  pointer-events: none;
+                  line-height: normal;
+                  position: absolute;
+                  top: 50%;
+                  margin-top: -11.5px;
+                }
+                [data-mfb-toggle=&quot;hover&quot;] [data-mfb-label]:hover:after {
+                  content: attr(data-mfb-label);
+                  opacity: 1;
+                  transition: all 0.3s;
+                }
+                .mfb-component--br [data-mfb-label]:after {
+                  content: attr(data-mfb-label);
+                  right: 70px;
+                }
+                .mfb-component--br .mfb-component__list [data-mfb-label]:after {
+                  content: attr(data-mfb-label);
+                  right: 50px;
+                }
+              </style>
+              <ul class='mfb-component--br mfb-slidein' data-mfb-toggle='hover' id='menu'>
+                <li class='mfb-component__wrap'>
+                  <a class='mfb-component__button--main' data-mfb-label='Dashboard' href='#'><i class='mfb-component__main-icon--resting ion-settings'/><i class='mfb-component__main-icon--active ion-close-round'/></a>
+                  <ul class='mfb-component__list'>
+                    <li>
+                      <a class='mfb-component__button--child' data-mfb-label='Edit Article' expr:href='data:post.editUrl' target='_blank'><i class='mfb-component__child-icon ion-edit'/></a>
+                    </li>
+                    <li>
+                      <a class='mfb-component__button--child' data-mfb-label='Blog Overview' expr:href='&quot;https://www.blogger.com/blogger.g?blogID=&quot; + data:blog.blogId + &quot;#overview&quot;' target='_blank'><i class='mfb-component__child-icon ion-home'/></a>
+                    </li>
+                    <li>
+                      <a class='mfb-component__button--child' data-mfb-label='View Comments' href='https://YOUR-DISQUS-SHORTNAME.disqus.com/admin/' target='_blank'><i class='mfb-component__child-icon ion-chatbox'/></a>
+                    </li>
+                    <li>
+                      <a class='mfb-component__button--child' data-mfb-label='View Posts Stats' expr:href='&quot;https://www.blogger.com/blogger.g?blogID=&quot; + data:blog.blogId + &quot;#postsstats&quot;' target='_blank'><i class='mfb-component__child-icon ion-pie-graph'/></a>
+                    </li>
+                    <li>
+                      <a class='mfb-component__button--child' data-mfb-label='Edit Template' expr:href='&quot;https://www.blogger.com/blogger.g?blogID=&quot; + data:blog.blogId + &quot;#template&quot;' target='_blank'><i class='mfb-component__child-icon ion-easel'/></a>
+                    </li>
+                    <li>
+                      <a class='mfb-component__button--child' data-mfb-label='Edit Settings' expr:href='&quot;https://www.blogger.com/blogger.g?blogID=&quot; + data:blog.blogId + &quot;#basicsettings&quot;' target='_blank'><i class='mfb-component__child-icon ion-wrench'/></a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </b:includable>
           <b:includable id='comment-form' var='post'/>
           <b:includable id='commentDeleteIcon' var='comment'/>
           <b:includable id='comment_count_picker' var='post'/>
@@ -713,7 +949,9 @@ font-size: .9em;
             </div>
           </b:includable>
           <b:includable id='feedLinks'/>
-          <b:includable id='feedLinksBody' var='links'/>
+          <b:includable id='feedLinksBody' var='links'>
+            <a expr:href='data:blog.homepageUrl + &quot;feeds/posts/default?alt=rss&quot;' id='post-feed' target='_blank'>Subscribe via RSS</a>
+          </b:includable>
           <b:includable id='iframe_comments' var='post'/>
           <b:includable id='mobile-index-post' var='post'/>
           <b:includable id='mobile-main' var='top'/>
@@ -723,15 +961,11 @@ font-size: .9em;
             <div class='blog-pager'>
               <b:if cond='data:newerPageUrl'>
                 &#8592; 
-                <a class='newer-link' expr:href='data:newerPageUrl' rel='next'>
-                  next
-                </a>
+                <a class='newer-link' expr:href='data:newerPageUrl' rel='next'>next</a>
               </b:if>
               &#160;
               <b:if cond='data:olderPageUrl'>
-                <a class='older-link' expr:href='data:olderPageUrl' rel='prev'>
-                  prev
-                </a>
+                <a class='older-link' expr:href='data:olderPageUrl' rel='prev'>prev</a>
                 &#8594;
               </b:if>
             </div>
@@ -762,72 +996,50 @@ font-size: .9em;
                   <b:if cond='data:post.title'>
                     <h2 class='post-title'>
                       <b:if cond='data:blog.url != data:post.url'>
-                        <a expr:href='data:post.url'>
-                          <data:post.title/>
-                        </a>
-                        <b:else/>
+                        <a expr:href='data:post.url'><data:post.title/></a>
+                      <b:else/>
                         <data:post.title/>
                       </b:if>
                     </h2>
                   </b:if>
                   <div class='post-preview-left'>
                     <time expr:datetime='data:post.timestampISO8601' pubdate='pubdate'>
-                      <b:if cond='data:post.dateHeader'>
-                        <data:post.date/>
-                      </b:if>
-                      <b:if cond='data:top.showTimestamp'>
-                        <data:top.timestampLabel/>
-                        <data:post.timestamp/>
-                      </b:if>
+                      <b:if cond='data:post.dateHeader'><data:post.date/></b:if>
+                      <b:if cond='data:top.showTimestamp'><data:top.timestampLabel/> <data:post.timestamp/></b:if>
                     </time>
-                    <a class='post-comment-link' href='#post-comments'>
-                      <data:postCommentMsg/>
-                    </a>
+                    <b:include data='post' name='postQuickEdit'/>
                   </div>
                   <div class='post-preview-right'>
                     <b:if cond='data:post.location'>
-                      <address>
-                        <data:post.location.name/>
-                      </address>
+                      <address><a expr:href='data:post.location.mapsUrl' rel='nofollow' target='_blank'><data:post.location.name/></a></address>
                     </b:if>
                   </div>
                 </div>
                 <b:case value='static_page'/>
                 <div class='page-header'>
                   <b:if cond='data:post.title'>
-                    <h2 class='page-title'>
-                      <data:post.title/>
-                    </h2>
+                    <h2 class='page-title'><data:post.title/></h2>
                   </b:if>
                 </div>
                 <b:default/>
                 <time expr:datetime='data:post.timestampISO8601' pubdate='pubdate'>
                   <data:post.date/>
-                  <b:if cond='data:top.showTimestamp'>
-                    <data:top.timestampLabel/>
-                    <data:post.timestamp/>
-                  </b:if>
+                  <b:if cond='data:top.showTimestamp'><data:top.timestampLabel/> <data:post.timestamp/></b:if>
                 </time>
                 <b:if cond='data:post.title'>
                   <h2 class='post-title'>
                     <b:if cond='data:blog.url != data:post.url'>
-                      <a expr:href='data:post.url'>
-                        <data:post.title/>
-                      </a>
-                      <b:else/>
+                      <a expr:href='data:post.url'><data:post.title/></a>
+                    <b:else/>
                       <data:post.title/>
                     </b:if>
                   </h2>
                 </b:if>
               </b:switch>
-              <div class='post-body'>
-                <data:post.body/>
-              </div>
+              <div class='post-body'><data:post.body/></div>
               <b:if cond='data:post.hasJumpLink'>
                 <div class='post-jump'>
-                  <a expr:href='data:post.url'>
-                    <data:post.jumpText/>
-                  </a>
+                  <a expr:href='data:post.url'><data:post.jumpText/></a>
                 </div>
               </b:if>
               <b:if cond='data:blog.pageType == &quot;item&quot;'>
@@ -836,13 +1048,15 @@ font-size: .9em;
                     <div class='post-labels'>
                       <data:postLabelsLabel/>
                       <b:loop values='data:post.labels' var='label'>
-                        <a expr:href='data:label.url' rel='tag'>
-                          <data:label.name/>
-                        </a>
-                        ,
+                        <b:if cond='data:label.isLast'>
+                          <a expr:href='data:label.url' rel='tag'><data:label.name/></a>
+                        <b:else/>
+                          <a expr:href='data:label.url' rel='tag'><data:label.name/></a>,
+                        </b:if>
                       </b:loop>
                     </div>
                   </b:if>
+                  <b:include name='feedLinksBody'/>
                   <b:if cond='data:post.sharePostUrl'>
                     <b:include data='post' name='shareButtons'/>
                   </b:if>
@@ -850,7 +1064,11 @@ font-size: .9em;
               </b:if>
             </article>
           </b:includable>
-          <b:includable id='postQuickEdit' var='post'/>
+          <b:includable id='postQuickEdit' var='post'>
+            <span expr:class='&quot;item-control &quot; + data:post.adminClass'>
+              <a expr:href='data:post.editUrl' id='edit-pencil' target='_blank'><data:top.editPostMsg/></a>
+            </span>
+          </b:includable>
           <b:includable id='shareButtons' var='post'>
             <script src='//yastatic.net/es5-shims/0.0.2/es5-shims.min.js'/>
             <script src='//yastatic.net/share2/share.js'/>
@@ -860,18 +1078,11 @@ font-size: .9em;
             <b:if cond='data:blog.pageType == &quot;archive&quot;'>
               <div class='status-archive'>
                 <div class='status-archive-desc'>
-                  <span class='status-archive__name'>
-                    Archive 
-                    <data:blog.pageName/>
-                  </span>
-                  <span class='status-archive__category'>
-                    Shown posts for the selected month
-                  </span>
+                  <span class='status-archive__name'>Archive for <data:blog.pageName/></span>
+                  <span class='status-archive__category'>Shown posts for the selected month</span>
                 </div>
                 <div class='status-archive__all'>
-                  <a expr:href='data:blog.homepageUrl'>
-                    all posts
-                  </a>
+                  <a expr:href='data:blog.homepageUrl'>All posts</a>
                 </div>
               </div>
               <style type='text/css'>
@@ -906,23 +1117,27 @@ font-size: .9em;
                 .status-archive__all a:hover {
                   background-color: #B0BEC5;
                 }
+                @media all and (max-width: 664px) {
+                  .status-archive {
+                    display: inline-block;
+                    font-size: 1em;
+                  }
+                  .status-archive__all a {
+                    display: inline-block;
+                    margin-top: 8px;
+                  }
+                }
               </style>
             </b:if>
             <b:if cond='data:navMessage'>
               <b:if cond='data:blog.searchLabel'>
                 <div class='status-labels'>
                   <div class='status-label-desc'>
-                    <span class='status-label__name'>
-                      <data:blog.searchLabel/>
-                    </span>
-                    <span class='status-label__category'>
-                      Shown posts with this label
-                    </span>
+                    <span class='status-label__name'><data:blog.searchLabel/></span>
+                    <span class='status-label__category'>Shown posts with this label</span>
                   </div>
                   <div class='status-label-subscribtion'>
-                    <a expr:href='data:blog.homepageUrl + &quot;feeds/posts/default/-/&quot; + data:blog.searchLabel + &quot;?alt=rss&quot;' rel='nofollow' target='_blank'>
-                      Subscribe via RSS
-                    </a>
+                    <a expr:href='data:blog.homepageUrl + &quot;feeds/posts/default/-/&quot; + data:blog.searchLabel + &quot;?alt=rss&quot;' rel='nofollow' target='_blank'>Subscribe via RSS</a>
                   </div>
                 </div>
                 <b:if cond='data:numPosts &lt; 10'>
@@ -961,13 +1176,21 @@ font-size: .9em;
                   .status-label-subscribtion a:hover {
                     background-color: #B0BEC5;
                   }
+                  @media all and (max-width: 664px) {
+                    .status-labels {
+                      display: inline-block;
+                      font-size: 1em;
+                    }
+                    .status-label-subscribtion a {
+                      display: inline-block;
+                      margin-top: 8px;
+                    }
+                  }
                 </style>
               </b:if>
               <b:if cond='data:blog.searchQuery'>
                 <div class='status-search'>
-                  <h5 class='status-search__name'>
-                    Search
-                  </h5>
+                  <h5 class='status-search__name'>Search</h5>
                   <div class='status-search__form'>
                     <form expr:action='data:blog.homepageUrl + &quot;search/&quot;' method='get'>
                       <input expr:placeholder='data:blog.searchQuery' expr:value='data:blog.searchQuery' id='s' name='q' type='search'/>
@@ -977,27 +1200,19 @@ font-size: .9em;
                     <span class='sort'>
                       Sort:
                       <span class='sort-by-relevant'>
-                        <a expr:href='data:blog.homepageUrl + &quot;search/?q=&quot; + data:blog.searchQuery + &quot;&amp;by-date=false&quot;'>
-                          by relevance
-                        </a>
+                        <a expr:href='data:blog.homepageUrl + &quot;search/?q=&quot; + data:blog.searchQuery + &quot;&amp;by-date=false&quot;'>by relevance</a>
                       </span>
                       <span class='sort-by-date'>
-                        <a expr:href='data:blog.homepageUrl + &quot;search/?q=&quot; + data:blog.searchQuery + &quot;&amp;by-date=true&quot;'>
-                          by time
-                        </a>
+                        <a expr:href='data:blog.homepageUrl + &quot;search/?q=&quot; + data:blog.searchQuery + &quot;&amp;by-date=true&quot;'>by time</a>
                       </span>
                     </span>
                     <span class='no-sort'>
-                      <a expr:href='data:blog.homepageUrl'>
-                        all posts
-                      </a>
+                      <a expr:href='data:blog.homepageUrl'>all posts</a>
                     </span>
                   </div>
                 </div>
                 <b:if cond='data:numPosts == 0'>
-                  <p class='status-search__blank'>
-                    No search results.
-                  </p>
+                  <p class='status-search__blank'>No search results.</p>
                 </b:if>
                 <style type='text/css'>
                   .status-search {
@@ -1014,7 +1229,7 @@ font-size: .9em;
                     color: #555;
                     width: 100%;
                     max-width: 916px;
-                    margin: 1em auto 2em; 
+                    margin: 2em auto; 
                   }
                   .status-search__name {
                     margin: 0;
@@ -1049,12 +1264,34 @@ font-size: .9em;
                   .no-sort {
                     text-align: right;
                   }
+                  @media all and (max-width: 664px) {
+                    .status-search {
+                      border-width: 1px 0;
+                      border-radius: 0;
+                    }
+                    .status-search__name {
+                      font-size: 1em;
+                    }
+                    .status-search__form form #s {
+                      margin: 0 0 8px;
+                      font-size: 1em;
+                    }
+                    .status-search__sort {
+                      display: block;
+                      font-size: .9em;
+                      line-height: 2;
+                    }
+                    .no-sort {
+                      text-align: left;
+                    }
+                    .status-search__blank {
+                      padding: 0 1em;
+                    }
+                  }
                 </style>
               </b:if>
               <b:if cond='data:blog.pageType == &quot;error_page&quot;'>
-                <div class='status'>
-                  <data:navMessage/>
-                </div>
+                <div class='status'><data:navMessage/></div>
                 <style type='text/css'>
                   .footer-outer { border-bottom: 1px solid #d5d5d5; }
                 </style>
@@ -1067,14 +1304,7 @@ font-size: .9em;
         </b:widget>
       </b:section>
       <footer class='footer-outer'>
-        Blogger Template &#171;
-        <b>
-          Journalium
-        </b>
-        &#187;. Made with &#10084;&#65039; by 
-        <a href='http://www.web-xaser.ru' target='_blank'>
-          @web_xaser
-        </a>
+        Blogger Template &#171;<b>Journalium</b>&#187;.<br/>Made with &#10084;&#65039; by <a href='http://www.web-xaser.ru' target='_blank'>@web_xaser</a> | Powered by Blogger.
         <b:section class='footer' id='footer'/>
       </footer>
     </div>
