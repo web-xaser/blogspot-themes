@@ -114,7 +114,7 @@ border-bottom: 1px solid #d5d5d5;
 background-color: #f5f5f5;
 }
 .header-inner {
-max-width: 964px;
+max-width: 948px;
 padding: 0 16px;
 display: flex;
 margin: 0 auto;
@@ -165,31 +165,8 @@ display: none;
 }
 /* ---------- POST ---------- */
 .status {
-padding: 5em 1em;
-color: #333;
-font-size: 1.25em;
-line-height: 1.5;
-text-align: center;
 width: 100%;
-margin: 0 auto;
-max-width: 600px;
-}
-.status h2 {
-font-size: 2em;
-font-weight: normal;
-}
-.status a {
-margin: 1em 0 0;
-padding: 8px 16px;
-border-radius: 2px;
-font-size: 1em;
-display: inline-block;
-color: #90A4AE;
-border: 1px solid #90A4AE;
-}
-.status a:hover {
-background-color: #90A4AE;
-color: #fff;
+padding: 0 16px;
 }
 .post-title {
 display: inline-block;
@@ -225,9 +202,9 @@ color: #fff;
 color: rgba(255, 255, 255, .75);
 }
 .page-header {
-padding: 2em 8px 1em;
+padding: 2em 16px 1em;
 width: 100%;
-max-width: 916px;
+max-width: 948px;
 margin: 0 auto;
 }
 .page-title {
@@ -254,7 +231,7 @@ z-index: 2;
 color: #fff;
 position: absolute;
 bottom: 10px;
-left: 15%;
+left: 10%;
 }
 #edit-pencil {
 margin-left: 32px;
@@ -268,7 +245,7 @@ z-index: 2;
 color: #fff;
 position: absolute;
 bottom: 10px;
-right: 15%;
+right: 10%;
 }
 .post-preview-right address {
 display: inline;
@@ -281,11 +258,11 @@ justify-content: space-between;
 align-items: center;
 max-width: 100%;
 font-size: 1.15em;
-max-width: 916px;
+max-width: 948px;
 margin: 1em auto;
 border: 1px solid #ccc;
 border-radius: 2px;
-padding: 4px 8px;
+padding: 4px 16px;
 }
 .post-labels {
 color: #555;
@@ -297,9 +274,10 @@ text-decoration: underline;
 }
 .post-jump {
 margin: 1em auto;
+padding: 0 16px;
 width: 100%;
 position: relative;
-max-width: 916px;
+max-width: 948px;
 text-align: right;
 }
 .post-jump a {
@@ -316,9 +294,10 @@ background-color: #90A4AE;
 }
 .blog-pager {
 margin: 2em auto 0;
+padding: 0 16px;
 display: flex;
 width: 100%;
-max-width: 916px;
+max-width: 948px;
 justify-content: center;
 font-size: 1.75em;
 }
@@ -343,15 +322,17 @@ color: #90A4AE;
 }
 .post-body p, .post-body div {
 width: 100%;
-max-width: 916px;
+max-width: 948px;
 margin: 1em auto;
+padding: 0 16px;
 text-align: justify;
 text-indent: 2em;
 }
 .post-body > h1, .post-body  > h2, .post-body > h3, .post-body > h4, .post-body > h5, .post-body > h6 {
 width: 100%;
-max-width: 916px;
+max-width: 948px;
 margin: 1em auto;
+padding: 0 16px;
 font-family: Verdana, Arial, sans-serif;
 }
 .post-body h1 {
@@ -377,8 +358,9 @@ font-style: italic;
 }
 .post-body figure, .post-body .post-iframe {
 width: 100%;
-max-width: 916px;
+max-width: 948px;
 margin: 1em auto;
+padding: 0 16px;
 text-align: center;
 display: block;
 }
@@ -387,31 +369,33 @@ color: #90A4AE;
 font-style: italic;
 }
 .post-body blockquote {
-padding: 1em 2em;
+padding: 1em 16px;
 margin: 1em auto;
 color: #333;
 background-color: #f5f5f5;
 width: 100%;
-max-width: 916px;
+max-width: 948px;
 }
 .post-body cite {
 width: 100%;
-max-width: 916px;
+max-width: 948px;
 margin: 1em auto;
+padding: 0 16px;
 text-align: right;
 color: #333;
 }
 .post-body .hljs {
-padding: 0 2em 1.5em !important;
+padding: 0 16px 1.5em !important;
 background: #f5f5f5 !important;
 margin: 0 auto;
 width: 100%;
-max-width: 916px;
+max-width: 948px;
 }
 .post-body .tr-caption-container {
 width: 100%;
-max-width: 916px;
+max-width: 948px;
 margin: 1em auto;
+padding: 0 16px;
 text-align: center;
 text-indent: 0;
 }
@@ -427,10 +411,9 @@ max-width: 100%;
 .widget .post-body ul, .widget .post-body ol {
 margin: 1em auto;
 line-height: 1.5;
-padding: 0;
-padding-left: 32px;
+padding: 0 16px 0 32px;
 width: 100%;
-max-width: 916px;
+max-width: 948px;
 }
 .separator {
 margin: .5em 0;
@@ -512,7 +495,8 @@ padding: 0 16px !important;
 font-size: 1em;
 }
 .post-title {
-font-size: 2em;
+font-size: 1.5em;
+line-height: 1.25;
 }
 .post-preview-left, .post-preview-right {
 display: block;
@@ -545,7 +529,7 @@ max-width: 100%;
 font-size: 1em;
 }
 .footer-outer {
-padding: 1.5em 1em;
+padding: 16px !important;
 font-size: 1em;
 }
 }
@@ -554,17 +538,18 @@ font-size: 1em;
       <style type='text/css'>
         .post {
           width: 100%;
-          max-width: 916px;
+          max-width: 948px;
           margin: 3em auto;
         }
         .post time {
+          padding: 0 16px;
           font-size: 1em;
           color: #999;
         }
         .post-title {
           display: block;
           font-size: 2em;
-          padding: 0;
+          padding: 0 16px;
           color: #555;
         }
         .post-title a {
@@ -581,7 +566,6 @@ font-size: 1em;
     <link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/default.min.css' rel='stylesheet'/>
     <link href='//cdnjs.cloudflare.com/ajax/libs/featherlight/1.5.0/featherlight.min.css' rel='stylesheet'/>
     <script src='//code.jquery.com/jquery-latest.js'/>
-    <script src='//cdnjs.cloudflare.com/ajax/libs/parallax.js/1.4.2/parallax.min.js'/>
     <script src='//cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js'/>
     <script src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js'/>
     <script src='//cdnjs.cloudflare.com/ajax/libs/featherlight/1.5.0/featherlight.min.js'/>
@@ -954,8 +938,9 @@ font-size: 1em;
               <style type='text/css'>
                 #disqus_thread {
                   width: 100%;
-                  max-width: 916px;
+                  max-width: 948px;
                   margin: 2em auto 0;
+                  padding: 0 16px;
                 }
                 @media all and (max-width: 1012px) {
                   #disqus_thread {
@@ -970,7 +955,7 @@ font-size: 1em;
               <script type='text/javascript'>
                 VK.init({apiId: YOUR-APP-ID, onlyWidgets: true});
               </script>
-              <div id='vk_comments' style='width: 100%; max-width: 916px; margin: 2em auto 0;'/>
+              <div id='vk_comments' style='width: 100%; max-width: 948px; margin: 2em auto 0; padding: 0 16px;'/>
               <script type='text/javascript'>
                 VK.Widgets.Comments(&quot;vk_comments&quot;, {limit: 15, width: &quot;auto&quot;, attach: &quot;*&quot;});
               </script>
@@ -1096,9 +1081,7 @@ font-size: 1em;
                     </div>
                   </b:if>
                   <b:include name='feedLinksBody'/>
-                  <b:if cond='data:post.sharePostUrl'>
-                    <b:include data='post' name='shareButtons'/>
-                  </b:if>
+                  <b:include data='post' name='shareButtons'/>
                 </div>
               </b:if>
             </article>
@@ -1114,228 +1097,256 @@ font-size: 1em;
             <div class='ya-share2' data-services='twitter,vkontakte,facebook,gplus,collections,pocket'/>
           </b:includable>
           <b:includable id='status-message'>
-            <b:if cond='data:blog.pageType == &quot;archive&quot;'>
-              <div class='status-archive'>
-                <div class='status-archive-desc'>
-                  <span class='status-archive__name'>Archive for <data:blog.pageName/></span>
-                  <span class='status-archive__category'>Shown posts for the selected month</span>
-                </div>
-                <div class='status-archive__all'>
-                  <a expr:href='data:blog.homepageUrl'>All posts</a>
-                </div>
-              </div>
-              <style type='text/css'>
-                .status-archive {
-                  display: flex;
-                  justify-content: space-between;
-                  align-items: center;
-                  width: 100%;
-                  max-width: 916px;
-                  margin: 2em auto 0;
-                  padding: 2em;
-                  background-color: #f5f5f5;
-                  border: 1px solid #d5d5d5;
-                  font-size: 1.1em;
-                }
-                .status-archive__name {
-                  font-size: 1.25em;
-                  display: block;
-                  padding: 0 0 .5em;
-                  font-weight: bold;
-                  color: #333;
-                }
-                .status-archive__category {
-                  color: #555;
-                }
-                .status-archive__all a {
-                  background-color: #90A4AE;
-                  border-radius: 3px;
-                  color: #fff;
-                  padding: 8px 16px;
-                }
-                .status-archive__all a:hover {
-                  background-color: #B0BEC5;
-                }
-                @media all and (max-width: 664px) {
-                  .status-archive {
-                    display: inline-block;
-                    font-size: 1em;
-                  }
-                  .status-archive__all a {
-                    display: inline-block;
-                    margin-top: 8px;
-                  }
-                }
-              </style>
-            </b:if>
-            <b:if cond='data:navMessage'>
-              <b:if cond='data:blog.searchLabel'>
-                <div class='status-labels'>
-                  <div class='status-label-desc'>
-                    <span class='status-label__name'><data:blog.searchLabel/></span>
-                    <span class='status-label__category'>Shown posts with this label</span>
+            <div class='status'>
+              <b:if cond='data:blog.pageType == &quot;archive&quot;'>
+                <div class='status-archive'>
+                  <div class='status-archive-desc'>
+                    <span class='status-archive__name'>Archive for <data:blog.pageName/></span>
+                    <span class='status-archive__category'>Shown posts for the selected month</span>
                   </div>
-                  <div class='status-label-subscribtion'>
-                    <a expr:href='data:blog.homepageUrl + &quot;feeds/posts/default/-/&quot; + data:blog.searchLabel + &quot;?alt=rss&quot;' rel='nofollow' target='_blank'>Subscribe via RSS</a>
+                  <div class='status-archive__all'>
+                    <a expr:href='data:blog.homepageUrl'>All posts</a>
                   </div>
                 </div>
-                <b:if cond='data:numPosts &lt; 10'>
-                  <style type='text/css'>
-                    .blog-pager { display: none; } </style>
-                </b:if>
                 <style type='text/css'>
-                  .status-labels {
+                  .status-archive {
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
                     width: 100%;
-                    max-width: 916px;
+                    max-width: 948px;
                     margin: 2em auto 0;
-                    padding: 2em;
+                    padding: 2em 16px;
                     background-color: #f5f5f5;
                     border: 1px solid #d5d5d5;
                     font-size: 1.1em;
                   }
-                  .status-label__name {
+                  .status-archive__name {
                     font-size: 1.25em;
                     display: block;
                     padding: 0 0 .5em;
                     font-weight: bold;
                     color: #333;
                   }
-                  .status-label__category {
+                  .status-archive__category {
                     color: #555;
                   }
-                  .status-label-subscribtion a {
+                  .status-archive__all a {
                     background-color: #90A4AE;
                     border-radius: 3px;
                     color: #fff;
                     padding: 8px 16px;
                   }
-                  .status-label-subscribtion a:hover {
+                  .status-archive__all a:hover {
                     background-color: #B0BEC5;
                   }
                   @media all and (max-width: 664px) {
-                    .status-labels {
+                    .status-archive {
                       display: inline-block;
                       font-size: 1em;
                     }
-                    .status-label-subscribtion a {
+                    .status-archive__all a {
                       display: inline-block;
                       margin-top: 8px;
                     }
                   }
                 </style>
               </b:if>
-              <b:if cond='data:blog.searchQuery'>
-                <div class='status-search'>
-                  <h5 class='status-search__name'>Search</h5>
-                  <div class='status-search__form'>
-                    <form expr:action='data:blog.homepageUrl + &quot;search/&quot;' method='get'>
-                      <input expr:placeholder='data:blog.searchQuery' expr:value='data:blog.searchQuery' id='s' name='q' type='search'/>
-                    </form>
+              <b:if cond='data:navMessage'>
+                <b:if cond='data:blog.searchLabel'>
+                  <div class='status-labels'>
+                    <div class='status-label-desc'>
+                      <span class='status-label__name'><data:blog.searchLabel/></span>
+                      <span class='status-label__category'>Shown posts with this label</span>
+                    </div>
+                    <div class='status-label-subscribtion'>
+                      <a expr:href='data:blog.homepageUrl + &quot;feeds/posts/default/-/&quot; + data:blog.searchLabel + &quot;?alt=rss&quot;' rel='nofollow' target='_blank'>Subscribe via RSS</a>
+                    </div>
                   </div>
-                  <div class='status-search__sort'>
-                    <span class='sort'>
-                      Sort:
-                      <span class='sort-by-relevant'>
-                        <a expr:href='data:blog.homepageUrl + &quot;search/?q=&quot; + data:blog.searchQuery + &quot;&amp;by-date=false&quot;'>by relevance</a>
-                      </span>
-                      <span class='sort-by-date'>
-                        <a expr:href='data:blog.homepageUrl + &quot;search/?q=&quot; + data:blog.searchQuery + &quot;&amp;by-date=true&quot;'>by time</a>
-                      </span>
-                    </span>
-                    <span class='no-sort'>
-                      <a expr:href='data:blog.homepageUrl'>all posts</a>
-                    </span>
-                  </div>
-                </div>
-                <b:if cond='data:numPosts == 0'>
-                  <p class='status-search__blank'>No search results.</p>
-                </b:if>
-                <style type='text/css'>
-                  .status-search {
-                    width: 100%;
-                    max-width: 916px;
-                    margin: 2em auto;
-                    padding: 2em;
-                    background-color: #f5f5f5;
-                    border: 1px solid #d5d5d5;
-                    border-radius: 2px;
-                  }
-                  .status-search__blank {
-                    font-size: 1.5em;
-                    color: #555;
-                    width: 100%;
-                    max-width: 916px;
-                    margin: 2em auto; 
-                  }
-                  .status-search__name {
-                    margin: 0;
-                    font-size: 1.5em;
-                    color: #333;
-                    padding: 0 0 .5em;
-                  }
-                  .status-search__form form #s {
-                    width: 100%;
-                    margin: 0 0 1em;
-                    height: 32px;
-                    font-size: 1.25em;
-                    padding: 4px 8px;
-                    outline: none;
-                    border: 1px solid #d5d5d5;
-                  }
-                  .status-search__form #s:focus {
-                    border: 1px solid #b5b5b5;
-                  }
-                  .status-search__sort {
-                    display: flex;
-                    justify-content: space-between;
-                    color: #555;
-                  }
-                  .status-search__sort a {
-                    color: #90A4AE;
-                    padding: 2px 4px;
-                  }
-                  .status-search__sort a:hover {
-                    background-color: rgba(0, 0, 0, .05);
-                  }
-                  .no-sort {
-                    text-align: right;
-                  }
-                  @media all and (max-width: 664px) {
-                    .status-search {
-                      border-width: 1px 0;
-                      border-radius: 0;
+                  <b:if cond='data:numPosts &lt; 10'>
+                    <style type='text/css'>
+                      .blog-pager { display: none; } </style>
+                  </b:if>
+                  <style type='text/css'>
+                    .status-labels {
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                      width: 100%;
+                      max-width: 948px;
+                      margin: 2em auto 0;
+                      padding: 2em 16px;
+                      background-color: #f5f5f5;
+                      border: 1px solid #d5d5d5;
+                      font-size: 1.1em;
                     }
-                    .status-search__name {
-                      font-size: 1em;
-                    }
-                    .status-search__form form #s {
-                      margin: 0 0 8px;
-                      font-size: 1em;
-                    }
-                    .status-search__sort {
+                    .status-label__name {
+                      font-size: 1.25em;
                       display: block;
-                      font-size: .9em;
-                      line-height: 2;
+                      padding: 0 0 .5em;
+                      font-weight: bold;
+                      color: #333;
                     }
-                    .no-sort {
-                      text-align: left;
+                    .status-label__category {
+                      color: #555;
+                    }
+                    .status-label-subscribtion a {
+                      background-color: #90A4AE;
+                      border-radius: 3px;
+                      color: #fff;
+                      padding: 8px 16px;
+                    }
+                    .status-label-subscribtion a:hover {
+                      background-color: #B0BEC5;
+                    }
+                    @media all and (max-width: 664px) {
+                      .status-labels {
+                        display: inline-block;
+                        font-size: 1em;
+                      }
+                      .status-label-subscribtion a {
+                        display: inline-block;
+                        margin-top: 8px;
+                      }
+                    }
+                  </style>
+                </b:if>
+                <b:if cond='data:blog.searchQuery'>
+                  <div class='status-search'>
+                    <h5 class='status-search__name'>Search</h5>
+                    <div class='status-search__form'>
+                      <form expr:action='data:blog.homepageUrl + &quot;search/&quot;' method='get'>
+                        <input expr:placeholder='data:blog.searchQuery' expr:value='data:blog.searchQuery' id='s' name='q' type='search'/>
+                      </form>
+                    </div>
+                    <div class='status-search__sort'>
+                      <span class='sort'>
+                        Sort:
+                        <span class='sort-by-relevant'>
+                          <a expr:href='data:blog.homepageUrl + &quot;search/?q=&quot; + data:blog.searchQuery + &quot;&amp;by-date=false&quot;'>by relevance</a>
+                        </span>
+                        <span class='sort-by-date'>
+                          <a expr:href='data:blog.homepageUrl + &quot;search/?q=&quot; + data:blog.searchQuery + &quot;&amp;by-date=true&quot;'>by time</a>
+                        </span>
+                      </span>
+                      <span class='no-sort'>
+                        <a expr:href='data:blog.homepageUrl'>all posts</a>
+                      </span>
+                    </div>
+                  </div>
+                  <b:if cond='data:numPosts == 0'>
+                    <p class='status-search__blank'>No search results.</p>
+                  </b:if>
+                  <style type='text/css'>
+                    .status-search {
+                      width: 100%;
+                      max-width: 948px;
+                      margin: 2em auto;
+                      padding: 2em 16px;
+                      background-color: #f5f5f5;
+                      border: 1px solid #d5d5d5;
+                      border-radius: 2px;
                     }
                     .status-search__blank {
-                      padding: 0 1em;
+                      font-size: 1.5em;
+                      color: #555;
+                      width: 100%;
+                      max-width: 948px;
+                      margin: 2em auto;
+                      padding: 0 16px;
                     }
-                  }
-                </style>
+                    .status-search__name {
+                      margin: 0;
+                      font-size: 1.5em;
+                      color: #333;
+                      padding: 0 0 .5em;
+                    }
+                    .status-search__form form #s {
+                      width: 100%;
+                      margin: 0 0 1em;
+                      height: 32px;
+                      font-size: 1.25em;
+                      padding: 4px 8px;
+                      outline: none;
+                      border: 1px solid #d5d5d5;
+                    }
+                    .status-search__form #s:focus {
+                      border: 1px solid #b5b5b5;
+                    }
+                    .status-search__sort {
+                      display: flex;
+                      justify-content: space-between;
+                      color: #555;
+                    }
+                    .status-search__sort a {
+                      color: #90A4AE;
+                      padding: 2px 4px;
+                    }
+                    .status-search__sort a:hover {
+                      background-color: rgba(0, 0, 0, .05);
+                    }
+                    .no-sort {
+                      text-align: right;
+                    }
+                    @media all and (max-width: 664px) {
+                      .status-search__name {
+                        font-size: 1em;
+                      }
+                      .status-search__form form #s {
+                        margin: 0 0 8px;
+                        font-size: 1em;
+                      }
+                      .status-search__sort {
+                        display: block;
+                        font-size: .9em;
+                        line-height: 2;
+                      }
+                      .no-sort {
+                        text-align: left;
+                      }
+                      .status-search__blank {
+                        padding: 0 1em;
+                      }
+                    }
+                  </style>
+                </b:if>
+                <b:if cond='data:blog.pageType == &quot;error_page&quot;'>
+                  <div class='status-error'><data:navMessage/></div>
+                  <style type='text/css'>
+                    .status-error {
+                      padding: 5em 16px;
+                      color: #333;
+                      font-size: 1.25em;
+                      line-height: 1.5;
+                      text-align: center;
+                      width: 100%;
+                      margin: 0 auto;
+                      max-width: 600px;
+                    }
+                    .status-error h2 {
+                      font-size: 2em;
+                      font-weight: normal;
+                    }
+                    .status-error a {
+                      margin: 1em 0 0;
+                      padding: 8px 16px;
+                      border-radius: 2px;
+                      font-size: 1em;
+                      display: inline-block;
+                      color: #90A4AE;
+                      border: 1px solid #90A4AE;
+                    }
+                    .status-error a:hover {
+                      background-color: #90A4AE;
+                      color: #fff;
+                    }
+                    .footer-outer {
+                      border-bottom: 1px solid #d5d5d5;
+                    }
+                  </style>
+                </b:if>
               </b:if>
-              <b:if cond='data:blog.pageType == &quot;error_page&quot;'>
-                <div class='status'><data:navMessage/></div>
-                <style type='text/css'>
-                  .footer-outer { border-bottom: 1px solid #d5d5d5; }
-                </style>
-              </b:if>
-            </b:if>
+            </div>
           </b:includable>
           <b:includable id='threaded-comment-form' var='post'/>
           <b:includable id='threaded_comment_js' var='post'/>
@@ -1350,7 +1361,7 @@ font-size: 1em;
     <script type='text/javascript'>
       // <![CDATA[
       $(document).ready(function() {
-        $('body').append('<div class="button-up" style="display: none; opacity: 0.7; width: 50px; height:100%; position: fixed; left: 0; top: 0; cursor: pointer; text-align: center; line-height: 100px; color: #333; font-weight: bold; font-size: 3em;">↑</div>');
+        $('body').append('<div class="button-up" style="display: none; opacity: .7; width: 50px; height:100%; position: fixed; left: 0; top: 0; cursor: pointer; text-align: center; line-height: 100px; color: #333; font-weight: bold; font-size: 3em;" title='To Top'>↑</div>');
         $ (window).scroll (function () {
           if ($ (this).scrollTop () > 300) {
             $ ('.button-up').fadeIn();
@@ -1367,7 +1378,7 @@ font-size: 1em;
         $('.button-up').hover(function() {
           $(this).animate({
             'opacity':'1',
-          }).css({'background-color':'#f5f5f5','color':'#555'});
+          }).css({'background-color':'rgba(245, 245, 245, .5)','color':'#555'});
         }, function(){
           $(this).animate({
             'opacity':'0.7'
