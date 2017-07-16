@@ -115,7 +115,7 @@ background-color: #f5f5f5;
 }
 .header-inner {
 max-width: 964px;
-padding: 0 32px;
+padding: 0 16px;
 display: flex;
 margin: 0 auto;
 justify-content: space-between;
@@ -125,7 +125,7 @@ align-items: center;
 margin: 0 !important;
 }
 #Header1 {
-margin-right: 8px;
+margin-right: 8px !important;
 }
 .blog-title {
 font-family: Verdana, sans-serif;
@@ -602,13 +602,50 @@ font-size: 1em;
               <b:widget-setting name='displayWidth'>0</b:widget-setting>
             </b:widget-settings>
             <b:includable id='main'>
-              <h1 class='blog-title'><b:include name='title'/></h1>
+              <b:if cond='data:useImage'>
+                <b:if cond='data:imagePlacement == &quot;BEHIND&quot;'>
+                  <!-- Blog Title with logo -->
+                  <a expr:href='data:blog.homepageUrl' rel='nofollow'><img class='blog-title_image' expr:alt='data:title' expr:src='data:sourceUrl' expr:title='data:title'/></a>
+                  <h1 class='blog-title'><b:include name='title'/></h1>
+                <b:else/>
+                  <!-- Only logo -->
+                  <a expr:href='data:blog.homepageUrl' rel='nofollow'><img class='blog-title_single-image' expr:alt='data:title' expr:src='data:sourceUrl' expr:title='data:title'/></a>
+                </b:if>
+                <style type='text/css'>
+                  #Header1 {
+                    display: inline-flex;
+                  }
+                  .blog-title_image {
+                    margin: 8px 8px 0 0;
+                    height: 48px;
+                  }
+                  .blog-title_single-image {
+                    margin: 4px 8px 0 0;
+                    height: 48px;
+                  }
+                  @media all and (max-width: 664px) {
+                    .blog-title_image {
+                      margin: 14px 8px 0 0;
+                      height: 32px;
+                    }
+                    .blog-title_single-image {
+                      margin: 1px 8px 0 0;
+                      height: 32px;
+                    }
+                  }
+                </style>
+              <b:else/>
+                <!-- Only Blog Title -->
+                <h1 class='blog-title'>
+                  <b:include name='title'/>
+                </h1>
+              </b:if>
             </b:includable>
             <b:includable id='description'/>
             <b:includable id='title'>
               <b:if cond='data:blog.url == data:blog.homepageUrl'>
                 <data:title/>
-                <b:else/>
+              <b:else/>
                 <a expr:href='data:blog.homepageUrl'><data:title/></a>
               </b:if>
             </b:includable>
@@ -668,6 +705,7 @@ font-size: 1em;
       <b:section class='main-outer' id='main' showaddelement='no'>
         <b:widget id='Blog1' locked='true' title='Blog Posts' type='Blog' version='1'>
           <b:widget-settings>
+            <b:widget-setting name='commentLabel'>comments</b:widget-setting>
             <b:widget-setting name='showDateHeader'>true</b:widget-setting>
             <b:widget-setting name='style.textcolor'>#000000</b:widget-setting>
             <b:widget-setting name='showShareButtons'>true</b:widget-setting>
@@ -683,6 +721,7 @@ font-size: 1em;
             <b:widget-setting name='showAuthorProfile'>false</b:widget-setting>
             <b:widget-setting name='style.layout'>1x1</b:widget-setting>
             <b:widget-setting name='showLabels'>true</b:widget-setting>
+            <b:widget-setting name='postLabelsLabel'>Labels:</b:widget-setting>
             <b:widget-setting name='showLocation'>true</b:widget-setting>
             <b:widget-setting name='showTimestamp'>true</b:widget-setting>
             <b:widget-setting name='postsPerAd'>1</b:widget-setting>
