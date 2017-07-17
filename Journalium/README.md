@@ -8,10 +8,12 @@ You can use all advantages of Blogger with this theme: image in header, internal
 
 ## FAQ
 
-1. Delete `<!-- ... -->` in comments includable for working Disqus and VK Comments widgets.
-2. Replace `YOUR-DISQUS-NAME` to your Disqus community shortname ([what's a shortname?](https://help.disqus.com/customer/en/portal/articles/466208-what-s-a-shortname-))
-3. Replace `YOUR-APP-ID` to your VK Comments app ID ([where's to find?](https://vk.com/dev/widget_comments))
-4. Set up the share buttons in the same includable ([documentation](https://tech.yandex.ru/share/doc/dg/add-docpage/))
+1. Replace `@TWITTER-OF-YOUR-SITE` to your site Twitter account nickname and `@YOUR-TWITTER_USERNAME` to your own Twitter account nickname
+2. Replace `PATH-TO-32x32-ICON` to URL of your logo (with a width of 32px), `PATH-TO-48x48-ICON` to URL of your logo (with a width of 48px), `PATH-TO-180x180-ICON` to URL of your logo (with a width of 180px), `PATH-TO-144x144-ICON` to URL of your logo (with a width of 144px)
+3. Delete `<!-- ... -->` in comments includable for working Disqus and VK Comments widgets.
+4. Replace `YOUR-DISQUS-NAME` to your Disqus community shortname ([what's a shortname?](https://help.disqus.com/customer/en/portal/articles/466208-what-s-a-shortname-))
+5. Replace `YOUR-APP-ID` to your VK Comments app ID ([where's to find?](https://vk.com/dev/widget_comments))
+6. Set up the share buttons in the same includable ([documentation](https://tech.yandex.ru/share/doc/dg/add-docpage/))
 
 #### How to install a free theme?
 
