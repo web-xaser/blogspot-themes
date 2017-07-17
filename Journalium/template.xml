@@ -3,11 +3,53 @@
 <html b:version='2' expr:dir='data:blog.languageDirection' expr:lang='data:blog.locale' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
   <head>
     <title><b:if cond='data:blog.pageName'><data:blog.pageName/> | </b:if><data:blog.title/></title>
+    <!-- Meta-tags -->
     <meta content='width=device-width, initial-scale=1' name='viewport'/>
+    <meta expr:charset='data:blog.encoding'/>
+    <meta content='IE=edge' http-equiv='X-UA-Compatible'/>
+    <!-- Open Graph & Twitter-->
+    <b:if cond='data:blog.postImageUrl != &quot;&quot;'>
+      <meta content='summary_large_image' name='twitter:card'/>
+      <meta expr:content='data:blog.postImageUrl' property='og:image'/>
+    <b:else/>
+      <meta content='summary' name='twitter:card'/>
+    </b:if>
+    <meta content='@TWITTER-OF-YOUR-SITE' name='twitter:site'/>
+    <meta content='@YOUR-TWITTER_USERNAME' name='twitter:creator'/>
+    <meta expr:content='data:blog.locale' property='og:locale'/>
+    <meta expr:content='data:blog.title' property='og:site_name'/>
+    <meta content='true' property='og:rich_attachment'/>
+    <b:if cond='data:blog.pageName != &quot;&quot;'>
+      <meta expr:content='data:blog.pageName' property='og:title'/>
+    <b:else/>
+      <meta expr:content='data:blog.title' property='og:title'/>
+    </b:if>
+    <b:if cond='data:blog.pageType == &quot;item&quot; or data:blog.pageType == &quot;static_page&quot;'>
+      <meta content='article' property='og:type'/>
+    <b:else/>
+      <meta content='website' property='og:type'/>
+      <meta expr:content='data:blog.canonicalUrl' property='og:url'/>
+    </b:if>
+    <b:if cond='data:blog.metaDescription != &quot;&quot;'>
+      <meta expr:content='data:blog.metaDescription' name='og:description'/>
+    <b:else/>
+      <meta expr:content='data:blog.title + &quot;: &quot; + data:blog.pageName' name='og:description'/>
+    </b:if>
+    <!-- Icons -->
+    <link expr:href='data:blog.blogspotFaviconUrl' rel='icon' sizes='16x16' type='image/ico'/>
+    <!-- <link rel="icon" type="image/png" href="PATH-TO-32x32-ICON" sizes="32x32"/> -->
+    <!-- <link rel="icon" type="image/png" href="PATH-TO-48x48-ICON" sizes="48x48"/> -->
+    <!-- <link rel="apple-touch-icon" sizes="180x180" href="PATH-TO-180x180-ICON"/> -->
+    <!-- <meta name="msapplication-TileImage" content="PATH-TO-144x144-ICON"/> -->
+    <meta expr:content='data:blog.title' name='apple-mobile-web-app-title'/>
+    <meta expr:content='data:blog.title' name='application-name'/>
+    <meta content='#838a92' name='msapplication-TileColor'/>
+    <meta content='#838a92' name='theme-color'/>
+    <!-- Styles -->
     <b:skin><![CDATA[
 */ ----------
 Theme Name: Journalium
-Theme URL: https://github.com/web-xaser/journalium
+Theme URL: https://github.com/web-xaser/blogspot-themes/tree/master/Journalium
 Author: Pavel Chistyakov
 Author URL: http://www.web-xaser.ru
 License: https://web-xaser.mit-license.org
@@ -560,6 +602,7 @@ font-size: 1em;
         }
       </style>
     </b:if>
+    <!-- Scripts, fonts & other -->
     <b:include data='blog' name='all-head-content'/>
     <link href='//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css' rel='stylesheet'/>
     <link href='//cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css' rel='stylesheet'/>
@@ -579,7 +622,7 @@ font-size: 1em;
             <b:widget-settings>
               <b:widget-setting name='displayUrl'/>
               <b:widget-setting name='displayHeight'>0</b:widget-setting>
-              <b:widget-setting name='sectionWidth'>790</b:widget-setting>
+              <b:widget-setting name='sectionWidth'>827</b:widget-setting>
               <b:widget-setting name='useImage'>false</b:widget-setting>
               <b:widget-setting name='shrinkToFit'>false</b:widget-setting>
               <b:widget-setting name='imagePlacement'>BEHIND</b:widget-setting>
