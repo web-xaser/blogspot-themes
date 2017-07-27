@@ -73,8 +73,6 @@ text-size-adjust: 100%;
 -ms-text-size-adjust: 100%;
 -moz-text-size-adjust: 100%;
 -webkit-text-size-adjust: 100%;
--webkit-font-smoothing: antialiased;
-font-smoothing: antialiased;
 }
 figcaption, figure, cite {
 display: block;
@@ -475,6 +473,7 @@ background-color: #B0BEC5;
 }
 /* ---------- FOOTER ---------- */
 .footer-outer {
+position: relative;
 border-top: 1px solid #d5d5d5;
 background-color: #f5f5f5;
 padding: 1.5em 0;
@@ -605,19 +604,15 @@ font-size: 1em;
     <!-- Scripts, fonts & other -->
     <b:include data='blog' name='all-head-content'/>
     <link href='//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css' rel='stylesheet'/>
-    <link href='//cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css' rel='stylesheet'/>
     <link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/default.min.css' rel='stylesheet'/>
-    <link href='//cdnjs.cloudflare.com/ajax/libs/featherlight/1.5.0/featherlight.min.css' rel='stylesheet'/>
-    <script src='//code.jquery.com/jquery-latest.js'/>
-    <script src='//cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js'/>
-    <script src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js'/>
-    <script src='//cdnjs.cloudflare.com/ajax/libs/featherlight/1.5.0/featherlight.min.js'/>
+    <script src='//code.jquery.com/jquery-latest.js' async='async'/>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js' async='async'/>
     <script type='text/javascript'>hljs.initHighlightingOnLoad();</script>
   </head>
   <body>
     <div class='layout'>
       <header class='header-outer'>
-        <b:section class='header-inner' id='header' showaddelement='no'>
+        <b:section class='header-inner' id='header' showaddelement='no' name='Header'>
           <b:widget id='Header1' locked='true' title='Journalium (Header)' type='Header' version='1'>
             <b:widget-settings>
               <b:widget-setting name='displayUrl'/>
@@ -729,7 +724,7 @@ font-size: 1em;
           </b:widget>
         </b:section>
       </header>
-      <b:section class='main-outer' id='main' showaddelement='no'>
+      <b:section class='main-outer' id='main' showaddelement='no' name='Main'>
         <b:widget id='Blog1' locked='true' title='Blog Posts' type='Blog' version='1'>
           <b:widget-settings>
             <b:widget-setting name='commentLabel'>comments</b:widget-setting>
@@ -1397,19 +1392,33 @@ font-size: 1em;
         </b:widget>
       </b:section>
       <footer class='footer-outer'>
+        <b:section class='footer' id='footer' name='Footer'>
+          <b:widget id='HTML1' locked='false' title='Social Links' type='HTML' version='1'>
+            <b:widget-settings>
+              <b:widget-setting name='content'>&lt;nav id=&quot;social&quot;&gt;&lt;a class=&quot;twitter&quot; href=&quot;https://twitter.com/YOUR-TWITTER-NICKNAME&quot; target=&quot;_blank&quot; title=&quot;Twitter&quot;&gt;&lt;i class=&quot;ion ion-social-twitter&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
+&lt;a class=&quot;github&quot; href=&quot;https://github.com/YOUR-GITHUB-NICKNAME&quot; target=&quot;_blank&quot; title=&quot;Github&quot;&gt;&lt;i class=&quot;ion ion-social-github&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
+&lt;a class=&quot;google-plus&quot; href=&quot;https://plus.google.com/+YOUR-GOOGLE-PLUS-NICKNAME&quot; target=&quot;_blank&quot; title=&quot;Google+&quot;&gt;&lt;i class=&quot;ion ion-social-googleplus&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
+&lt;a class=&quot;facebook&quot; href=&quot;https://www.facebook.com/YOUR-FACEBOOK-NICKNAME&quot; target=&quot;_blank&quot; title=&quot;Facebook&quot;&gt;&lt;i class=&quot;ion ion-social-facebook&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
+&lt;/nav&gt;&lt;style type=&#39;text/css&#39;&gt;#HTML1 #social { position: absolute; right: 88px; top: 6.5px; } #HTML1 #social .ion { font-size: 32px; padding: 8px; } @media (max-width: 1012px) { #HTML1 #social { position: static; } } @media (max-width: 664px) { #HTML1 #social .ion { font-size: 24px; } }&lt;/style&gt;</b:widget-setting>
+            </b:widget-settings>
+            <b:includable id='main'>
+              <data:content/>
+            </b:includable>
+          </b:widget>
+        </b:section>
         Blogger Template &#171;<b>Journalium</b>&#187;.<br/>Made with &#10084;&#65039; by <a href='http://www.web-xaser.ru' target='_blank'>@web_xaser</a> | Powered by Blogger.
-        <b:section class='footer' id='footer'/>
       </footer>
     </div>
+    <!-- Scroll To Top Script -->
     <script type='text/javascript'>
       // <![CDATA[
       $(document).ready(function() {
-        $('body').append('<div class="button-up" style="display: none; opacity: .7; width: 50px; height:100%; position: fixed; left: 0; top: 0; cursor: pointer; text-align: center; line-height: 100px; color: #333; font-weight: bold; font-size: 3em;" title='To Top'>↑</div>');
-        $ (window).scroll (function () {
-          if ($ (this).scrollTop () > 300) {
-            $ ('.button-up').fadeIn();
+        $('body').append('<div class="button-up" style="display: none; opacity: .7; width: 50px; height: 100%; position: fixed; left: 0; top: 0; cursor: pointer; text-align: center; line-height: 100px; color: #333; font-weight: bold; font-size: 3em;" title="To Top">↑</div>');
+        $(window).scroll (function () {
+          if ($(this).scrollTop() > 300) {
+            $('.button-up').fadeIn();
           } else {
-            $ ('.button-up').fadeOut();
+            $('.button-up').fadeOut();
           }
         });
         $('.button-up').click(function(){
