@@ -1,2 +1,15 @@
-*.xml linguist-language=XML
-*.md linguist-language=Markdown
+* text=auto
+
+*.css text
+*.js text
+*.html text
+*.xml text
+*.md text
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+
+.gitattributes text
+LICENSE text
