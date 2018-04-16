@@ -487,6 +487,9 @@ color: #000;
 .footer-outer a, .footer-outer a:hover {
 color: #90A4AE;
 }
+.footer-svg {
+vertical-align: middle !important;
+}
 /* ---------- MEDIA QUERIES ---------- */
 @media all and (max-width: 1012px) {
 .post-body > h1, .post-body  > h2, .post-body > h3, .post-body > h4, .post-body > h5, .post-body > h6, .post-body p, .post-body figure, .post-body cite {
@@ -612,7 +615,7 @@ font-size: 1em;
   <body>
     <div class='layout'>
       <header class='header-outer'>
-        <b:section class='header-inner' id='header' showaddelement='no' name='Header'>
+        <b:section class='header-inner' id='header' name='Header' showaddelement='no'>
           <b:widget id='Header1' locked='true' title='Journalium (Header)' type='Header' version='1'>
             <b:widget-settings>
               <b:widget-setting name='displayUrl'/>
@@ -724,7 +727,7 @@ font-size: 1em;
           </b:widget>
         </b:section>
       </header>
-      <b:section class='main-outer' id='main' showaddelement='no' name='Main'>
+      <b:section class='main-outer' id='main' name='Main' showaddelement='no'>
         <b:widget id='Blog1' locked='true' title='Blog Posts' type='Blog' version='1'>
           <b:widget-settings>
             <b:widget-setting name='commentLabel'>comments</b:widget-setting>
@@ -931,22 +934,22 @@ font-size: 1em;
                   <a class='mfb-component__button--main' data-mfb-label='Dashboard' href='#'><i class='mfb-component__main-icon--resting ion-settings'/><i class='mfb-component__main-icon--active ion-close-round'/></a>
                   <ul class='mfb-component__list'>
                     <li>
-                      <a class='mfb-component__button--child' data-mfb-label='Edit Article' expr:href='data:post.editUrl' target='_blank'><i class='mfb-component__child-icon ion-edit'/></a>
+                      <a class='mfb-component__button--child' data-mfb-label='Edit Article' expr:href='data:post.editUrl' target='_blank' rel='noopener'><i class='mfb-component__child-icon ion-edit'/></a>
                     </li>
                     <li>
-                      <a class='mfb-component__button--child' data-mfb-label='Blog Overview' expr:href='&quot;https://www.blogger.com/blogger.g?blogID=&quot; + data:blog.blogId + &quot;#overview&quot;' target='_blank'><i class='mfb-component__child-icon ion-home'/></a>
+                      <a class='mfb-component__button--child' data-mfb-label='Blog Overview' expr:href='&quot;https://www.blogger.com/blogger.g?blogID=&quot; + data:blog.blogId + &quot;#overview&quot;' target='_blank' rel='noopener'><i class='mfb-component__child-icon ion-home'/></a>
                     </li>
                     <li>
-                      <a class='mfb-component__button--child' data-mfb-label='View Comments' href='https://YOUR-DISQUS-SHORTNAME.disqus.com/admin/' target='_blank'><i class='mfb-component__child-icon ion-chatbox'/></a>
+                      <a class='mfb-component__button--child' data-mfb-label='View Comments' href='https://YOUR-DISQUS-SHORTNAME.disqus.com/admin/' target='_blank' rel='noopener'><i class='mfb-component__child-icon ion-chatbox'/></a>
                     </li>
                     <li>
-                      <a class='mfb-component__button--child' data-mfb-label='View Posts Stats' expr:href='&quot;https://www.blogger.com/blogger.g?blogID=&quot; + data:blog.blogId + &quot;#postsstats&quot;' target='_blank'><i class='mfb-component__child-icon ion-pie-graph'/></a>
+                      <a class='mfb-component__button--child' data-mfb-label='View Posts Stats' expr:href='&quot;https://www.blogger.com/blogger.g?blogID=&quot; + data:blog.blogId + &quot;#postsstats&quot;' target='_blank' rel='noopener'><i class='mfb-component__child-icon ion-pie-graph'/></a>
                     </li>
                     <li>
-                      <a class='mfb-component__button--child' data-mfb-label='Edit Template' expr:href='&quot;https://www.blogger.com/blogger.g?blogID=&quot; + data:blog.blogId + &quot;#template&quot;' target='_blank'><i class='mfb-component__child-icon ion-easel'/></a>
+                      <a class='mfb-component__button--child' data-mfb-label='Edit Template' expr:href='&quot;https://www.blogger.com/blogger.g?blogID=&quot; + data:blog.blogId + &quot;#template&quot;' target='_blank' rel='noopener'><i class='mfb-component__child-icon ion-easel'/></a>
                     </li>
                     <li>
-                      <a class='mfb-component__button--child' data-mfb-label='Edit Settings' expr:href='&quot;https://www.blogger.com/blogger.g?blogID=&quot; + data:blog.blogId + &quot;#basicsettings&quot;' target='_blank'><i class='mfb-component__child-icon ion-wrench'/></a>
+                      <a class='mfb-component__button--child' data-mfb-label='Edit Settings' expr:href='&quot;https://www.blogger.com/blogger.g?blogID=&quot; + data:blog.blogId + &quot;#basicsettings&quot;' target='_blank' rel='noopener'><i class='mfb-component__child-icon ion-wrench'/></a>
                     </li>
                   </ul>
                 </li>
@@ -1046,7 +1049,7 @@ font-size: 1em;
                     <b:if cond='data:post.author'>
                       <div class='post-author'>
                         <b:if cond='data:post.authorProfileUrl'>
-                          <a expr:href='data:post.authorProfileUrl + &quot;?rel=author&quot;' target='_blank'>
+                          <a expr:href='data:post.authorProfileUrl + &quot;?rel=author&quot;' target='_blank' rel='noopener'>
                             <data:post.author/>
                           </a>
                           <b:else/>
@@ -1073,7 +1076,7 @@ font-size: 1em;
                   </div>
                   <div class='post-preview-right'>
                     <b:if cond='data:post.location'>
-                      <address><a expr:href='data:post.location.mapsUrl' rel='nofollow' target='_blank'><data:post.location.name/></a></address>
+                      <address><a expr:href='data:post.location.mapsUrl' rel='nofollow' target='_blank' rel='noopener'><data:post.location.name/></a></address>
                     </b:if>
                   </div>
                 </div>
@@ -1198,7 +1201,7 @@ font-size: 1em;
                       <span class='status-label__category'>Shown posts with this label</span>
                     </div>
                     <div class='status-label-subscribtion'>
-                      <a expr:href='data:blog.homepageUrl + &quot;feeds/posts/default/-/&quot; + data:blog.searchLabel + &quot;?alt=rss&quot;' rel='nofollow' target='_blank'>Subscribe via RSS</a>
+                      <a expr:href='data:blog.homepageUrl + &quot;feeds/posts/default/-/&quot; + data:blog.searchLabel + &quot;?alt=rss&quot;' target='_blank'>Subscribe via RSS</a>
                     </div>
                   </div>
                   <b:if cond='data:numPosts &lt; 10'>
@@ -1395,10 +1398,10 @@ font-size: 1em;
         <b:section class='footer' id='footer' name='Footer'>
           <b:widget id='HTML1' locked='false' title='Social Links' type='HTML' version='1'>
             <b:widget-settings>
-              <b:widget-setting name='content'>&lt;nav id=&quot;social&quot;&gt;&lt;a class=&quot;twitter&quot; href=&quot;https://twitter.com/YOUR-TWITTER-NICKNAME&quot; target=&quot;_blank&quot; title=&quot;Twitter&quot;&gt;&lt;i class=&quot;ion ion-social-twitter&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
-&lt;a class=&quot;github&quot; href=&quot;https://github.com/YOUR-GITHUB-NICKNAME&quot; target=&quot;_blank&quot; title=&quot;Github&quot;&gt;&lt;i class=&quot;ion ion-social-github&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
-&lt;a class=&quot;google-plus&quot; href=&quot;https://plus.google.com/+YOUR-GOOGLE-PLUS-NICKNAME&quot; target=&quot;_blank&quot; title=&quot;Google+&quot;&gt;&lt;i class=&quot;ion ion-social-googleplus&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
-&lt;a class=&quot;facebook&quot; href=&quot;https://www.facebook.com/YOUR-FACEBOOK-NICKNAME&quot; target=&quot;_blank&quot; title=&quot;Facebook&quot;&gt;&lt;i class=&quot;ion ion-social-facebook&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
+              <b:widget-setting name='content'>&lt;nav id=&quot;social&quot;&gt;&lt;a class=&quot;twitter&quot; href=&quot;https://twitter.com/YOUR-TWITTER-NICKNAME&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; title=&quot;Twitter&quot;&gt;&lt;i class=&quot;ion ion-social-twitter&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
+&lt;a class=&quot;github&quot; href=&quot;https://github.com/YOUR-GITHUB-NICKNAME&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; title=&quot;Github&quot;&gt;&lt;i class=&quot;ion ion-social-github&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
+&lt;a class=&quot;google-plus&quot; href=&quot;https://plus.google.com/+YOUR-GOOGLE-PLUS-NICKNAME&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; title=&quot;Google+&quot;&gt;&lt;i class=&quot;ion ion-social-googleplus&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
+&lt;a class=&quot;facebook&quot; href=&quot;https://www.facebook.com/YOUR-FACEBOOK-NICKNAME&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; title=&quot;Facebook&quot;&gt;&lt;i class=&quot;ion ion-social-facebook&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
 &lt;/nav&gt;&lt;style type=&#39;text/css&#39;&gt;#HTML1 #social { position: absolute; right: 88px; top: 6.5px; } #HTML1 #social .ion { font-size: 32px; padding: 8px; } @media (max-width: 1012px) { #HTML1 #social { position: static; } } @media (max-width: 664px) { #HTML1 #social .ion { font-size: 24px; } }&lt;/style&gt;</b:widget-setting>
             </b:widget-settings>
             <b:includable id='main'>
@@ -1406,7 +1409,8 @@ font-size: 1em;
             </b:includable>
           </b:widget>
         </b:section>
-        Blogger Template &#171;<b>Journalium</b>&#187;.<br/>Made with &#10084;&#65039; by <a href='http://www.web-xaser.ru' target='_blank'>@web_xaser</a> | Powered by Blogger.
+        Blogger Template &#171;Journalium&#187; | Powered by Blogger<br/>
+        <svg class='footer-svg' fill='#000' height='18' viewBox='0 0 14 16' width='18' xmlns='http://www.w3.org/2000/svg'><path d='M9.5 3L8 4.5 11.5 8 8 11.5 9.5 13 14 8 9.5 3zm-5 0L0 8l4.5 5L6 11.5 2.5 8 6 4.5 4.5 3z'/></svg> with <svg class='footer-svg' fill='#000' height='18' viewBox='0 0 12 16' width='18' xmlns='http://www.w3.org/2000/svg'><path d='M11.2 3c-.52-.63-1.25-.95-2.2-1-.97 0-1.69.42-2.2 1-.51.58-.78.92-.8 1-.02-.08-.28-.42-.8-1-.52-.58-1.17-1-2.2-1-.95.05-1.69.38-2.2 1-.52.61-.78 1.28-.8 2 0 .52.09 1.52.67 2.67C1.25 8.82 3.01 10.61 6 13c2.98-2.39 4.77-4.17 5.34-5.33C11.91 6.51 12 5.5 12 5c-.02-.72-.28-1.39-.8-2.02V3z' fill-rule='evenodd'/></svg> by <a href='https://www.web-xaser.ru' style='color: #000;' target='_blank' rel='noopener'><b>@web_xaser</b></a>
       </footer>
     </div>
     <!-- Scroll To Top Script -->
@@ -1421,7 +1425,7 @@ font-size: 1em;
             $('.button-up').fadeOut();
           }
         });
-        $('.button-up').click(function(){
+        $('.button-up').click(function() {
           $('body,html').animate({
             scrollTop: 0
           }, 100);
@@ -1431,7 +1435,7 @@ font-size: 1em;
           $(this).animate({
             'opacity':'1',
           }).css({'background-color':'rgba(245, 245, 245, .5)','color':'#555'});
-        }, function(){
+        }, function() {
           $(this).animate({
             'opacity':'0.7'
           }).css({'background':'none','color':'#555'});;
