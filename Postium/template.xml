@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html b:version='2' expr:dir='data:blog.languageDirection' expr:lang='data:blog.locale' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
   <head>
-    <meta content='width=device-width, initial-scale=1, maximum-scale=1' name='viewport'/>
-    <title>
-      <b:if cond='data:blog.pageName'>
-        <data:blog.pageName/> - 
-      </b:if>
-      <data:blog.title/>
-    </title>
-    
+    <title><b:if cond='data:blog.pageName'><data:blog.pageName/> - </b:if><data:blog.title/></title>
+    <meta content='width=device-width, initial-scale=1' name='viewport'/>
     <!-- Styles -->
     <b:skin><![CDATA[*/
 -----------------------------------------------
 Theme Name: Postium
-Theme URL: https://github.com/web-xaser/postium
+Theme URL: https://github.com/web-xaser/blogspot-themes/tree/master/Postium
 Author: Pavel Chistyakov
-Author URL: http://www.web-xaser.ru
+Author URL: https://www.web-xaser.ru
 License: https://web-xaser.mit-license.org
 ----------------------------------------------- */
 /********** GENERAL **********/
@@ -215,6 +209,9 @@ bottom: -1px;
 footer a {
 color: #fff;
 }
+footer .footer-svg {
+vertical-align: middle !important;
+}
 /********** MEDIA QUERIES **********/
 @media all and (max-width: 900px) {
 .header__wrap {
@@ -256,7 +253,7 @@ width: 100%;
 }
 ]]></b:skin>
     <b:template-skin>
-      <b:variable default='900px' name='content.width' type='length' value='900px'/>
+      <b:variable default='832px' name='content.width' type='length' value='900px'/>
       <![CDATA[
         .header__wrap, #Blog1, .PopularPosts, #HTML2 {
           max-width: $(content.width);
@@ -487,7 +484,8 @@ padding: 16px 16px 0;
 
     <!-- Meta-tags -->
     <meta expr:charset='data:blog.encoding'/>
-    <meta content='IE=edge' http-equiv='X-UA-Compatible'/>
+    <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible'/>
+    <!-- Open Graph & Twitter-->
     <b:if cond='data:blog.postImageUrl != &quot;&quot;'>
       <meta content='summary_large_image' name='twitter:card'/>
       <meta expr:content='data:blog.postImageUrl' property='og:image'/>
@@ -495,7 +493,7 @@ padding: 16px 16px 0;
       <meta content='summary' name='twitter:card'/>
     </b:if>
     <meta content='@TWITTER-OF-YOUR-SITE' name='twitter:site'/>
-    <meta content='@YOUR-TWITTER_USERNAME' name='twitter:creator'/>
+    <meta content='@YOUR-TWITTER-USERNAME' name='twitter:creator'/>
     <meta expr:content='data:blog.locale' property='og:locale'/>
     <meta expr:content='data:blog.title' property='og:site_name'/>
     <meta content='true' property='og:rich_attachment'/>
@@ -515,7 +513,6 @@ padding: 16px 16px 0;
     <b:else/>
       <meta expr:content='data:blog.title + &quot;: &quot; + data:blog.pageName' name='og:description'/>
     </b:if>
-
     <!-- Icons -->
     <link expr:href='data:blog.blogspotFaviconUrl' rel='icon' sizes='16x16' type='image/png'/>
     <!-- <link rel="icon" type="image/png" href="PATH-TO-32x32-ICON" sizes="32x32"/> -->
@@ -526,13 +523,12 @@ padding: 16px 16px 0;
     <meta expr:content='data:blog.title' name='application-name'/>
     <meta content='#79cc7a' name='msapplication-TileColor'/>
     <meta content='#79cc7a' name='theme-color'/>
-
-    <!-- Other -->
+    <!-- Scripts, fonts & other -->
     <b:include data='blog' name='all-head-content'/>
     <link href='//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css' rel='stylesheet'/>
     <link href='//cdn.jsdelivr.net/highlight.js/9.3.0/styles/default.min.css' rel='stylesheet'/>
     <script src='//cdn.jsdelivr.net/highlight.js/9.3.0/highlight.min.js' type='text/javascript'/>
-    <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js'/>
+    <script src='//ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js' type='text/javascript'/>
   </head>
   <body>
     <header>
@@ -540,7 +536,7 @@ padding: 16px 16px 0;
         <b:section class='header__title-wrap' id='header__title-wrap' showaddelement='no'>
           <b:widget id='Header1' locked='true' mobile='yes' title='Postium (Header)' type='Header' version='1'>
             <b:widget-settings>
-              <b:widget-setting name='displayUrl'>http://www.frelinghuysenschool.org/cms/lib010/NJ01912689/Centricity/Domain/19/unnamed.png</b:widget-setting>
+              <b:widget-setting name='displayUrl'>PATH-TO-YOUR-BLOG-LOGO</b:widget-setting>
               <b:widget-setting name='displayHeight'>64</b:widget-setting>
               <b:widget-setting name='sectionWidth'>790</b:widget-setting>
               <b:widget-setting name='useImage'>true</b:widget-setting>
@@ -873,7 +869,7 @@ padding: 16px 16px 0;
         <b:includable id='feedLinks'/>
         <b:includable id='feedLinksBody' var='links'>
           <div class='post__feed'>
-            <a expr:href='data:blog.homepageUrl + &quot;feeds/posts/default?alt=rss&quot;' rel='nofollow' target='_blank' title='Subscribe via RSS'>Subscribe via RSS</a>
+            <a expr:href='data:blog.canonicalHomepageUrl + &quot;feeds/posts/default?alt=rss&quot;' rel='nofollow' target='_blank' title='Subscribe via RSS'>Subscribe via RSS</a>
           </div>
         </b:includable>
         <b:includable id='iframe_comments' var='comment'/>
@@ -952,7 +948,7 @@ padding: 16px 16px 0;
                   &#183;
                   <address>
                     <b:if cond='data:blog.pageType == &quot;item&quot;'>
-                      <a expr:href='data:post.location.mapsUrl' rel='nofollow' target='_blank'>
+                      <a expr:href='data:post.location.mapsUrl' rel='nofollow noopener' target='_blank'>
                         <data:post.location.name/>
                       </a>
                     <b:else/>
@@ -976,8 +972,7 @@ padding: 16px 16px 0;
               </b:if>
             </div>
             <b:if cond='data:blog.pageType == &quot;item&quot; or data:blog.pageType == &quot;static_page&quot;'>
-              <!-- Code highlighting (more: https://highlightjs.org) -->
-              <script type='text/javascript'>hljs.initHighlightingOnLoad();</script>
+              <!-- <script type='text/javascript'>hljs.initHighlightingOnLoad();</script> -->
               <div class='post__body'>
                 <data:post.body/>
               </div>
@@ -992,7 +987,7 @@ padding: 16px 16px 0;
                     <div class='post__author-info'>
                       <h3>
                         <data:top.authorLabel/>:
-                        <a class='g-profile' expr:href='data:post.authorProfileUrl + &quot;?rel=author&quot;' rel='author' target='_blank'><data:post.author/></a>
+                        <a class='g-profile' expr:href='data:post.authorProfileUrl + &quot;?rel=author&quot;' rel='author noopener' target='_blank'><data:post.author/></a>
                       </h3>
                       <data:post.authorAboutMe/>
                     </div>
@@ -1003,6 +998,7 @@ padding: 16px 16px 0;
             </b:if>
           </article>
           <b:if cond='data:blog.pageType == &quot;item&quot;'>
+          <!-- Disqus Comments
             <style type='text/css'>
               #disqus {
                 margin: 32px auto;
@@ -1015,7 +1011,6 @@ padding: 16px 16px 0;
                 background-color: #fff;
               }
             </style>
-            <!-- Disqus Comments (more: https://disqus.com) -->
             <div id='disqus'><div id='disqus_thread'/></div>
             <script type='text/javascript'>
               var disqus_config = function () {
@@ -1028,7 +1023,7 @@ padding: 16px 16px 0;
                 s.setAttribute(&#39;data-timestamp&#39;, +new Date());
                 (d.head || d.body).appendChild(s);
               })();
-            </script>
+            </script> -->
           </b:if>
         </b:includable>
         <b:includable id='postQuickEdit'>
@@ -1197,32 +1192,32 @@ padding: 16px 16px 0;
                 </a>
                 <ul class='mfb-component__list'>
                   <li>
-                    <a class='mfb-component__button--child' data-mfb-label='Edit Article' expr:href='data:post.editUrl' target='_blank'>
+                    <a class='mfb-component__button--child' data-mfb-label='Edit Article' expr:href='data:post.editUrl' target='_blank' rel='noopener'>
                       <i class='mfb-component__child-icon ion-edit'/>
                     </a>
                   </li>
                   <li>
-                    <a class='mfb-component__button--child' data-mfb-label='Blog Overview' expr:href='&quot;https://www.blogger.com/blogger.g?blogID=&quot; + data:blog.blogId + &quot;#overview&quot;' target='_blank'>
+                    <a class='mfb-component__button--child' data-mfb-label='Blog Overview' expr:href='&quot;https://www.blogger.com/blogger.g?blogID=&quot; + data:blog.blogId + &quot;#overview&quot;' target='_blank' rel='noopener'>
                       <i class='mfb-component__child-icon ion-home'/>
                     </a>
                   </li>
                   <li>
-                    <a class='mfb-component__button--child' data-mfb-label='View Comments' href='https://YOUR-DISQUS-SHORTNAME.disqus.com/admin/' target='_blank'>
+                    <a class='mfb-component__button--child' data-mfb-label='View Comments' href='https://YOUR-DISQUS-SHORTNAME.disqus.com/admin/' target='_blank' rel='noopener'>
                       <i class='mfb-component__child-icon ion-chatbox'/>
                     </a>
                   </li>
                   <li>
-                    <a class='mfb-component__button--child' data-mfb-label='View Posts Stats' expr:href='&quot;https://www.blogger.com/blogger.g?blogID=&quot; + data:blog.blogId + &quot;#postsstats&quot;' target='_blank'>
+                    <a class='mfb-component__button--child' data-mfb-label='View Posts Stats' expr:href='&quot;https://www.blogger.com/blogger.g?blogID=&quot; + data:blog.blogId + &quot;#postsstats&quot;' target='_blank' rel='noopener'>
                       <i class='mfb-component__child-icon ion-pie-graph'/>
                     </a>
                   </li>
                   <li>
-                    <a class='mfb-component__button--child' data-mfb-label='Edit Template' expr:href='&quot;https://www.blogger.com/blogger.g?blogID=&quot; + data:blog.blogId + &quot;#template&quot;' target='_blank'>
+                    <a class='mfb-component__button--child' data-mfb-label='Edit Template' expr:href='&quot;https://www.blogger.com/blogger.g?blogID=&quot; + data:blog.blogId + &quot;#template&quot;' target='_blank' rel='noopener'>
                       <i class='mfb-component__child-icon ion-easel'/>
                     </a>
                   </li>
                   <li>
-                    <a class='mfb-component__button--child' data-mfb-label='Edit Settings' expr:href='&quot;https://www.blogger.com/blogger.g?blogID=&quot; + data:blog.blogId + &quot;#basicsettings&quot;' target='_blank'>
+                    <a class='mfb-component__button--child' data-mfb-label='Edit Settings' expr:href='&quot;https://www.blogger.com/blogger.g?blogID=&quot; + data:blog.blogId + &quot;#basicsettings&quot;' target='_blank' rel='noopener'>
                       <i class='mfb-component__child-icon ion-wrench'/>
                     </a>
                   </li>
@@ -1236,7 +1231,7 @@ padding: 16px 16px 0;
           <div class='post__share'>
             <b:include name='feedLinksBody'/>
             <script async='async' src='//yastatic.net/share2/share.js'/>
-            <div class='ya-share2' data-services='vkontakte,facebook,odnoklassniki,moimir,gplus,pinterest,linkedin,twitter,blogger,reddit,lj,pocket,tumblr,viber,whatsapp' expr:data-description='data:post.snippet' expr:data-image='data:postFirstImageUrl' expr:data-lang='data:blog.locale' expr:data-title='data:post.title' expr:data-url='data:post.url'/>
+            <div class='ya-share2' data-services='twitter,vkontakte,facebook,gplus,collections,pocket' expr:data-description='data:post.snippet' expr:data-image='data:postFirstImageUrl' expr:data-lang='data:blog.locale' expr:data-title='data:post.title' expr:data-url='data:post.url'/>
           </div>
         </b:includable>
         <b:includable id='status-message'>
@@ -1254,7 +1249,7 @@ padding: 16px 16px 0;
         <b:widget-settings>
           <b:widget-setting name='showSnippet'>true</b:widget-setting>
           <b:widget-setting name='showPostTitle'>true</b:widget-setting>
-          <b:widget-setting name='postId'>YOUR-FEAUTURED-POST-ID</b:widget-setting>
+          <b:widget-setting name='postId'>YOUR-FEATURED-POST-ID</b:widget-setting>
           <b:widget-setting name='showFirstImage'>true</b:widget-setting>
           <b:widget-setting name='useMostRecentPost'>false</b:widget-setting>
         </b:widget-settings>
@@ -1449,14 +1444,14 @@ padding: 16px 16px 0;
       <b:section class='footer__widgets' id='footer__widgets' showaddelement='yes'>
         <b:widget id='BlogArchive1' locked='false' mobile='no' title='Blog Archive' type='BlogArchive' version='1'>
           <b:widget-settings>
-            <b:widget-setting name='showStyle'>MENU</b:widget-setting>
+            <b:widget-setting name='showStyle'>HIERARCHY</b:widget-setting>
             <b:widget-setting name='yearPattern'>yyyy</b:widget-setting>
             <b:widget-setting name='showWeekEnd'>true</b:widget-setting>
             <b:widget-setting name='monthPattern'>MMMM yyyy</b:widget-setting>
             <b:widget-setting name='dayPattern'>MMM dd</b:widget-setting>
             <b:widget-setting name='weekPattern'>MM/dd</b:widget-setting>
             <b:widget-setting name='chronological'>false</b:widget-setting>
-            <b:widget-setting name='showPosts'>false</b:widget-setting>
+            <b:widget-setting name='showPosts'>true</b:widget-setting>
             <b:widget-setting name='frequency'>MONTHLY</b:widget-setting>
           </b:widget-settings>
           <b:includable id='main'>
@@ -1654,7 +1649,7 @@ padding: 16px 16px 0;
         </b:widget>
         <b:widget id='Text1' locked='false' title='About' type='Text' version='1'>
           <b:widget-settings>
-            <b:widget-setting name='content'><![CDATA[<img alt="About" src="https://lh3.googleusercontent.com/proxy/FPFRtPl_n-oWh6myRItLImPhCO2yBFLkeqe1SPqH9wyIub7GV08zho683yyqsyfugPzPapxcpNcxnlcTI4EuJ3MQUOhkSpBGDB2ljVrYp8n3rjlggX97sb5WSADzhGsFBtXF91EiMEJOU7wrlA=s0-d" style="float: right; max-width: 100px;" / /><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>]]></b:widget-setting>
+            <b:widget-setting name='content'><![CDATA[<img alt="About" src="//lh3.googleusercontent.com/proxy/FPFRtPl_n-oWh6myRItLImPhCO2yBFLkeqe1SPqH9wyIub7GV08zho683yyqsyfugPzPapxcpNcxnlcTI4EuJ3MQUOhkSpBGDB2ljVrYp8n3rjlggX97sb5WSADzhGsFBtXF91EiMEJOU7wrlA=s0-d" style="float: right; max-width: 100px;" / /><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>]]></b:widget-setting>
           </b:widget-settings>
           <b:includable id='main'>
             <style type='text/css'>
@@ -1680,11 +1675,11 @@ padding: 16px 16px 0;
       </b:section>
     </b:if>
     <footer>
-      Blogger Template &#171;<b>Postium</b>&#187;.<br/>Made with &#10084;&#65039; by <a href='http://www.web-xaser.ru' target='_blank'>@web_xaser</a> | Powered by Blogger.
+      Blogger Template &#171;Postium&#187; | Powered by Blogger<br/><svg class='footer-svg' fill='#fff' height='17' viewBox='0 0 14 16' width='17' xmlns='http://www.w3.org/2000/svg'><path d='M9.5 3L8 4.5 11.5 8 8 11.5 9.5 13 14 8 9.5 3zm-5 0L0 8l4.5 5L6 11.5 2.5 8 6 4.5 4.5 3z'/></svg> with <svg class='footer-svg' fill='#fff' height='17' viewBox='0 0 12 16' width='17' xmlns='http://www.w3.org/2000/svg'><path d='M11.2 3c-.52-.63-1.25-.95-2.2-1-.97 0-1.69.42-2.2 1-.51.58-.78.92-.8 1-.02-.08-.28-.42-.8-1-.52-.58-1.17-1-2.2-1-.95.05-1.69.38-2.2 1-.52.61-.78 1.28-.8 2 0 .52.09 1.52.67 2.67C1.25 8.82 3.01 10.61 6 13c2.98-2.39 4.77-4.17 5.34-5.33C11.91 6.51 12 5.5 12 5c-.02-.72-.28-1.39-.8-2.02V3z' fill-rule='evenodd'/></svg> by <a href='https://www.web-xaser.ru' target='_blank' rel='noopener'><b>@web_xaser</b></a>
     </footer>
     <!-- For old browsers -->
     <script src='https://yastatic.net/browser-updater/v1/script.js' type='text/javascript'/>
-    <script type='text/javascript'>var yaBrowserUpdater = new ya.browserUpdater.init({&quot;lang&quot;:&quot;en&quot;,&quot;browsers&quot;:{&quot;chrome&quot;:&quot;40&quot;,&quot;ie&quot;:&quot;9&quot;,&quot;opera&quot;:&quot;27&quot;,&quot;safari&quot;:&quot;7.1&quot;,&quot;fx&quot;:&quot;36&quot;},&quot;theme&quot;:&quot;black&quot;});</script>
+    <script type='text/javascript'>var yaBrowserUpdater = new ya.browserUpdater.init({&quot;lang&quot;:&quot;en&quot;,&quot;browsers&quot;:{&quot;chrome&quot;:&quot;60&quot;,&quot;ie&quot;:&quot;10&quot;,&quot;opera&quot;:&quot;40&quot;,&quot;safari&quot;:&quot;7.1&quot;,&quot;fx&quot;:&quot;40&quot;},&quot;theme&quot;:&quot;black&quot;});</script>
     <!-- Google Analytics -->
     <script type='text/javascript'>
       (function(i,s,o,g,r,a,m){i[&#39;GoogleAnalyticsObject&#39;]=r;i[r]=i[r]||function(){
