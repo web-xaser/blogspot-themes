@@ -1,6 +1,6 @@
 # Journalium [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/web-xaser/blogger-templates) [![License](https://img.shields.io/npm/l/express.svg)](https://github.com/web-xaser/blogspot-themes/blob/master/LICENSE)
 
-[![Gitter](https://raw.githubusercontent.com/web-xaser/blogspot-themes/master/Journalium/preview/journalium.png)](https://github.com/web-xaser/blogspot-themes/tree/master/Journalium)
+[![Gitter](https://raw.githubusercontent.com/web-xaser/blogspot-themes/master/Journalium/preview/main.jpg)](https://github.com/web-xaser/blogspot-themes/tree/master/Journalium)
 
 **Journalium** is a Blogger (Blogspot) theme for personal blogs with longreads, articles with photos, code and other.
 

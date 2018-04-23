@@ -51,7 +51,7 @@
 Theme Name: Journalium
 Theme URL: https://github.com/web-xaser/blogspot-themes/tree/master/Journalium
 Author: Pavel Chistyakov
-Author URL: http://www.web-xaser.ru
+Author URL: https://www.web-xaser.ru
 License: https://web-xaser.mit-license.org
 ---------- */
 /* ---------- RESET ---------- */
@@ -608,9 +608,8 @@ font-size: 1em;
     <b:include data='blog' name='all-head-content'/>
     <link href='//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css' rel='stylesheet'/>
     <link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/default.min.css' rel='stylesheet'/>
-    <script src='//code.jquery.com/jquery-latest.js' async='async'/>
-    <script src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js' async='async'/>
-    <script type='text/javascript'>hljs.initHighlightingOnLoad();</script>
+    <script src='//code.jquery.com/jquery-latest.js'/>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js'/>
   </head>
   <body>
     <div class='layout'>
@@ -1101,6 +1100,11 @@ font-size: 1em;
                   </h2>
                 </b:if>
               </b:switch>
+              <!-- <script type='text/javascript'>
+                // <![CDATA[
+                hljs.initHighlightingOnLoad();
+                // ]]>
+              </script> -->
               <div class='post-body'><data:post.body/></div>
               <b:if cond='data:post.hasJumpLink'>
                 <div class='post-jump'>
