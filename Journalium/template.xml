@@ -1075,7 +1075,7 @@ font-size: 1em;
                   </div>
                   <div class='post-preview-right'>
                     <b:if cond='data:post.location'>
-                      <address><a expr:href='data:post.location.mapsUrl' rel='nofollow' target='_blank' rel='noopener'><data:post.location.name/></a></address>
+                      <address><a expr:href='data:post.location.mapsUrl' rel='nofollow noopener' target='_blank'><data:post.location.name/></a></address>
                     </b:if>
                   </div>
                 </div>
