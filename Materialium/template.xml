@@ -1,126 +1,127 @@
-<?xml version='1.0' encoding='UTF-8' ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html>
 <html b:version='2' expr:dir='data:blog.languageDirection' expr:lang='data:blog.locale' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
- <head>
-  <title><b:if cond='data:blog.pageName'><data:blog.pageName/> | </b:if><data:blog.title/></title>
-  <!-- Meta-tags -->
-  <meta expr:charser='data:blog.encoding'/>
-  <meta name='viewport' content='width=device-width, initial-scale=1'/>
-  <meta content='IE=edge' http-equiv='X-UA-Compatible'/>
-  <!-- Open Graph & Twitter-->
-  <b:if cond='data:blog.postImageUrl != &quot;&quot;'>
-    <meta content='summary_large_image' name='twitter:card'/>
-    <meta expr:content='data:blog.postImageUrl' property='og:image'/>
-  <b:else/>
-    <meta content='summary' name='twitter:card'/>
-  </b:if>
-  <meta content='@TWITTER-OF-YOUR-SITE' name='twitter:site'/>
-  <meta content='@YOUR-TWITTER_USERNAME' name='twitter:creator'/>
-  <meta expr:content='data:blog.locale' property='og:locale'/>
-  <meta expr:content='data:blog.title' property='og:site_name'/>
-  <meta content='true' property='og:rich_attachment'/>
-  <b:if cond='data:blog.pageName != &quot;&quot;'>
-    <meta expr:content='data:blog.pageName' property='og:title'/>
-  <b:else/>
-    <meta expr:content='data:blog.title' property='og:title'/>
-  </b:if>
-  <b:if cond='data:blog.pageType == &quot;item&quot; or data:blog.pageType == &quot;static_page&quot;'>
-    <meta content='article' property='og:type'/>
-  <b:else/>
-    <meta content='website' property='og:type'/>
-    <meta expr:content='data:blog.canonicalUrl' property='og:url'/>
-  </b:if>
-  <b:if cond='data:blog.metaDescription != &quot;&quot;'>
-    <meta expr:content='data:blog.metaDescription' name='og:description'/>
-  <b:else/>
-    <meta expr:content='data:blog.title + &quot;: &quot; + data:blog.pageName' name='og:description'/>
-  </b:if>
-  <!-- Icons -->
-  <link expr:href='data:blog.blogspotFaviconUrl' rel='icon' sizes='16x16' type='image/ico'/>
-  <!-- <link rel='icon' type='image/png' href='PATH-TO-32x32-ICON' sizes='32x32'/> -->
-  <!-- <link rel='icon' type='image/png' href='PATH-TO-48x48-ICON' sizes='48x48'/> -->
-  <!-- <link rel='apple-touch-icon' sizes='180x180' href='PATH-TO-180x180-ICON'/> -->
-  <!-- <meta name='msapplication-TileImage' content='PATH-TO-144x144-ICON'/> -->
-  <meta expr:content='data:blog.title' name='apple-mobile-web-app-title'/>
-  <meta expr:content='data:blog.title' name='application-name'/>
-  <meta content='#b0120a' name='msapplication-TileColor'/>
-  <meta content='#b0120a' name='theme-color'/>
-  <!-- Styles -->
-  <b:skin>
-   <![CDATA[
-    /*
-    * Author info & styles
-    */
-   ]]>
-  </b:skin>
-  <!-- Scripts, fonts & other -->
-  <link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,700,700italic,100,100italic&amp;subset=latin,cyrillic' rel='stylesheet' type='text/css'/>
-  <b:include data='blog' name='all-head-content'/>
-  <script type='text/javascript'>
-    //<![CDATA[
-      (function() {  
-        function $(id){  
-          return document.getElementById(id);  
-        }  
-        function goTop(acceleration, time) {  
-          acceleration = acceleration || 0.1;  
-          time = time || 12;  
-          var dx = 0;  
-          var dy = 0;  
-          var bx = 0;  
-          var by = 0;  
-          var wx = 0;  
-          var wy = 0;  
-          if (document.documentElement) {  
-            dx = document.documentElement.scrollLeft || 0;  
-            dy = document.documentElement.scrollTop || 0;  
+  <head>
+    <title><b:if cond='data:blog.pageName'><data:blog.pageName/> | </b:if><data:blog.title/></title>
+    <!-- Meta-tags -->
+    <meta expr:charser='data:blog.encoding'/>
+    <meta name='viewport' content='width=device-width, initial-scale=1'/>
+    <meta content='IE=edge' http-equiv='X-UA-Compatible'/>
+    <!-- Open Graph & Twitter-->
+    <b:if cond='data:blog.postImageUrl != &quot;&quot;'>
+      <meta content='summary_large_image' name='twitter:card'/>
+      <meta expr:content='data:blog.postImageUrl' property='og:image'/>
+    <b:else/>
+      <meta content='summary' name='twitter:card'/>
+    </b:if>
+    <meta content='@TWITTER-OF-YOUR-SITE' name='twitter:site'/>
+    <meta content='@YOUR-TWITTER_USERNAME' name='twitter:creator'/>
+    <meta expr:content='data:blog.locale' property='og:locale'/>
+    <meta expr:content='data:blog.title' property='og:site_name'/>
+    <meta content='true' property='og:rich_attachment'/>
+    <b:if cond='data:blog.pageName != &quot;&quot;'>
+      <meta expr:content='data:blog.pageName' property='og:title'/>
+    <b:else/>
+      <meta expr:content='data:blog.title' property='og:title'/>
+    </b:if>
+    <b:if cond='data:blog.pageType == &quot;item&quot; or data:blog.pageType == &quot;static_page&quot;'>
+      <meta content='article' property='og:type'/>
+    <b:else/>
+      <meta content='website' property='og:type'/>
+      <meta expr:content='data:blog.canonicalUrl' property='og:url'/>
+    </b:if>
+    <b:if cond='data:blog.metaDescription != &quot;&quot;'>
+      <meta expr:content='data:blog.metaDescription' name='og:description'/>
+    <b:else/>
+      <meta expr:content='data:blog.title + &quot;: &quot; + data:blog.pageName' name='og:description'/>
+    </b:if>
+    <!-- Icons -->
+    <link expr:href='data:blog.blogspotFaviconUrl' rel='icon' sizes='16x16' type='image/ico'/>
+    <!-- <link rel='icon' type='image/png' href='PATH-TO-32x32-ICON' sizes='32x32'/> -->
+    <!-- <link rel='icon' type='image/png' href='PATH-TO-48x48-ICON' sizes='48x48'/> -->
+    <!-- <link rel='apple-touch-icon' sizes='180x180' href='PATH-TO-180x180-ICON'/> -->
+    <!-- <meta name='msapplication-TileImage' content='PATH-TO-144x144-ICON'/> -->
+    <meta expr:content='data:blog.title' name='apple-mobile-web-app-title'/>
+    <meta expr:content='data:blog.title' name='application-name'/>
+    <meta content='#b0120a' name='msapplication-TileColor'/>
+    <meta content='#b0120a' name='theme-color'/>
+    <!-- Styles -->
+    <b:skin>
+      <![CDATA[
+        /*
+        * Author info & styles
+        */
+      ]]>
+    </b:skin>
+    <!-- Scripts, fonts & other -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,700&amp;subset=cyrillic-ext,latin-ext' rel='stylesheet'/>
+    <link href='//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css' rel='stylesheet'/>
+    <b:include data='blog' name='all-head-content'/>
+    <script type='text/javascript'>
+      //<![CDATA[
+        (function() {  
+          function $(id){  
+            return document.getElementById(id);  
           }  
-          if (document.body) {  
-            bx = document.body.scrollLeft || 0;  
-            by = document.body.scrollTop || 0;  
-          }  
-          var wx = window.scrollX || 0;  
-          var wy = window.scrollY || 0;  
-          var x = Math.max(wx, Math.max(bx, dx));  
-          var y = Math.max(wy, Math.max(by, dy));  
-          var speed = 1 + acceleration;  
-          window.scrollTo(Math.floor(x / speed), Math.floor(y / speed));  
-          if(x > 0 || y > 0) {  
-            var invokeFunction = "top.goTop(" + acceleration + ", " + time + ")"  
-            window.setTimeout(invokeFunction, time);  
-          }  
-          return false;  
-        }  
-        function scrollTop(){  
-          var el = $('gotop');  
-          var stop = (document.body.scrollTop || document.documentElement.scrollTop);  
-          if(stop>200){  
-            if(el.style.display!='block'){  
-              el.style.display='block';  
-              smoothopaque(el, 0, 100, 1);  
+          function goTop(acceleration, time) {  
+            acceleration = acceleration || 0.1;  
+            time = time || 12;  
+            var dx = 0;  
+            var dy = 0;  
+            var bx = 0;  
+            var by = 0;  
+            var wx = 0;  
+            var wy = 0;  
+            if (document.documentElement) {  
+              dx = document.documentElement.scrollLeft || 0;  
+              dy = document.documentElement.scrollTop || 0;  
             }  
+            if (document.body) {  
+              bx = document.body.scrollLeft || 0;  
+              by = document.body.scrollTop || 0;  
+            }  
+            var wx = window.scrollX || 0;  
+            var wy = window.scrollY || 0;  
+            var x = Math.max(wx, Math.max(bx, dx));  
+            var y = Math.max(wy, Math.max(by, dy));  
+            var speed = 1 + acceleration;  
+            window.scrollTo(Math.floor(x / speed), Math.floor(y / speed));  
+            if(x > 0 || y > 0) {  
+              var invokeFunction = "top.goTop(" + acceleration + ", " + time + ")"  
+              window.setTimeout(invokeFunction, time);  
+            }  
+            return false;  
           }  
-          else  
-           el.style.display='none';  
-          return false;  
-    }   
-    function smoothopaque(el, startop, endop, inc){  
-      op = startop;  
-      setopacity(el, op);  
-      setTimeout(slowopacity, 1);  
-      function slowopacity(){  
-        if(startop < endop){  
-          op = op + inc;  
-          if(op < endop){  
-            setTimeout(slowopacity, 1);  
-          }  
+          function scrollTop(){  
+            var el = $('gotop');  
+            var stop = (document.body.scrollTop || document.documentElement.scrollTop);  
+            if(stop>200){  
+              if(el.style.display!='block'){  
+                el.style.display='block';  
+                smoothopaque(el, 0, 100, 1);  
+              }  
+            }  
+            else  
+             el.style.display='none';  
+            return false;  
+      }   
+      function smoothopaque(el, startop, endop, inc){  
+        op = startop;  
+        setopacity(el, op);  
+        setTimeout(slowopacity, 1);  
+        function slowopacity(){  
+          if(startop < endop){  
+            op = op + inc;  
+            if(op < endop){  
+              setTimeout(slowopacity, 1);  
+            }  
           } else {  
             op = op - inc;  
             if(op > endop){  
              setTimeout(slowopacity, 1);  
             }  
           }  
-            setopacity(el, op);  
+          setopacity(el, op);  
           };  
         };   
         function setopacity(el, opacity){  
@@ -160,6 +161,7 @@
                 <style>
                   header {
                     background-image: url(&#39;<data:sourceUrl/>&#39;);
+                    background-position: center bottom;
                   }
                 </style>
               </b:if>
@@ -207,12 +209,12 @@
                 <ul class='menu'>
                   <b:loop values='data:links' var='link'>
                     <a class='menu-link' expr:href='data:link.href'>
-                      <b:if cond='data:link.isCurrentPage'>
-                        <li class='menu-icon selected'>
+                      <b:if cond='data:link.isCurrentPage or data:blog.url == data:link.href'>
+                        <li class='menu-icon darker selected'>
                           <data:link.title/>
                         </li>
                       <b:else/>
-                        <li class='menu-icon'>
+                        <li class='menu-icon darker'>
                           <data:link.title/>
                         </li>
                       </b:if>
@@ -248,6 +250,26 @@
         </b:section>
       </div>
       <div class='main-outer'>
+        <b:if cond='data:blog.pageType == &quot;index&quot; or data:blog.pageType == &quot;archive&quot;'>
+          <b:if cond='data:blog.searchQuery'>
+          <b:else/>
+          <b:section class='menu-list' id='manu-list' maxwidgets='1' showaddelement='no'>
+            <b:widget id='LinkList1' locked='false' title='Horizontal Menu' type='LinkList' version='1'>
+              <b:widget-settings>
+                <b:widget-setting name='shownum'>10</b:widget-setting>
+                <b:widget-setting name='sorting'>NONE</b:widget-setting>
+              </b:widget-settings>
+              <b:includable id='main'>
+              <ul class='main-menu'>
+                <b:loop values='data:links' var='link'>
+                  <li><a class='darker' expr:href='data:link.target'><data:link.name/></a></li>
+                </b:loop>
+              </ul>
+            </b:includable>
+            </b:widget>
+          </b:section>
+          </b:if>
+        </b:if>
         <b:section class='main' id='main' showaddelement='true'>
           <b:widget id='Blog1' locked='true' title='Blog Posts' type='Blog'>
             <b:widget-settings>
@@ -286,7 +308,7 @@
                     </b:if>
                   </b:loop>
                 </div>
-                <b:if cond='data.blog.pageType != &quot;static_page&quot;'>
+                <b:if cond='data:blog.pageType != &quot;static_page&quot;'>
                   <b:if cond='data:blog.pageType != &quot;error_page&quot;'>
                     <b:if cond='data:blog.pageType != &quot;item&quot;'>
                       <b:include name='nextprev'/>
@@ -364,7 +386,7 @@
                             <data:comment.author/>
                           </div>
                           <time>
-                            <a expr:href='data:&quot;#&quot; + data:comment.id' expr:title='data:commentLabel + &quot; link to comment&quot;' rel='nofollow'>
+                            <a expr:href='&quot;#&quot; + data:comment.id' expr:title='data:commentLabel + &quot; link to comment&quot;' rel='nofollow'>
                               <data:comment.timestamp/>
                             </a>
                           </time>
@@ -603,14 +625,14 @@
             <b:includable id='nextprev'>
               <div class='blog-pager'>
                 <b:if cond='data:newerPageUrl'>
-                  <a class='newer-link' expr:href='data:newerPageUrl' rel='next'>
+                  <a class='newer-link lighter' expr:href='data:newerPageUrl' rel='next'>
                     &lt;
                     <data:newerPageTitle/>
                   </a>
                 </b:if>
                 &#160;
                 <b:if cond='data:olderPageUrl'>
-                  <a class='older-link' expr:href='data:olderPageUrl' rel='prev'>
+                  <a class='older-link lighter' expr:href='data:olderPageUrl' rel='prev'>
                     <data:olderPageTitle/>
                     &gt;
                   </a>
@@ -767,7 +789,7 @@
                   </a>
                 </b:if>
                 <b:if cond='data:top.showBlogThisButton'>
-                  <a class='goog-inline-block share-button sb-blog' expr:href='data:post.sharePostUrl + &quot;&amp;target=blog&quot;' expr:title='data:top.blogThisMsg' target='_blank' expr:onclick='&quot;window.open(this.href, \&quot;_blank\&quot;, \&quot;height=632,width=734\&quot;); return false;&quot;'>
+                  <a class='goog-inline-block share-button sb-blog' expr:href='data:post.sharePostUrl + &quot;&amp;target=blog&quot;' expr:onclick='&quot;window.open(this.href, \&quot;_blank\&quot;, \&quot;height=632,width=734\&quot;); return false;&quot;' expr:title='data:top.blogThisMsg' target='_blank' >
                     <span class='share-button-link-text'>
                       <data:top.blogThisMsg/>
                     </span>
@@ -781,7 +803,7 @@
                   </a>
                 </b:if>
                 <b:if cond='data:top.showFacebookButton'>
-                  <a class='goog-inline-block share-button sb-facebook' expr:href='data:post.sharePostUrl + &quot;&amp;target=facebook&quot;' expr:title='data:top.shareToFacebookMsg' target='_blank' expr:onclick='&quot;window.open(this.href, \&quot;_blank\&quot;, \&quot;height=430,width=640\&quot;); return false;&quot;'>
+                  <a class='goog-inline-block share-button sb-facebook' expr:href='data:post.sharePostUrl + &quot;&amp;target=facebook&quot;' expr:onclick='&quot;window.open(this.href, \&quot;_blank\&quot;, \&quot;height=430,width=640\&quot;); return false;&quot;' expr:title='data:top.shareToFacebookMsg' target='_blank'>
                     <span class='share-button-link-text'>
                       <data:top.shareToFacebookMsg/>
                     </span>
@@ -820,7 +842,7 @@
                 </script>
               </div>
             </b:includable>
-            <b:includable id='threaded-comment_js' var='post'>
+            <b:includable id='threaded_comment_js' var='post'>
               <script async='async' expr:src='data:post.commentSrc' type='text/javascript'/>
               <script type='text/javascript'>
                 (function() {
@@ -986,11 +1008,11 @@
                 // ]]>
               </script>
             </b:includable>
-            <b:includable id='threaded-comments' var='post'>
+            <b:includable id='threaded_comments' var='post'>
               <div class='comments'>
                 <b:if cond='data:post.numComments &gt; 0'>
                   <h4><data:post.commentLabelFull/></h4>
-                  <b:includable name='feedLinks'/>
+                  <b:include name='feedLinks'/>
                 </b:if>
                 <b:if cond='data:blogTeamBlogMessage'>
                   <div class='not-allowed'>
@@ -1009,7 +1031,7 @@
                   <div class='comments-pager'>
                     <b:if cond='data:post.hasOlderLinks'>
                       <a expr:class='data:post.oldLinkClass' expr:href='data:post.olderLinkUrl'>
-                        <data:post.olderLinText/>
+                        <data:post.olderLinkText/>
                       </a>
                     </b:if>
                     <data:post.commentRangeText/>
@@ -1028,7 +1050,7 @@
                   </div>
                 </b:if>
                 <b:if cond='data:showCmtPopup'>
-                  <div class='comment-popup'>
+                  <div id='comment-popup'>
                     <iframe allowtransparency='true' frameborder='0' id='comment-actions' name='comment-actions' scrolling='no'/>
                   </div>
                 </b:if>
@@ -1037,8 +1059,26 @@
           </b:widget>
         </b:section>
       </div>
+      <footer class='footer-outer'>
+        <b:section class='footer' id='footer' name='Footer'>
+          <b:widget id='HTML1' locked='false' title='Social Links' type='HTML' version='1'>
+            <b:widget-settings>
+              <b:widget-setting name='content'>&lt;nav id=&quot;social&quot;&gt;&lt;a class=&quot;twitter&quot; href=&quot;https://twitter.com/YOUR-TWITTER-NICKNAME&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; title=&quot;Twitter&quot;&gt;&lt;i class=&quot;ion ion-social-twitter&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
+&lt;a class=&quot;github&quot; href=&quot;https://github.com/YOUR-GITHUB-NICKNAME&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; title=&quot;Github&quot;&gt;&lt;i class=&quot;ion ion-social-github&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
+&lt;a class=&quot;google-plus&quot; href=&quot;https://plus.google.com/+YOUR-GOOGLE-PLUS-NICKNAME&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; title=&quot;Google+&quot;&gt;&lt;i class=&quot;ion ion-social-googleplus&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
+&lt;a class=&quot;facebook&quot; href=&quot;https://www.facebook.com/YOUR-FACEBOOK-NICKNAME&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; title=&quot;Facebook&quot;&gt;&lt;i class=&quot;ion ion-social-facebook&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
+&lt;/nav&gt;&lt;style type=&#39;text/css&#39;&gt;#HTML1 #social { position: absolute; right: 88px; top: 6.5px; } #HTML1 #social .ion { font-size: 32px; padding: 8px; } @media (max-width: 1012px) { #HTML1 #social { position: static; } } @media (max-width: 664px) { #HTML1 #social .ion { font-size: 24px; } }&lt;/style&gt;</b:widget-setting>
+            </b:widget-settings>
+            <b:includable id='main'>
+              <data:content/>
+            </b:includable>
+          </b:widget>
+        </b:section>
+        Blogger Template &#171;Materialium&#187; | Powered by Blogger<br/>
+        <svg class='footer-svg' fill='#000' height='18' viewBox='0 0 14 16' width='18' xmlns='http://www.w3.org/2000/svg'><path d='M9.5 3L8 4.5 11.5 8 8 11.5 9.5 13 14 8 9.5 3zm-5 0L0 8l4.5 5L6 11.5 2.5 8 6 4.5 4.5 3z'/></svg> with <svg class='footer-svg' fill='#000' height='18' viewBox='0 0 12 16' width='18' xmlns='http://www.w3.org/2000/svg'><path d='M11.2 3c-.52-.63-1.25-.95-2.2-1-.97 0-1.69.42-2.2 1-.51.58-.78.92-.8 1-.02-.08-.28-.42-.8-1-.52-.58-1.17-1-2.2-1-.95.05-1.69.38-2.2 1-.52.61-.78 1.28-.8 2 0 .52.09 1.52.67 2.67C1.25 8.82 3.01 10.61 6 13c2.98-2.39 4.77-4.17 5.34-5.33C11.91 6.51 12 5.5 12 5c-.02-.72-.28-1.39-.8-2.02V3z' fill-rule='evenodd'/></svg> by <a href='https://www.web-xaser.ru' rel='noopener' style='color: #000;' target='_blank'><b>@web_xaser</b></a>
+      </footer>
     </div>
-    <a class='scrollTop' href='#' id='gotop' onclick='top.goTop(); return false;' title='Go Top'/>
+    <a class='scrollTop lighter' href='#' id='gotop' onclick='top.goTop(); return false;' title='Go Top'/>
     <div id='dark00' onclick='document.getElementById(&apos;slider&apos;).classList.toggle(&apos;closed&apos;),document.getElementById(&apos;dark00&apos;).classList.toggle(&apos;dark0&apos;),document.getElementById(&apos;page&apos;).classList.toggle(&apos;no-overflow&apos;);'/>
     <div id='dark01' onclick='document.getElementById(&apos;s&apos;).classList.toggle(&apos;active&apos;),document.getElementById(&apos;dark01&apos;).classList.toggle(&apos;dark1&apos;),document.getElementById(&apos;page&apos;).classList.toggle(&apos;no-overflow&apos;);'/>
   </body>
