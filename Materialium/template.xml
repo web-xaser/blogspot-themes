@@ -4,7 +4,7 @@
   <head>
     <title><b:if cond='data:blog.pageName'><data:blog.pageName/> | </b:if><data:blog.title/></title>
     <!-- Meta-tags -->
-    <meta expr:charser='data:blog.encoding'/>
+    <meta expr:charset='data:blog.encoding'/>
     <meta name='viewport' content='width=device-width, initial-scale=1'/>
     <meta content='IE=edge' http-equiv='X-UA-Compatible'/>
     <!-- Open Graph & Twitter-->
@@ -93,9 +93,9 @@
             return false;  
           }  
           function scrollTop(){  
-            var el = $('gotop');  
+            var el = document.getElementById('gotop');  
             var stop = (document.body.scrollTop || document.documentElement.scrollTop);  
-            if(stop>200){  
+            if(stop>232){  
               if(el.style.display!='block'){  
                 el.style.display='block';  
                 smoothopaque(el, 0, 100, 1);  
@@ -251,27 +251,245 @@
       </div>
       <div class='main-outer'>
         <b:if cond='data:blog.pageType == &quot;index&quot; or data:blog.pageType == &quot;archive&quot;'>
-          <b:if cond='data:blog.searchQuery'>
-          <b:else/>
-          <b:section class='menu-list' id='manu-list' maxwidgets='1' showaddelement='no'>
-            <b:widget id='LinkList1' locked='false' title='Horizontal Menu' type='LinkList' version='1'>
+          <b:section class='menu-list' id='menu-list' maxwidgets='1' showaddelement='no'>
+            <b:widget id='LinkList1' locked='true' title='Horizontal Menu' type='LinkList' version='1'>
               <b:widget-settings>
                 <b:widget-setting name='shownum'>10</b:widget-setting>
                 <b:widget-setting name='sorting'>NONE</b:widget-setting>
               </b:widget-settings>
               <b:includable id='main'>
-              <ul class='main-menu'>
-                <b:loop values='data:links' var='link'>
-                  <li><a class='darker' expr:href='data:link.target'><data:link.name/></a></li>
-                </b:loop>
-              </ul>
-            </b:includable>
+                <ul class='main-menu' id='main-menu'>
+                  <button class='main-menu_button' onclick='document.getElementById(&apos;slider&apos;).classList.toggle(&apos;closed&apos;),document.getElementById(&apos;dark00&apos;).classList.toggle(&apos;dark0&apos;),document.getElementById(&apos;page&apos;).classList.toggle(&apos;no-overflow&apos;);' title='Menu'/>
+                  <b:loop values='data:links' var='link'>
+                    <li><a class='darker' expr:href='data:link.target'><data:link.name/></a></li>
+                  </b:loop>
+                  <button class='main-search_button' onclick='document.getElementById(&apos;s&apos;).classList.toggle(&apos;active&apos;),document.getElementById(&apos;dark01&apos;).classList.toggle(&apos;dark1&apos;),document.getElementById(&apos;page&apos;).classList.toggle(&apos;no-overflow&apos;),document.getElementById(&apos;s&apos;).focus();' title='Search'/>
+                </ul>
+              </b:includable>
             </b:widget>
           </b:section>
-          </b:if>
+          <script type='text/javascript'>
+            // Calculating min-height of #nav-sidebar for #main
+            // Fix #main-menu after scrolling 
+            // <![CDATA[
+            (function() {
+              window.onload = function() {
+                var nav = document.getElementById('nav-sidebar'), style = window.getComputedStyle(nav), height = style.getPropertyValue('height');
+                var main = document.getElementById('main');
+                main.style.minHeight = 'calc(' + height + ' + 72px)';
+              }
+              var navFix = document.querySelector('#main-menu');
+              var searchFix = document.querySelector('.main-search_button');
+              var menuFix = document.querySelector('.main-menu_button');
+              function stickyNav() {
+                if (window.scrollY >= 232) {
+                  navFix.classList.add('nav-pin');
+                  menuFix.classList.add('menuFix');
+                  searchFix.classList.add('menuFix');
+                } else if (window.scrollY < 232) {
+                  navFix.classList.remove('nav-pin');
+                  menuFix.classList.remove('menuFix');
+                  searchFix.classList.remove('menuFix');
+                }
+              }
+              window.addEventListener('scroll', stickyNav);
+            })();
+            // ]]>
+          </script>
         </b:if>
+        <div class='main-content'>
+          <b:if cond='data:blog.url != data:blog.homepageUrl or data:mobile == &quot;false&quot;'>
+            <b:if cond='data:blog.pageType == &quot;index&quot; or data:blog.pageType == &quot;archive&quot;'>
+              <b:section class='nav-sidebar' id='nav-sidebar' maxwidgets='3' showaddelement='yes'>
+                <b:widget id='Label1' locked='true' title='Tags' type='Label' version='1'>
+                  <b:widget-settings>
+                    <b:widget-setting name='sorting'>ALPHA</b:widget-setting>
+                    <b:widget-setting name='display'>CLOUD</b:widget-setting>
+                    <b:widget-setting name='selectedLabelsList'/>
+                    <b:widget-setting name='showType'>ALL</b:widget-setting>
+                    <b:widget-setting name='showFreqNumbers'>false</b:widget-setting>
+                  </b:widget-settings>
+                  <b:includable id='main'>
+                    <b:if cond='data:title != &quot;&quot;'>
+                      <h3><data:title/></h3>
+                    </b:if>
+                      <b:if cond='data:display == &quot;list&quot;'>
+                        <ul class='labels list'>
+                          <b:loop values='data:labels' var='label'>
+                            <b:if cond='data:blog.url != data:label.url'>
+                              <li>
+                                <a class='darker' expr:href='data:label.url'>
+                                  #<data:label.name/>
+                                  <b:if cond='data:showFreqNumbers'>
+                                    <b:if cond='data:label.count &gt; 1'>
+                                      (<data:label.count/> posts)
+                                    <b:else/>
+                                      (<data:label.count/> post)
+                                    </b:if>
+                                  </b:if>
+                                </a>
+                              </li>
+                            </b:if>
+                          </b:loop>
+                        </ul>
+                      <b:else/>
+                        <ul class='labels cloud'>
+                          <b:loop values='data:labels' var='label'>
+                            <b:if cond='data:blog.url != data:label.url'>
+                              <li>
+                                <a class='darker' expr:href='data:label.url'>
+                                  <data:label.name/>
+                                  <b:if cond='data:showFreqNumbers'>(<data:label.count/>)</b:if>
+                                </a>
+                              </li>
+                            </b:if>
+                          </b:loop>
+                        </ul>
+                      </b:if>
+                      <b:loop values='data:labels' var='label'>
+                        <b:if cond='data:blog.url == data:label.url'>
+                          <script>var label_count = &#39;<data:label.count/>&#39;;</script>
+                        </b:if>
+                      </b:loop>
+                  </b:includable>
+                </b:widget>
+                <b:widget id='BlogArchive1' locked='true' title='Archive' type='BlogArchive' version='1'>
+                  <b:widget-settings>
+                    <b:widget-setting name='showStyle'>HIERARCHY</b:widget-setting>
+                    <b:widget-setting name='yearPattern'>yyyy</b:widget-setting>
+                    <b:widget-setting name='showWeekEnd'>true</b:widget-setting>
+                    <b:widget-setting name='monthPattern'>MMMM</b:widget-setting>
+                    <b:widget-setting name='dayPattern'>dd</b:widget-setting>
+                    <b:widget-setting name='weekPattern'>d MMMM</b:widget-setting>
+                    <b:widget-setting name='chronological'>false</b:widget-setting>
+                    <b:widget-setting name='showPosts'>true</b:widget-setting>
+                    <b:widget-setting name='frequency'>MONTHLY</b:widget-setting>
+                  </b:widget-settings>
+                  <b:includable id='main'>
+                    <b:if cond='data:title != &quot;&quot;'>
+                      <h3><data:title/></h3>
+                    </b:if>
+                    <div id='ArchiveList'>
+                      <div expr:id='data:widget.instanceId + &quot;_ArchiveList&quot;'>
+                        <b:include cond='data:style == &quot;HIERARCHY&quot;' data='data' name='interval'/>
+                        <b:include cond='data:style == &quot;FLAT&quot;' data='data' name='flat'/>
+                        <b:include cond='data:style == &quot;MENU&quot;' data='data' name='menu'/>
+                      </div>
+                    </div>
+                  </b:includable>
+                  <b:includable id='flat' var='data'>
+                    <ul class='flat'>
+                      <b:loop values='data:data' var='i'>
+                        <li class='archivedate'>
+                          <a expr:href='data:i.url'>
+                            <data:i.name/>
+                            <b:if cond='data:i.post-count &gt; 1'>
+                              (<data:i.post-count/> posts)
+                            <b:else/>
+                              (<data:i.post-count/> post)
+                            </b:if>
+                          </a>
+                        </li>
+                      </b:loop>
+                    </ul>
+                    <b:loop values='data:data' var='i'>
+                      <b:if cond='data:blog.url == data:i.url'>
+                        <script>var archive_count = &#39;<data:i.post-count/>&#39;;</script>
+                      </b:if>
+                    </b:loop>
+                  </b:includable>
+                  <b:includable id='interval' var='intervalData'>
+                    <b:loop values='data:intervalData' var='interval'>
+                      <ul class='hierarchy'>
+                        <li expr:class='&quot;archivedate &quot; + data:interval.expclass'>
+                            <a class='post-count-link darker' expr:href='data:interval.url'>
+                            <data:interval.name/>
+                            <b:if cond='data:interval.post-count &gt; 1'>
+                              (<data:interval.post-count/> posts)
+                            <b:else/>
+                              (<data:interval.post-count/> post)
+                            </b:if>
+                          </a>
+                          <b:include cond='data:interval.data' data='interval.data' name='interval'/>
+                          <b:include cond='data:interval.posts' data='interval.posts' name='posts'/>
+                        </li>
+                      </ul>
+                    </b:loop>
+                    <b:loop values='data:intervalData' var='interval'>
+                      <b:if cond='data:blog.url == data:interval.url'>
+                        <script>var archive_count = &#39;<data:interval.post-count/>&#39;;</script>
+                      </b:if>
+                    </b:loop>
+                  </b:includable>
+                  <b:includable id='menu' var='data'>
+                    <select expr:id='data:widget.instanceId + &quot;_ArchiveMenu&quot;'>
+                      <option value=''>Choose date..</option>
+                      <b:loop values='data:data' var='i'>
+                        <option expr:value='data:i.url'>
+                          <data:i.name/>
+                          <b:if cond='data:i.post-count &gt; 1'>
+                            (<data:i.post-count/> posts)
+                          <b:else/>
+                            (<data:i.post-count/> post)
+                          </b:if>
+                        </option>
+                      </b:loop>
+                    </select>
+                    <b:loop values='data:data' var='i'>
+                      <b:if cond='data:blog.url == data:i.url'>
+                        <script>var archive_count = &#39;<data:i.post-count/>&#39;;</script>
+                      </b:if>
+                    </b:loop>
+                  </b:includable>
+                  <b:includable id='posts' var='posts'>
+                    <ul class='posts'>
+                      <b:loop values='data:posts' var='post'>
+                        <li><a class='darker' expr:href='data:post.url'><data:post.title/></a></li>
+                      </b:loop>
+                    </ul>
+                  </b:includable>
+                  <b:includable id='toggle' var='interval'/>
+                </b:widget>
+                <b:widget id='PopularPosts1' locked='true' title='Popular Posts' type='PopularPosts' version='1'>
+                  <b:widget-settings>
+                    <b:widget-setting name='numItemsToShow'>3</b:widget-setting>
+                    <b:widget-setting name='showThumbnails'>true</b:widget-setting>
+                    <b:widget-setting name='showSnippets'>true</b:widget-setting>
+                    <b:widget-setting name='timeRange'>LAST_WEEK</b:widget-setting>
+                  </b:widget-settings>
+                  <b:includable id='main'>
+                    <b:if cond='data:title != &quot;&quot;'>
+                      <h3><data:title/></h3>
+                    </b:if>
+                    <b:loop values='data:posts' var='post'>
+                      <div class='popular-post'>
+                        <a expr:href='data:post.href'>
+                          <b:if cond='!data:showThumbnails'>
+                            <b:if cond='!data:showSnippets'>
+                              <span class='item-title'><data:post.title/></span>
+                            <b:else/>
+                              <span class='item-title'><data:post.title/></span>
+                              <span class='item-snippet'><data:post.snippet/></span>
+                            </b:if>
+                          <b:else/>
+                            <b:if cond='data:post.featuredImage'>
+                              <img class='item-image' expr:alt='data:post.title' expr:src='data:post.featuredImage'/>
+                            </b:if>
+                            <span class='item-title'><data:post.title/></span>
+                            <b:if cond='data:showSnippets'>
+                              <span class='item-snippet'><data:post.snippet/></span>
+                            </b:if>
+                          </b:if>
+                        </a>
+                      </div>
+                    </b:loop>
+                  </b:includable>
+                </b:widget>
+              </b:section>
+            </b:if>
+          </b:if>
         <b:section class='main' id='main' showaddelement='true'>
-          <b:widget id='Blog1' locked='true' title='Blog Posts' type='Blog'>
+          <b:widget id='Blog1' locked='true' title='Blog Posts' type='Blog' version='1'>
             <b:widget-settings>
               <b:widget-setting name='showDateHeader'>true</b:widget-setting>
               <b:widget-setting name='style.textcolor'>#000000</b:widget-setting>
@@ -534,12 +752,12 @@
               <div class='blog-pager'>
                 <b:if cond='data:newerPageUrl'>
                   <a expr:href='data:newerPageUrl' id='blog-pager-newer-link' rel='next'>
-                    &lt;
+                    <data:newerPageTitle/>
                   </a>
                 </b:if>
                 <b:if cond='data:olderPageUrl'>
                   <a expr:href='data:olderPageUrl' id='blog-pager-older-link' rel='prev'>
-                    &gt;
+                    <data:olderPageTitle/>
                   </a>
                 </b:if>
                 <a expr:href='data:desktopLinkUrl' id='blog-pager-desktop-link'>
@@ -626,7 +844,6 @@
               <div class='blog-pager'>
                 <b:if cond='data:newerPageUrl'>
                   <a class='newer-link lighter' expr:href='data:newerPageUrl' rel='next'>
-                    &lt;
                     <data:newerPageTitle/>
                   </a>
                 </b:if>
@@ -634,7 +851,6 @@
                 <b:if cond='data:olderPageUrl'>
                   <a class='older-link lighter' expr:href='data:olderPageUrl' rel='prev'>
                     <data:olderPageTitle/>
-                    &gt;
                   </a>
                 </b:if>
               </div>
@@ -789,7 +1005,7 @@
                   </a>
                 </b:if>
                 <b:if cond='data:top.showBlogThisButton'>
-                  <a class='goog-inline-block share-button sb-blog' expr:href='data:post.sharePostUrl + &quot;&amp;target=blog&quot;' expr:onclick='&quot;window.open(this.href, \&quot;_blank\&quot;, \&quot;height=632,width=734\&quot;); return false;&quot;' expr:title='data:top.blogThisMsg' target='_blank' >
+                  <a class='goog-inline-block share-button sb-blog' expr:href='data:post.sharePostUrl + &quot;&amp;target=blog&quot;' expr:onclick='&quot;window.open(this.href, \&quot;_blank\&quot;, \&quot;height=632,width=734\&quot;); return false;&quot;' expr:title='data:top.blogThisMsg' target='_blank'>
                     <span class='share-button-link-text'>
                       <data:top.blogThisMsg/>
                     </span>
@@ -824,10 +1040,40 @@
               </div>
             </b:includable>
             <b:includable id='status-message'>
-              <b:if cond='data:navMessage'>
+              <b:if cond='data:blog.pageType == &quot;archive&quot;'>
                 <div class='status'>
-                  <data:navMessage/>
+                  <span>Blog Archive</span>
+                  <h4><data:blog.pageName/></h4>
+                  <span><script>document.write(&#39;Number of posts: &#39; + archive_count);</script></span>
                 </div>
+              </b:if>
+              <b:if cond='data:blog.pageType == &quot;index&quot;'>
+                <b:if cond='data:blog.searchQuery'>
+                  <div class='status'>
+                    <span><data:numPosts/> Search results</span>
+                    <form expr:action='data:blog.homepageUrl + &quot;search/&quot;' method='get'>
+                      <input autocomplete='off' expr:value='data:blog.searchQuery' id='s' name='q' placeholder='Search..' type='search'/>
+                    </form>
+                    <b:if cond='data:numPosts &gt; 0'>
+                      <span><a class='darker' expr:href='data:blog.homepageUrl + &quot;search/?q=&quot; + data:blog.searchQuery + &quot;&amp;by-date=false&quot;'>Sort by relevance</a> <a class='darker' expr:href='data:blog.homepageUrl + &quot;search/?q=&quot; + data:blog.searchQuery + &quot;&amp;by-date=true&quot;'>Sort by time</a></span>
+                    </b:if>
+                  </div>
+                  <b:if cond='data:numPosts == 0'>
+                    <style type='text/css'>#nav-sidebar, .blog-pager {display: none;} </style>
+                    <div class='not-found'>No posts matching the query.<br/><a class='lighter' expr:href='data:blog.homepageUrl'>Show all posts</a></div>
+                  </b:if>
+                </b:if>
+                <b:if cond='data:blog.searchLabel'>
+                  <div class='status'>
+                    <span>Posts with label</span>
+                    <h4><data:blog.pageName/></h4>
+                    <span><script>document.write(&#39;Number of posts: &#39; + label_count);</script></span>
+                  </div>
+                </b:if>
+              </b:if>
+              <b:if cond='data:blog.pageType == &quot;error_page&quot;'>
+                <style type='text/css'>#nav-sidebar, .blog-pager {display: none;} </style>
+                <div class='not-found'><data:navMessage/><br/><a class='lighter' expr:href='data:blog.homepageUrl'>Go to homepage</a></div>
               </b:if>
             </b:includable>
             <b:includable id='threaded-comment-form' var='post'>
@@ -858,7 +1104,7 @@
                       if (entry.gd$extendedProperty) {
                         for (var k in entry.gd$extendedProperty) {
                           if (entry.gd$extendedProperty[k].name == 'blogger.contentRemoved') {
-                            return '<span class='deleted-comment'>' + entry.content.$t + '</span>';
+                            return '<span class="deleted-comment">' + entry.content.$t + '</span>';
                           }
                         }
                       }
@@ -1058,10 +1304,11 @@
             </b:includable>
           </b:widget>
         </b:section>
+        </div>
       </div>
       <footer class='footer-outer'>
-        <b:section class='footer' id='footer' name='Footer'>
-          <b:widget id='HTML1' locked='false' title='Social Links' type='HTML' version='1'>
+        <b:section class='footer' id='footer' name='Footer' showaddelement='no'>
+          <b:widget id='HTML1' locked='true' title='Social Links' type='HTML' version='1'>
             <b:widget-settings>
               <b:widget-setting name='content'>&lt;nav id=&quot;social&quot;&gt;&lt;a class=&quot;twitter&quot; href=&quot;https://twitter.com/YOUR-TWITTER-NICKNAME&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; title=&quot;Twitter&quot;&gt;&lt;i class=&quot;ion ion-social-twitter&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
 &lt;a class=&quot;github&quot; href=&quot;https://github.com/YOUR-GITHUB-NICKNAME&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; title=&quot;Github&quot;&gt;&lt;i class=&quot;ion ion-social-github&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
