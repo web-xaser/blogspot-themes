@@ -250,7 +250,7 @@
         </b:section>
       </div>
       <div class='main-outer'>
-        <b:if cond='data:blog.pageType == &quot;index&quot; or data:blog.pageType == &quot;archive&quot;'>
+        <b:if cond='data:blog.pageType == &quot;index&quot; or data:blog.pageType == &quot;archive&quot; or data:blog.pageType == &quot;item&quot;'>
           <b:section class='menu-list' id='menu-list' maxwidgets='1' showaddelement='no'>
             <b:widget id='LinkList1' locked='true' title='Horizontal Menu' type='LinkList' version='1'>
               <b:widget-settings>
@@ -300,6 +300,7 @@
         <div class='main-content'>
           <b:if cond='data:blog.url != data:blog.homepageUrl or data:mobile == &quot;false&quot;'>
             <b:if cond='data:blog.pageType == &quot;index&quot; or data:blog.pageType == &quot;archive&quot;'>
+              <style>.posts { margin-left: 25%; }</style>
               <b:section class='nav-sidebar' id='nav-sidebar' maxwidgets='3' showaddelement='yes'>
                 <b:widget id='Label1' locked='true' title='Tags' type='Label' version='1'>
                   <b:widget-settings>
@@ -526,12 +527,8 @@
                     </b:if>
                   </b:loop>
                 </div>
-                <b:if cond='data:blog.pageType != &quot;static_page&quot;'>
-                  <b:if cond='data:blog.pageType != &quot;error_page&quot;'>
-                    <b:if cond='data:blog.pageType != &quot;item&quot;'>
-                      <b:include name='nextprev'/>
-                    </b:if>
-                  </b:if>
+                <b:if cond='data:blog.pageType != &quot;static_page&quot; and data:blog.pageType != &quot;error_page&quot; and data:blog.pageType != &quot;item&quot;'>
+                  <b:include name='nextprev'/>
                 </b:if>
               <b:else/>
                 <b:include name='mobile-main'/>
@@ -609,7 +606,7 @@
                             </a>
                           </time>
                           <b:if cond='data:comment.inReplyTo'>
-                            in reply to 
+                            in reply to
                             <a expr:href='&quot;#&quot; + data:comment.inReplyTo'>
                               this comment
                             </a>
@@ -1059,7 +1056,7 @@
                     </b:if>
                   </div>
                   <b:if cond='data:numPosts == 0'>
-                    <style type='text/css'>#nav-sidebar, .blog-pager {display: none;} </style>
+                    <style type='text/css'>#nav-sidebar {display: none;} </style>
                     <div class='not-found'>No posts matching the query.<br/><a class='lighter' expr:href='data:blog.homepageUrl'>Show all posts</a></div>
                   </b:if>
                 </b:if>
@@ -1304,6 +1301,100 @@
             </b:includable>
           </b:widget>
         </b:section>
+          <b:if cond='data:blog.pageType == &quot;item&quot;'>
+            <style>.posts { margin-right: 25%; }</style>
+            <b:section class='post-sidebar' id='post-sidebar' maxwidgets='5' showaddelement='true'>
+              <b:widget id='FeaturedPost1' locked='false' title='Featured Post' type='FeaturedPost' version='1'>
+                <b:widget-settings>
+                  <b:widget-setting name='showSnippet'>true</b:widget-setting>
+                  <b:widget-setting name='showPostTitle'>true</b:widget-setting>
+                  <b:widget-setting name='showFirstImage'>true</b:widget-setting>
+                  <b:widget-setting name='useMostRecentPost'>true</b:widget-setting>
+                </b:widget-settings>
+                <b:includable id='main'>
+                  <b:if cond='data:title != &quot;&quot;'>
+                    <h3><data:title/></h3>
+                  </b:if>
+                  <b:include name='content'/>
+                </b:includable>
+                <b:includable id='content'>
+                  <div class='featured-post'>
+                    <a expr:href='data:postUrl'>
+                      <b:if cond='data:showFirstImage and data:postFirstImage != &quot;&quot;'>
+                        <img class='item-image' expr:src='data:postFirstImage'/>
+                      </b:if>
+                      <b:if cond='data:showPostTitle and data:postTitle != &quot;&quot;'>
+                        <span class='item-title'><data:postTitle/></span>
+                      </b:if>
+                      <b:if cond='data:showSnippet and data:postSummary != &quot;&quot;'>
+                        <span class='item-snippet'><data:postSummary/></span>
+                      </b:if>
+                    </a>
+                  </div>
+                </b:includable>
+              </b:widget>
+              <b:widget id='FollowByEmail1' locked='false' title='Follow by Email' type='FollowByEmail' version='1'>
+                <b:includable id='main'>
+                  <b:if cond='data:title != &quot;&quot;'>
+                    <h3><data:title/></h3>
+                  </b:if>
+                  <div class='follow-content'>
+                    <form action='//feedburner.google.com/fb/a/mailverify' expr:onsubmit='&quot;window.open(\&quot;//feedburner.google.com/fb/a/mailverify?uri=&quot; + data:feedPath + &quot;\&quot;, \&quot;popupwindow\&quot;, \&quot;scrollbars=yes,width=550,height=520\&quot;); return true&quot;' method='post' target='popupwindow'>
+                      <input class='follow-input' name='email' onblur='this.placeholder = &apos;Email address..&apos;' onfocus='this.placeholder = &apos;&apos;' placeholder='Email address..' type='text'/>
+                      <span class='follow-text'>E-mail</span>
+                      <input expr:value='data:feedPath' name='uri' type='hidden'/>
+                      <input expr:value='data:blog.locale' name='loc' type='hidden'/>
+                    </form>
+                  </div>
+                </b:includable>
+              </b:widget>
+              <b:widget id='HTML2' locked='false' title='HTML Content' type='HTML' version='1'>
+                <b:widget-settings>
+                  <b:widget-setting name='content'><![CDATA[<-- Any HTML-content here (like social widgets, embeded content, stat counters, etc) -->]]></b:widget-setting>
+                </b:widget-settings>
+                <b:includable id='main'>
+                  <b:if cond='data:title != &quot;&quot;'>
+                    <h3><data:title/></h3>
+                  </b:if>
+                  <div class='html-content'>
+                    <data:content/>
+                  </div>
+                </b:includable>
+              </b:widget>
+              <b:widget id='Image1' locked='false' title='Featured Image' type='Image' version='1'>
+                <b:widget-settings>
+                  <b:widget-setting name='displayUrl'>PATH-TO-SIDEBAR-PINNED-IMAGE</b:widget-setting>
+                  <b:widget-setting name='shrinkToFit'>false</b:widget-setting>
+                  <b:widget-setting name='link'>#</b:widget-setting>
+                </b:widget-settings>
+                <b:includable id='main'>
+                  <b:if cond='data:title != &quot;&quot;'>
+                    <h3><data:title/></h3>
+                  </b:if>
+                  <div class='pinned-image'>
+                    <b:tag cond='data:link' expr:href='data:link' name='a' style='display: inline-block; line-height: 0;'>
+                      <img class='item-image' expr:alt='data:title' expr:src='data:sourceUrl'/>
+                    </b:tag>
+                    <b:if cond='data:caption'>
+                      <span class='item-snippet' style='text-align: center;'><data:caption/></span>
+                    </b:if>
+                  </div>
+                </b:includable>
+              </b:widget>
+            </b:section>
+            <script type='text/javascript'>
+              // Calculating min-height of #post-sidebar for #main
+              // <![CDATA[
+              (function() {
+                window.onload = function() {
+                  var nav = document.getElementById('post-sidebar'), style = window.getComputedStyle(nav), height = style.getPropertyValue('height');
+                  var main = document.getElementById('main');
+                  main.style.minHeight = 'calc(' + height + ')';
+                }
+              })();
+              // ]]>
+            </script>
+          </b:if>
         </div>
       </div>
       <footer class='footer-outer'>
