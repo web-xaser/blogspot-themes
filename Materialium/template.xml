@@ -5,7 +5,7 @@
     <title><b:if cond='data:blog.pageName'><data:blog.pageName/> | </b:if><data:blog.title/></title>
     <!-- Meta-tags -->
     <meta expr:charset='data:blog.encoding'/>
-    <meta name='viewport' content='width=device-width, initial-scale=1'/>
+    <meta content='width=device-width, initial-scale=1' name='viewport'/>
     <meta content='IE=edge' http-equiv='X-UA-Compatible'/>
     <!-- Open Graph & Twitter-->
     <b:if cond='data:blog.postImageUrl != &quot;&quot;'>
@@ -251,6 +251,12 @@
       </div>
       <div class='main-outer'>
         <b:if cond='data:blog.pageType == &quot;index&quot; or data:blog.pageType == &quot;archive&quot; or data:blog.pageType == &quot;item&quot;'>
+          <b:if cond='data:blog.pageType != &quot;item&quot;'>
+            <style>/* Styles for post-card elements */</style>
+          </b:if>
+          <b:if cond='!data:view.isHomepage'>
+            <style>/* Styles for post-card elements on index pages */</style>
+          </b:if>
           <b:section class='menu-list' id='menu-list' maxwidgets='1' showaddelement='no'>
             <b:widget id='LinkList1' locked='true' title='Horizontal Menu' type='LinkList' version='1'>
               <b:widget-settings>
@@ -268,39 +274,11 @@
               </b:includable>
             </b:widget>
           </b:section>
-          <script type='text/javascript'>
-            // Calculating min-height of #nav-sidebar for #main
-            // Fix #main-menu after scrolling 
-            // <![CDATA[
-            (function() {
-              window.onload = function() {
-                var nav = document.getElementById('nav-sidebar'), style = window.getComputedStyle(nav), height = style.getPropertyValue('height');
-                var main = document.getElementById('main');
-                main.style.minHeight = 'calc(' + height + ' + 72px)';
-              }
-              var navFix = document.querySelector('#main-menu');
-              var searchFix = document.querySelector('.main-search_button');
-              var menuFix = document.querySelector('.main-menu_button');
-              function stickyNav() {
-                if (window.scrollY >= 232) {
-                  navFix.classList.add('nav-pin');
-                  menuFix.classList.add('menuFix');
-                  searchFix.classList.add('menuFix');
-                } else if (window.scrollY < 232) {
-                  navFix.classList.remove('nav-pin');
-                  menuFix.classList.remove('menuFix');
-                  searchFix.classList.remove('menuFix');
-                }
-              }
-              window.addEventListener('scroll', stickyNav);
-            })();
-            // ]]>
-          </script>
         </b:if>
         <div class='main-content'>
           <b:if cond='data:blog.url != data:blog.homepageUrl or data:mobile == &quot;false&quot;'>
             <b:if cond='data:blog.pageType == &quot;index&quot; or data:blog.pageType == &quot;archive&quot;'>
-              <style>.posts { margin-left: 25%; }</style>
+              <style>.posts, .blog-pager { margin-left: 25%; }</style>
               <b:section class='nav-sidebar' id='nav-sidebar' maxwidgets='3' showaddelement='yes'>
                 <b:widget id='Label1' locked='true' title='Tags' type='Label' version='1'>
                   <b:widget-settings>
@@ -474,7 +452,7 @@
                             </b:if>
                           <b:else/>
                             <b:if cond='data:post.featuredImage'>
-                              <img class='item-image' expr:alt='data:post.title' expr:src='data:post.featuredImage'/>
+                              <img class='item-image' expr:alt='data:post.title' expr:src='data:post.featuredImage resizeImage 500 resizeImage "2:1"'/>
                             </b:if>
                             <span class='item-title'><data:post.title/></span>
                             <b:if cond='data:showSnippets'>
@@ -487,11 +465,46 @@
                   </b:includable>
                 </b:widget>
               </b:section>
+              <script type='text/javascript'>
+                // Calculating min-height of #nav-sidebar for #main
+                // Fix #main-menu after scrolling 
+                // <![CDATA[
+                (function() {
+                  window.onload = function() {
+                    var nav = document.getElementById('nav-sidebar'), style = window.getComputedStyle(nav), height = style.getPropertyValue('height');
+                    var main = document.getElementById('main');
+                    main.style.minHeight = 'calc(' + height + ' + 72px)';
+                  }
+                  var navFix = document.querySelector('#main-menu');
+                  var searchFix = document.querySelector('.main-search_button');
+                  var menuFix = document.querySelector('.main-menu_button');
+                  function stickyNav() {
+                    if (window.scrollY >= 232) {
+                      navFix.classList.add('nav-pin');
+                      menuFix.classList.add('menuFix');
+                      searchFix.classList.add('menuFix');
+                    } else if (window.scrollY < 232) {
+                      navFix.classList.remove('nav-pin');
+                      menuFix.classList.remove('menuFix');
+                      searchFix.classList.remove('menuFix');
+                    }
+                  }
+                  window.addEventListener('scroll', stickyNav);
+                })();
+                // ]]>
+              </script>
             </b:if>
           </b:if>
         <b:section class='main' id='main' showaddelement='true'>
           <b:widget id='Blog1' locked='true' title='Blog Posts' type='Blog' version='1'>
             <b:widget-settings>
+              <b:widget-setting name='authorLabel'>Author</b:widget-setting>
+              <b:widget-setting name='backlinksLabel'>Links to this post</b:widget-setting>
+              <b:widget-setting name='commentLabel'>comments</b:widget-setting>
+              <b:widget-setting name='postLabelsLabel'>Labels</b:widget-setting>
+              <b:widget-setting name='postLocationLabel'>Location</b:widget-setting>
+              <b:widget-setting name='reactionsLabel'>Reaction</b:widget-setting>
+              <b:widget-setting name='timestampLabel'>on</b:widget-setting>
               <b:widget-setting name='showDateHeader'>true</b:widget-setting>
               <b:widget-setting name='style.textcolor'>#000000</b:widget-setting>
               <b:widget-setting name='showShareButtons'>true</b:widget-setting>
@@ -560,8 +573,7 @@
             </b:includable>
             <b:includable id='comment_count_picker' var='post'>
               <b:if cond='data:post.numComments &gt; 1'>
-                - 
-                <a class='post-comment-link' expr:href='data:post.addCommentUrl' expr:title='data:postCommentMsg'>
+                <a class='post-comment-link' expr:href='data:post.addCommentUrl'>
                   <data:post.commentLabelFull/>
                 </a>
               </b:if>
@@ -838,7 +850,7 @@
               </article>
             </b:includable>
             <b:includable id='nextprev'>
-              <div class='blog-pager'>
+              <div class='blog-pager' id='blog-pager'>
                 <b:if cond='data:newerPageUrl'>
                   <a class='newer-link lighter' expr:href='data:newerPageUrl' rel='next'>
                     <data:newerPageTitle/>
@@ -851,9 +863,51 @@
                   </a>
                 </b:if>
               </div>
+              <b:if cond='data:blog.pageType == &quot;archive&quot;'>
+                <script type='text/javascript'>
+                  var numPosts = &#39;<data:posts.length/>&#39;;
+                  // <![CDATA[
+                  (function() {
+                    var pager = document.getElementById('pager');
+                    if (archive_count != null || archive_count != 0 || archive_count == numPosts) {
+                      pager.style.display = 'none';
+                    }
+                  })();
+                  // ]]>
+                </script>
+              </b:if>
+              <b:if cond='data:blog.pageType == &quot;index&quot;'>
+                <b:if cond='data:blog.searchLabel'>
+                  <script type='text/javascript'>
+                    var numPosts = &#39;<data:posts.length/>&#39;;
+                    // <![CDATA[
+                    (function() {
+                      var pager = document.getElementById('pager');
+                      if (label_count != null || label_count != 0 || label_count == numPosts) {
+                        pager.style.display = 'none';
+                      }
+                    })();
+                    // ]]>
+                   </script>
+                </b:if>
+                <b:if cond='data:blog.searchQuery'>
+                  <script type='text/javascript'>
+                    var numPosts = &#39;<data:posts.length/>&#39;;
+                    var searchPosts= &#39;<data:numPosts/>&#39;;
+                    // <![CDATA[
+                    (function() {
+                      var pager = document.getElementById('pager');
+                      if (searchPosts != 0 || searchPosts == numPosts) {
+                        pager.style.display = 'none';
+                      }
+                    })();
+                    // ]]>
+                  </script>
+                </b:if>
+              </b:if>
             </b:includable>
             <b:includable id='post' var='post'>
-              <b:if cond='data:blog.pageType == &quot;item&quot;'>
+              <b:if cond='data:blog.pageType == &quot;item&quot; or data:blog.pageType == &quot;static_page&quot;'>
                 <meta expr:content='data:post.title' name='twitter:title'/>
                 <meta expr:content='data:post.url' name='twitter:url'/>
                 <b:if cond='data:blog.metaDescription != &quot;&quot;'>
@@ -861,13 +915,13 @@
                   <meta expr:content='data:blog.metaDescription' property='og:description'/>
                 <b:else/>
                   <meta expr:content='data:post.snippet' name='twitter:description'/>
+                  <meta expr:content='data:post.snippet' property='og:description'/>
                 </b:if>
                 <b:if cond='data:post.firstImageUrl'>
                   <meta expr:content='data:post.firstImageUrl' name='twitter:image:src'/>
                   <meta expr:content='data:blog.postImageUrl' property='og:image'/>
                 </b:if>
                 <meta expr:content='data:post.timestampISO8601' property='article:published_time'/>
-                <meta expr:content='data:post.snippet' property='og:description'/>
                 <b:if cond='data:post.author'>
                   <meta expr:content='data:post.authorProfileUrl' property='article:author'/>
                 </b:if>
@@ -877,6 +931,35 @@
                   </b:loop>
                 </b:if>
               </b:if>
+              <b:if cond='data:blog.pageType != &quot;item&quot; and data:blog.pageType != &quot;static_page&quot;'>
+                <article class='post-card'>
+                  <a expr:href='data:post.url'>
+                    <b:if cond='data:post.firstImageUrl != &quot;&quot;'>
+                      <img expr:alt='data:post.title' expr:src='data:post.firstImageUrl resizeImage 1200 resizeImage "2:1"'/>
+                    </b:if>
+                    <b:if cond='data:post.dateHeader'>
+                      <time expr:datetime='data:post.timestampISO8601' pubdate='pubdate'>
+                        <data:post.dateHeader/>
+                        <script type='text/javascript'>postDate = &quot;<data:post.dateHeader/>&quot;;</script>
+                      </time>
+                    <b:else/>
+                      <time expr:datetime='data:post.timestampISO8601' pubdate='pubdate'>
+                        <script type='text/javascript'>document.write(postDate);</script>
+                      </time>
+                    </b:if>
+                    <b:if cond='data:post.title'>
+                      <h2><data:post.title/></h2>
+                    </b:if>
+                    <span><b:eval expr='snippet(data:post.longSnippet, {length: 500})'/></span>
+                  </a>
+                  <span class='post-card_footer'>
+                    <a class='more darker' expr:href='data:post.url + &quot;#more&quot;'>
+                      <data:post.jumpText/>
+                    </a>
+                    <b:include data='post' name='comment_count_picker'/>
+                  </span>
+                </article>
+              <b:else/>
               <article class='post'>
                 <b:if cond='data:top.showAuthor'>
                   <b:if cond='data:post.author'>
@@ -981,6 +1064,7 @@
                   </b:if>
                 </div>
               </article>
+              </b:if>
               <b:if cond='data:blog.pageType == &quot;item&quot;'>
                 <b:include name='nextprev'/>
               </b:if>
@@ -1321,7 +1405,7 @@
                   <div class='featured-post'>
                     <a expr:href='data:postUrl'>
                       <b:if cond='data:showFirstImage and data:postFirstImage != &quot;&quot;'>
-                        <img class='item-image' expr:src='data:postFirstImage'/>
+                        <img class='item-image' expr:src='data:postFirstImage resizeImage 500 resizeImage "2:1"'/>
                       </b:if>
                       <b:if cond='data:showPostTitle and data:postTitle != &quot;&quot;'>
                         <span class='item-title'><data:postTitle/></span>
@@ -1373,7 +1457,7 @@
                   </b:if>
                   <div class='pinned-image'>
                     <b:tag cond='data:link' expr:href='data:link' name='a' style='display: inline-block; line-height: 0;'>
-                      <img class='item-image' expr:alt='data:title' expr:src='data:sourceUrl'/>
+                      <img class='item-image' expr:alt='data:title' expr:src='data:sourceUrl resizeImage 500 resizeImage "1:1"'/>
                     </b:tag>
                     <b:if cond='data:caption'>
                       <span class='item-snippet' style='text-align: center;'><data:caption/></span>
