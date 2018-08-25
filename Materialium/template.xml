@@ -274,6 +274,28 @@
               </b:includable>
             </b:widget>
           </b:section>
+          <script type='text/javascript'>
+            // Fixed horizontal navigation on index pages
+            // <![CDATA[
+            (function() {
+              var navFix = document.querySelector('#main-menu');
+              var searchFix = document.querySelector('.main-search_button');
+              var menuFix = document.querySelector('.main-menu_button');
+              function stickyNav() {
+                if (window.scrollY >= 232) {
+                  navFix.classList.add('nav-pin');
+                  menuFix.classList.add('menuFix');
+                  searchFix.classList.add('menuFix');
+                } else if (window.scrollY < 232) {
+                  navFix.classList.remove('nav-pin');
+                  menuFix.classList.remove('menuFix');
+                  searchFix.classList.remove('menuFix');
+                }
+              }
+              window.addEventListener('scroll', stickyNav);
+            })();
+            // ]]>
+          </script>
         </b:if>
         <div class='main-content'>
           <b:if cond='data:blog.url != data:blog.homepageUrl or data:mobile == &quot;false&quot;'>
@@ -452,7 +474,7 @@
                             </b:if>
                           <b:else/>
                             <b:if cond='data:post.featuredImage'>
-                              <img class='item-image' expr:alt='data:post.title' expr:src='data:post.featuredImage resizeImage 500 resizeImage "2:1"'/>
+                              <img class='item-image' expr:alt='data:post.title' expr:src='data:post.featuredImage resizeImage 500 resizeImage &quot;2:1&quot;'/>
                             </b:if>
                             <span class='item-title'><data:post.title/></span>
                             <b:if cond='data:showSnippets'>
@@ -475,21 +497,6 @@
                     var main = document.getElementById('main');
                     main.style.minHeight = 'calc(' + height + ' + 72px)';
                   }
-                  var navFix = document.querySelector('#main-menu');
-                  var searchFix = document.querySelector('.main-search_button');
-                  var menuFix = document.querySelector('.main-menu_button');
-                  function stickyNav() {
-                    if (window.scrollY >= 232) {
-                      navFix.classList.add('nav-pin');
-                      menuFix.classList.add('menuFix');
-                      searchFix.classList.add('menuFix');
-                    } else if (window.scrollY < 232) {
-                      navFix.classList.remove('nav-pin');
-                      menuFix.classList.remove('menuFix');
-                      searchFix.classList.remove('menuFix');
-                    }
-                  }
-                  window.addEventListener('scroll', stickyNav);
                 })();
                 // ]]>
               </script>
@@ -573,7 +580,7 @@
             </b:includable>
             <b:includable id='comment_count_picker' var='post'>
               <b:if cond='data:post.numComments &gt; 1'>
-                <a class='post-comment-link' expr:href='data:post.addCommentUrl'>
+                <a class='post-comment-link darker' expr:href='data:post.addCommentUrl'>
                   <data:post.commentLabelFull/>
                 </a>
               </b:if>
@@ -850,7 +857,7 @@
               </article>
             </b:includable>
             <b:includable id='nextprev'>
-              <div class='blog-pager' id='blog-pager'>
+              <div class='blog-pager' id='pager'>
                 <b:if cond='data:newerPageUrl'>
                   <a class='newer-link lighter' expr:href='data:newerPageUrl' rel='next'>
                     <data:newerPageTitle/>
@@ -935,7 +942,7 @@
                 <article class='post-card'>
                   <a expr:href='data:post.url'>
                     <b:if cond='data:post.firstImageUrl != &quot;&quot;'>
-                      <img expr:alt='data:post.title' expr:src='data:post.firstImageUrl resizeImage 1200 resizeImage "2:1"'/>
+                      <img expr:alt='data:post.title' expr:src='data:post.firstImageUrl resizeImage 1200 resizeImage &quot;2:1&quot;'/>
                     </b:if>
                     <b:if cond='data:post.dateHeader'>
                       <time expr:datetime='data:post.timestampISO8601' pubdate='pubdate'>
@@ -960,118 +967,96 @@
                   </span>
                 </article>
               <b:else/>
-              <article class='post'>
-                <b:if cond='data:top.showAuthor'>
-                  <b:if cond='data:post.author'>
-                    <div class='post-author'>
-                      <b:if cond='data:post.authorProfileUrl'>
-                        <a expr:href='data:post.authorProfileUrl + &quot;?rel=author&quot;' rel='nofollow' target='_blank'>
-                          <b:if cond='data:post.authorPhoto.url'>
-				            <img class='author-avatar' expr:alt='data:top.authorLabel + &quot; &quot; + data:post.author' expr:src='data:post.authorPhoto.url' expr:title='data:top.authorLabel + &quot; &quot; + data:post.author'/>
-			              </b:if>
-                        </a>
-                      <b:else/>
-                        <b:if cond='data:post.authorPhoto.url'>
-				          <img class='author-avatar' expr:alt='data:post.author' expr:src='data:post.authorPhoto.url' expr:title='data:post.author'/>
-			            </b:if>
+                <b:if cond='data:blog.pageType == &quot;item&quot;'>
+                  <article class='post'>
+                    <b:if cond='data:post.title'>
+                      <h1><data:post.title/></h1>
+                    </b:if>
+                    <div class='post-header-info'>
+                      <b:if cond='data:post.dateHeader'>
+                        <time expr:datetime='data:post.timestampISO8601' pubdate='pubdate'>
+                          <data:post.dateHeader/>
+                        </time>
                       </b:if>
+                      <span class='reading-time'/>
                     </div>
-                  </b:if>
-                </b:if>
-                <b:if cond='data:post.title'>
-                  <h2 class='post-title'>
-                    <b:if cond='data:blog.url != data:post.url'>
-                      <a expr:href='data:post.url'>
-                        <data:post.title/>
-                      </a>
-                    <b:else/>
-                      <data:post.title/>
+                    <b:if cond='data:post.editUrl'>
+                      <b:include data='post' name='postQuickEdit'/>
                     </b:if>
-                  </h2>
-                </b:if>
-                <b:if cond='data:blog.pageType != &quot;static_page&quot;'>
-                  <div class='post-header'>
-                    <b:if cond='data:post.dateHeader'>
-                      <time expr:datetime='data:post.timestampISO8601' pubdate='pubdate'>
-                        <data:post.dateHeader/>
-                        <script type='text/javascript'>postDate = &quot;<data:post.dateHeader/>&quot;;</script>
-                        <b:if cond='data:top.showTimestamp'>
-                          (<data:post.timestamp/>)
+                    <div class='post-body'>
+                      <data:post.body/>
+                    </div>
+                    <div class='post-footer-info'>
+                      <b:if cond='data:top.showAuthor'>
+                        <b:if cond='data:post.author'>
+                          <b:if cond='data:post.authorProfileUrl'>
+                            <span><a expr:href='data:post.authorProfileUrl + &quot;?rel=author&quot;' rel='noopener nofollow' target='_blank'><data:post.author/></a></span>
+                          <b:else/>
+                            <span><data:post.author/></span>
+                          </b:if>
                         </b:if>
-                      </time>
-                    <b:else/>
-                      <time expr:datetime='data:post.timestampISO8601' pubdate='pubdate'>
-                        <script type='text/javascript'>document.write(postDate);</script>
-                        <b:if cond='data:top.showTimestamp'>
-                          (<data:post.timestamp/>)
-                        </b:if>
-                      </time>
-                    </b:if>
-                    <b:if cond='data:top.showLocation'>
-                      <b:if cond='data:post.location'>
-                        -
-                        <address>
-                          <b:if cond='data:blog.pageType == &quot;item&quot;'>
-                            <a expr:href='data:post.location.mapsUrl' rel='nofollow' target='_blank'>
+                      </b:if>
+                      <b:if cond='data:top.showLocation'>
+                        <b:if cond='data:post.location'>
+                          <address>
+                            <a expr:href='data:post.location.mapsUrl' rel='noopener nofollow' target='_blank'>
                               <data:post.location.name/>
                             </a>
-                          <b:else/>
-                            <data:post.location.name/>
-                          </b:if>
-                        </address>
-                      </b:if>
-                    </b:if>
-                    <b:if cond='data:blog.pageType != &quot;item&quot;'>
-                      <b:if cond='data:blog.pageType != &quot;static_page&quot;'>
-                        <b:if cond='data:post.allowComments'>
-                          <b:include data='post' name='comment_count_picker'/>
+                          </address>
                         </b:if>
                       </b:if>
-                    </b:if>
-                    <b:if cond='data:post.labels'>
-                      -
-                      <div class='post-labels'>
-                        <b:loop values='data:post.labels' var='label'>
-                          <a expr:href='data:label.url' rel='tag'>
-                            #<data:label.name/>
-                          </a>
-                          <b:if cond='data:label.isLast'><b:else/>,</b:if>
-                        </b:loop>
+                      <b:if cond='data:post.labels'>
+                        <div class='post-labels'>
+                          <b:loop values='data:post.labels' var='label'>
+                            <a expr:href='data:label.url' rel='tag'>#<data:label.name/></a>
+                            <b:if cond='data:label.isLast'><b:else/>,</b:if>
+                          </b:loop>
+                        </div>
+                      </b:if>
+                    </div>
+                    <b:if cond='data:post.authorAboutMe'>
+                      <div class='author-profile'>
+                        <b:if cond='data:post.authorPhoto.url'>
+                          <img expr:src='data:post.authorPhoto.url resizeImage 64 resizeImage &quot;1:1&quot;'/>
+                        </b:if>
+                        <div class='author-info'>
+                          <span rel='author'><data:post.author/></span>
+                          <span><data:post.authorAboutMe/></span>
+                        </div>
                       </div>
                     </b:if>
-                    <b:if cond='data:blog.pageType == &quot;item&quot;'>
-                      <b:if cond='data:post.editUrl'>
-                        <b:include data='post' name='postQuickEdit'/>
-                      </b:if>
-                    </b:if>
-                  </div>
-                </b:if>
-                <div class='post-body'>
-                  <data:post.body/>
-                </div>
-                <div class='post-footer'>
-                  <b:if cond='data:blog.pageType == &quot;item&quot;'>
                     <b:if cond='data:post.sharePostUrl'>
                       <b:include data='post' name='shareButtons'/>
                     </b:if>
-                  </b:if>
-                  <b:if cond='data:post.hasJumpLink'>
-                    <div class='post-jump'>
-                      <a expr:href='data:post.url + &quot;#more&quot;'>
-                        <data:post.jumpText/>
-                      </a>
+                  </article>
+                  <script type='text/javascript'>
+                    // Post reading time counter
+                    // <![CDATA[
+                    (function() {
+                      var post = document.getElementsByClassName('post-body')[0].innerText;
+                      var words = post.length / 200;
+                      var time = Math.round(words);
+                      var out = document.getElementsByClassName('reading-time')[0];
+                      out.innerHTML = time + ' min read';
+                    })();
+                    // ]]>
+                  </script>
+                  <b:include name='nextprev'/>
+                <b:else/>
+                  <article class='page'>
+                    <b:if cond='data:post.title'>
+                      <h1><data:post.title/></h1>
+                    </b:if>
+                    <div class='page-body'>
+                      <data:post.body/>
                     </div>
-                  </b:if>
-                </div>
-              </article>
-              </b:if>
-              <b:if cond='data:blog.pageType == &quot;item&quot;'>
-                <b:include name='nextprev'/>
+                  </article>
+                </b:if>
               </b:if>
             </b:includable>
             <b:includable id='postQuickEdit' var='post'>
 	            <span expr:class='&quot;item-control &quot; + data:post.adminClass'>
-		            <a expr:href='data:post.editUrl' expr:title='data:top.editPostMsg' id='edit-pencil'>
+		            <a expr:href='data:post.editUrl' expr:title='data:top.editPostMsg' id='edit-pencil' class='darker'>
 			            <img expr:alt='data:top.editPostMsg' src='//lh4.googleusercontent.com/-6Rw5H6aPZS0/VElBLMFWT8I/AAAAAAAAIow/FVohrUCl-Sg/s24/pencil.png'/>
 		            </a>
 	            </span>
@@ -1405,7 +1390,7 @@
                   <div class='featured-post'>
                     <a expr:href='data:postUrl'>
                       <b:if cond='data:showFirstImage and data:postFirstImage != &quot;&quot;'>
-                        <img class='item-image' expr:src='data:postFirstImage resizeImage 500 resizeImage "2:1"'/>
+                        <img class='item-image' expr:src='data:postFirstImage resizeImage 500 resizeImage &quot;2:1&quot;'/>
                       </b:if>
                       <b:if cond='data:showPostTitle and data:postTitle != &quot;&quot;'>
                         <span class='item-title'><data:postTitle/></span>
@@ -1457,7 +1442,7 @@
                   </b:if>
                   <div class='pinned-image'>
                     <b:tag cond='data:link' expr:href='data:link' name='a' style='display: inline-block; line-height: 0;'>
-                      <img class='item-image' expr:alt='data:title' expr:src='data:sourceUrl resizeImage 500 resizeImage "1:1"'/>
+                      <img class='item-image' expr:alt='data:title' expr:src='data:sourceUrl resizeImage 500 resizeImage &quot;1:1&quot;'/>
                     </b:tag>
                     <b:if cond='data:caption'>
                       <span class='item-snippet' style='text-align: center;'><data:caption/></span>
