@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html>
-<html b:version='2' expr:dir='data:blog.languageDirection' expr:lang='data:blog.locale' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<html b:css='true' b:templateVersion='2.1.6' b:version='2' expr:dir='data:blog.languageDirection' expr:lang='data:blog.locale' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
   <head>
     <title><b:if cond='data:blog.pageName'><data:blog.pageName/> | </b:if><data:blog.title/></title>
     <!-- Meta-tags -->
@@ -54,8 +54,8 @@
       ]]>
     </b:skin>
     <!-- Scripts, fonts & other -->
-    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,700&amp;subset=cyrillic-ext,latin-ext' rel='stylesheet'/>
-    <link href='//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css' rel='stylesheet'/>
+    <link href='//fonts.googleapis.com/css?family=Roboto:300,400,700&amp;subset=cyrillic-ext,latin-ext' rel='stylesheet'/>
+    <link href='//unpkg.com/ionicons@4.2.2/dist/css/ionicons.min.css' rel='stylesheet'/>
     <b:include data='blog' name='all-head-content'/>
     <script type='text/javascript'>
       //<![CDATA[
@@ -177,15 +177,15 @@
                 <button class='search-button' onclick='document.getElementById(&apos;s&apos;).classList.toggle(&apos;active&apos;),document.getElementById(&apos;dark01&apos;).classList.toggle(&apos;dark1&apos;),document.getElementById(&apos;page&apos;).classList.toggle(&apos;no-overflow&apos;),document.getElementById(&apos;s&apos;).focus();' title='Search'/>
               </b:if>
             </b:includable>
-            <b:includable id='title'>
-              <a expr:href='data:blog.homepageUrl' id='base-url'>
-                <data:title/>
-              </a>
-            </b:includable>
             <b:includable id='description'>
               <div class='blog-description'>
                 <data:description/>
               </div>
+            </b:includable>
+            <b:includable id='title'>
+              <a expr:href='data:blog.homepageUrl' id='base-url'>
+                <data:title/>
+              </a>
             </b:includable>
           </b:widget>
         </b:section>
@@ -493,9 +493,11 @@
                 // <![CDATA[
                 (function() {
                   window.onload = function() {
-                    var nav = document.getElementById('nav-sidebar'), style = window.getComputedStyle(nav), height = style.getPropertyValue('height');
+                    var nav = document.getElementById('nav-sidebar'),
+                        style = window.getComputedStyle(nav),
+                        height = style.getPropertyValue('height');
                     var main = document.getElementById('main');
-                    main.style.minHeight = 'calc(' + height + ' + 72px)';
+                    main.style.minHeight = 'calc(' + height + ')';
                   }
                 })();
                 // ]]>
@@ -507,11 +509,11 @@
             <b:widget-settings>
               <b:widget-setting name='authorLabel'>Author</b:widget-setting>
               <b:widget-setting name='backlinksLabel'>Links to this post</b:widget-setting>
-              <b:widget-setting name='commentLabel'>comments</b:widget-setting>
+              <b:widget-setting name='commentLabel'>Comments</b:widget-setting>
               <b:widget-setting name='postLabelsLabel'>Labels</b:widget-setting>
               <b:widget-setting name='postLocationLabel'>Location</b:widget-setting>
               <b:widget-setting name='reactionsLabel'>Reaction</b:widget-setting>
-              <b:widget-setting name='timestampLabel'>on</b:widget-setting>
+              <b:widget-setting name='timestampLabel'>Posted on</b:widget-setting>
               <b:widget-setting name='showDateHeader'>true</b:widget-setting>
               <b:widget-setting name='style.textcolor'>#000000</b:widget-setting>
               <b:widget-setting name='showShareButtons'>true</b:widget-setting>
@@ -972,55 +974,49 @@
                     <b:if cond='data:post.title'>
                       <h1><data:post.title/></h1>
                     </b:if>
-                    <div class='post-header-info'>
-                      <b:if cond='data:post.dateHeader'>
-                        <time expr:datetime='data:post.timestampISO8601' pubdate='pubdate'>
-                          <data:post.dateHeader/>
-                        </time>
-                      </b:if>
-                      <span class='reading-time'/>
+                    <div class='post-header'>
+                      <span class='info left'>
+                        <b:if cond='data:post.dateHeader'>
+                          <time expr:datetime='data:post.timestampISO8601' pubdate='pubdate'>
+                            <data:post.dateHeader/>
+                          </time>
+                        </b:if>
+                        <b:if cond='data:top.showAuthor'>
+                          <b:if cond='data:post.author'>
+                            <data:post.author/>
+                          </b:if>
+                        </b:if>
+                      </span>
+                      <span class='info right'>
+                        <b:if cond='data:post.editUrl'>
+                          <b:include data='post' name='postQuickEdit'/>
+                        </b:if>
+                        <span class='reading-time'/>
+                      </span>
                     </div>
-                    <b:if cond='data:post.editUrl'>
-                      <b:include data='post' name='postQuickEdit'/>
-                    </b:if>
                     <div class='post-body'>
                       <data:post.body/>
                     </div>
-                    <div class='post-footer-info'>
-                      <b:if cond='data:top.showAuthor'>
-                        <b:if cond='data:post.author'>
-                          <b:if cond='data:post.authorProfileUrl'>
-                            <span><a expr:href='data:post.authorProfileUrl + &quot;?rel=author&quot;' rel='noopener nofollow' target='_blank'><data:post.author/></a></span>
-                          <b:else/>
-                            <span><data:post.author/></span>
-                          </b:if>
-                        </b:if>
-                      </b:if>
-                      <b:if cond='data:top.showLocation'>
-                        <b:if cond='data:post.location'>
-                          <address>
-                            <a expr:href='data:post.location.mapsUrl' rel='noopener nofollow' target='_blank'>
-                              <data:post.location.name/>
-                            </a>
-                          </address>
-                        </b:if>
-                      </b:if>
-                      <b:if cond='data:post.labels'>
-                        <div class='post-labels'>
-                          <b:loop values='data:post.labels' var='label'>
-                            <a expr:href='data:label.url' rel='tag'>#<data:label.name/></a>
-                            <b:if cond='data:label.isLast'><b:else/>,</b:if>
-                          </b:loop>
-                        </div>
-                      </b:if>
-                    </div>
+                    <b:if cond='data:post.labels'>
+                      <div class='post-footer'>
+                        <b:loop values='data:post.labels' var='label'>
+                          <a class='darker' expr:href='data:label.url' rel='tag'><data:label.name/></a>
+                        </b:loop>
+                      </div>
+                    </b:if>
                     <b:if cond='data:post.authorAboutMe'>
                       <div class='author-profile'>
                         <b:if cond='data:post.authorPhoto.url'>
                           <img expr:src='data:post.authorPhoto.url resizeImage 64 resizeImage &quot;1:1&quot;'/>
                         </b:if>
                         <div class='author-info'>
-                          <span rel='author'><data:post.author/></span>
+                          <h3 rel='author'>
+                            <b:if cond='data:post.authorProfileUrl'>
+                              <a expr:href='data:post.authorProfileUrl' rel='noopener' target='_blank'><data:post.author/></a>
+                            <b:else/>
+                              <data:post.author/>
+                            </b:if>
+                          </h3>
                           <span><data:post.authorAboutMe/></span>
                         </div>
                       </div>
@@ -1029,19 +1025,19 @@
                       <b:include data='post' name='shareButtons'/>
                     </b:if>
                   </article>
+                  <b:include name='nextprev'/>
                   <script type='text/javascript'>
                     // Post reading time counter
                     // <![CDATA[
                     (function() {
                       var post = document.getElementsByClassName('post-body')[0].innerText;
-                      var words = post.length / 200;
+                      var words = (post.length / 200) / 6;
                       var time = Math.round(words);
                       var out = document.getElementsByClassName('reading-time')[0];
                       out.innerHTML = time + ' min read';
                     })();
                     // ]]>
                   </script>
-                  <b:include name='nextprev'/>
                 <b:else/>
                   <article class='page'>
                     <b:if cond='data:post.title'>
@@ -1056,52 +1052,25 @@
             </b:includable>
             <b:includable id='postQuickEdit' var='post'>
 	            <span expr:class='&quot;item-control &quot; + data:post.adminClass'>
-		            <a expr:href='data:post.editUrl' expr:title='data:top.editPostMsg' id='edit-pencil' class='darker'>
-			            <img expr:alt='data:top.editPostMsg' src='//lh4.googleusercontent.com/-6Rw5H6aPZS0/VElBLMFWT8I/AAAAAAAAIow/FVohrUCl-Sg/s24/pencil.png'/>
-		            </a>
+		            <a expr:href='data:post.editUrl' id='edit'><data:top.editPostMsg/></a>
 	            </span>
             </b:includable>
             <b:includable id='shareButtons' var='post'>
               <div class='post-social-links'>
                 <b:if cond='data:top.showEmailButton'>
-                  <a class='goog-inline-block share-button sb-email' expr:href='data:post.sharePostUrl + &quot;&amp;target=email&quot;' expr:title='data:top.emailThisMsg' target='_blank'>
-                    <span class='share-button-link-text'>
-                      <data:top.emailThisMsg/>
-                    </span>
-                  </a>
+                  <a class='lighter' expr:href='data:post.sharePostUrl' expr:title='data:top.emailThisMsg' target='_blank'><i class='icon ion-md-mail'/></a>
                 </b:if>
                 <b:if cond='data:top.showBlogThisButton'>
-                  <a class='goog-inline-block share-button sb-blog' expr:href='data:post.sharePostUrl + &quot;&amp;target=blog&quot;' expr:onclick='&quot;window.open(this.href, \&quot;_blank\&quot;, \&quot;height=632,width=734\&quot;); return false;&quot;' expr:title='data:top.blogThisMsg' target='_blank'>
-                    <span class='share-button-link-text'>
-                      <data:top.blogThisMsg/>
-                    </span>
-                  </a>
+                  <a class='lighter' expr:href='data:post.sharePostUrl' expr:onclick='&quot;window.open(this.href, \&quot;_blank\&quot;, \&quot;height=632,width=734\&quot;); return false;&quot;' expr:title='data:top.blogThisMsg' target='_blank'><i class='icon ion-md-book'/></a>
                 </b:if>
                 <b:if cond='data:top.showTwitterButton'>
-                  <a class='goog-inline-block share-button sb-twitter' expr:href='data:post.sharePostUrl + &quot;&amp;target=twitter&quot;' expr:title='data:top.shareToTwitterMsg' target='_blank'>
-                    <span class='share-button-link-text'>
-                      <data:top.shareToTwitterMsg/>
-                    </span>
-                  </a>
+                  <a class='lighter' expr:href='data:post.sharePostUrl' expr:title='data:top.shareToTwitterMsg' target='_blank'><i class='icon ion-logo-twitter'/></a>
                 </b:if>
                 <b:if cond='data:top.showFacebookButton'>
-                  <a class='goog-inline-block share-button sb-facebook' expr:href='data:post.sharePostUrl + &quot;&amp;target=facebook&quot;' expr:onclick='&quot;window.open(this.href, \&quot;_blank\&quot;, \&quot;height=430,width=640\&quot;); return false;&quot;' expr:title='data:top.shareToFacebookMsg' target='_blank'>
-                    <span class='share-button-link-text'>
-                      <data:top.shareToFacebookMsg/>
-                    </span>
-                  </a>
+                  <a class='lighter' expr:href='data:post.sharePostUrl' expr:onclick='&quot;window.open(this.href, \&quot;_blank\&quot;, \&quot;height=430,width=640\&quot;); return false;&quot;' expr:title='data:top.shareToFacebookMsg' target='_blank'><i class='icon ion-logo-facebook'/></a>
                 </b:if>
                 <b:if cond='data:top.showPinterestButton'>
-                  <a class='goog-inline-block share-button sb-pinterest' expr:href='data:post.sharePostUrl + &quot;&amp;target=pinterest&quot;' expr:title='data:top.shareToPinterestMsg' target='_blank'>
-                    <span class='share-button-link-text'>
-                      <data:top.shareToPinterestMsg/>
-                    </span>
-                  </a>
-                </b:if>
-                <b:if cond='data:top.showDummy'>
-                  <div class='goog-inline-block dummy-container'>
-                    <data:post.dummyTag/>
-                  </div>
+                  <a class='lighter' expr:href='data:post.sharePostUrl' expr:title='data:top.shareToPinterestMsg' target='_blank'><i class='icon ion-logo-pinterest'/></a>
                 </b:if>
               </div>
             </b:includable>
@@ -1470,11 +1439,11 @@
         <b:section class='footer' id='footer' name='Footer' showaddelement='no'>
           <b:widget id='HTML1' locked='true' title='Social Links' type='HTML' version='1'>
             <b:widget-settings>
-              <b:widget-setting name='content'>&lt;nav id=&quot;social&quot;&gt;&lt;a class=&quot;twitter&quot; href=&quot;https://twitter.com/YOUR-TWITTER-NICKNAME&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; title=&quot;Twitter&quot;&gt;&lt;i class=&quot;ion ion-social-twitter&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
-&lt;a class=&quot;github&quot; href=&quot;https://github.com/YOUR-GITHUB-NICKNAME&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; title=&quot;Github&quot;&gt;&lt;i class=&quot;ion ion-social-github&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
-&lt;a class=&quot;google-plus&quot; href=&quot;https://plus.google.com/+YOUR-GOOGLE-PLUS-NICKNAME&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; title=&quot;Google+&quot;&gt;&lt;i class=&quot;ion ion-social-googleplus&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
-&lt;a class=&quot;facebook&quot; href=&quot;https://www.facebook.com/YOUR-FACEBOOK-NICKNAME&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; title=&quot;Facebook&quot;&gt;&lt;i class=&quot;ion ion-social-facebook&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
-&lt;/nav&gt;&lt;style type=&#39;text/css&#39;&gt;#HTML1 #social { position: absolute; right: 88px; top: 6.5px; } #HTML1 #social .ion { font-size: 32px; padding: 8px; } @media (max-width: 1012px) { #HTML1 #social { position: static; } } @media (max-width: 664px) { #HTML1 #social .ion { font-size: 24px; } }&lt;/style&gt;</b:widget-setting>
+              <b:widget-setting name='content'>&lt;nav id=&quot;social&quot;&gt;&lt;a class=&quot;twitter&quot; href=&quot;https://twitter.com/YOUR-TWITTER-NICKNAME&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; title=&quot;Twitter&quot;&gt;&lt;i class=&quot;icon ion-logo-twitter&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
+&lt;a class=&quot;github&quot; href=&quot;https://github.com/YOUR-GITHUB-NICKNAME&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; title=&quot;Github&quot;&gt;&lt;i class=&quot;icon ion-logo-github&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
+&lt;a class=&quot;google-plus&quot; href=&quot;https://plus.google.com/+YOUR-GOOGLE-PLUS-NICKNAME&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; title=&quot;Google+&quot;&gt;&lt;i class=&quot;icon ion-logo-googleplus&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
+&lt;a class=&quot;facebook&quot; href=&quot;https://www.facebook.com/YOUR-FACEBOOK-NICKNAME&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; title=&quot;Facebook&quot;&gt;&lt;i class=&quot;icon ion-logo-facebook&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
+&lt;/nav&gt;&lt;style type=&#39;text/css&#39;&gt;#HTML1 #social { position: absolute; right: 88px; top: 6.5px; } #HTML1 #social .icon { font-size: 32px; padding: 8px; } @media (max-width: 1012px) { #HTML1 #social { position: static; } } @media (max-width: 664px) { #HTML1 #social .icon { font-size: 24px; } }&lt;/style&gt;</b:widget-setting>
             </b:widget-settings>
             <b:includable id='main'>
               <data:content/>
