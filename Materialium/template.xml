@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html>
-<html b:css='true' b:templateVersion='2.1.6' b:version='2' expr:dir='data:blog.languageDirection' expr:lang='data:blog.locale' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<html b:css='true' b:templateVersion='2.1.7' b:version='2' expr:dir='data:blog.languageDirection' expr:lang='data:blog.locale' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
   <head>
     <title><b:if cond='data:blog.pageName'><data:blog.pageName/> | </b:if><data:blog.title/></title>
     <!-- Meta-tags -->
@@ -15,7 +15,7 @@
       <meta content='summary' name='twitter:card'/>
     </b:if>
     <meta content='@TWITTER-OF-YOUR-SITE' name='twitter:site'/>
-    <meta content='@YOUR-TWITTER_USERNAME' name='twitter:creator'/>
+    <meta content='@YOUR-TWITTER-NICKNAME' name='twitter:creator'/>
     <meta expr:content='data:blog.locale' property='og:locale'/>
     <meta expr:content='data:blog.title' property='og:site_name'/>
     <meta content='true' property='og:rich_attachment'/>
@@ -51,6 +51,8 @@
         /*
         * Author info & styles
         */
+        <Variable name="keycolor" description="Main Color" type="color" default="#b0120a" value="#b0120a"/>
+        <Variable name="header.background" description="Header Background" type="background" color="$(keycolor)" default="$(color) url() no-repeat scroll bottom center" value="$(color) url(URL-TO-HEADER-BACKGROUND) no-repeat scroll bottom center"/>
       ]]>
     </b:skin>
     <!-- Scripts, fonts & other -->
@@ -157,15 +159,12 @@
               <b:widget-setting name='displayWidth'>1600</b:widget-setting>
             </b:widget-settings>
             <b:includable id='main'>
-              <b:if cond='data:useImage'>
-                <style>
-                  header {
-                    background-image: url(&#39;<data:sourceUrl/>&#39;);
-                    background-position: center bottom;
-                  }
-                </style>
-              </b:if>
               <button class='hamburger-button' onclick='document.getElementById(&apos;slider&apos;).classList.toggle(&apos;closed&apos;),document.getElementById(&apos;dark00&apos;).classList.toggle(&apos;dark0&apos;),document.getElementById(&apos;page&apos;).classList.toggle(&apos;no-overflow&apos;);' title='Open menu'/>
+              <b:if cond='data:useImage'>
+                <img class='blog-logo' expr:alt='data:blog.title' expr:src='data:sourceUrl'/>
+                <style> .blog-title, .blog-description { margin-left: 64px !important; } </style>
+                <script type='text/javascript'> var blog_logo = &quot;<data:sourceUrl/>&quot;;</script>
+              </b:if>
               <h1 class='blog-title'>
                 <b:include name='title'/>
               </h1>
@@ -198,11 +197,6 @@
             </b:widget-settings>
             <b:includable id='main'>
               <div class='slider' id='slider'>
-                <style>
-                  .menu-title:before {
-                    background-image: url(&#39;<data:blog.blogspotFaviconUrl/>&#39;);
-                  }
-                </style>
                 <h2 class='menu-title'>
                   <data:blog.title/>
                 </h2>
@@ -240,6 +234,10 @@
                         link[i].setAttribute('target', '_blank');
                         link[i].setAttribute('rel', 'noopener nofollow');
                       }
+                    }
+                    var menuTitle = document.getElementsByClassName('menu-title');
+                    if (menuTitle != 'underfined') {
+                      menuTitle[0].setAttribute('style', 'background: transparent url(' + blog_logo + ') no-repeat scroll 16px;');
                     }
                   })();
                   // ]]>
@@ -1052,27 +1050,41 @@
             </b:includable>
             <b:includable id='postQuickEdit' var='post'>
 	            <span expr:class='&quot;item-control &quot; + data:post.adminClass'>
-		            <a expr:href='data:post.editUrl' id='edit'><data:top.editPostMsg/></a>
+		            <a expr:href='data:post.editUrl' id='edit' target='_blank'><data:top.editPostMsg/></a>
 	            </span>
             </b:includable>
             <b:includable id='shareButtons' var='post'>
               <div class='post-social-links'>
-                <b:if cond='data:top.showEmailButton'>
-                  <a class='lighter' expr:href='data:post.sharePostUrl' expr:title='data:top.emailThisMsg' target='_blank'><i class='icon ion-md-mail'/></a>
-                </b:if>
-                <b:if cond='data:top.showBlogThisButton'>
-                  <a class='lighter' expr:href='data:post.sharePostUrl' expr:onclick='&quot;window.open(this.href, \&quot;_blank\&quot;, \&quot;height=632,width=734\&quot;); return false;&quot;' expr:title='data:top.blogThisMsg' target='_blank'><i class='icon ion-md-book'/></a>
-                </b:if>
-                <b:if cond='data:top.showTwitterButton'>
-                  <a class='lighter' expr:href='data:post.sharePostUrl' expr:title='data:top.shareToTwitterMsg' target='_blank'><i class='icon ion-logo-twitter'/></a>
-                </b:if>
-                <b:if cond='data:top.showFacebookButton'>
-                  <a class='lighter' expr:href='data:post.sharePostUrl' expr:onclick='&quot;window.open(this.href, \&quot;_blank\&quot;, \&quot;height=430,width=640\&quot;); return false;&quot;' expr:title='data:top.shareToFacebookMsg' target='_blank'><i class='icon ion-logo-facebook'/></a>
-                </b:if>
-                <b:if cond='data:top.showPinterestButton'>
-                  <a class='lighter' expr:href='data:post.sharePostUrl' expr:title='data:top.shareToPinterestMsg' target='_blank'><i class='icon ion-logo-pinterest'/></a>
-                </b:if>
+                <!-- <a class='lighter' expr:href='data:post.sharePostUrl + &quot;&amp;target=email&quot;' expr:title='data:top.emailThisMsg' style='background-color: #3b60c4;' target='_blank'><i class='icon ion-md-mail'/></a> -->
+                <a class='lighter' expr:href='&quot;https://twitter.com/intent/tweet?url=&quot; + data:post.url + &quot;&amp;text=&quot; + data:post.title + &quot;&amp;via=YOUR-TWITTER-NICKNAME&quot;' expr:title='data:top.shareToTwitterMsg' style='background-color: #00ACED;' target='_blank'><i class='icon ion-logo-twitter'/></a>
+                <a class='lighter' expr:href='&quot;https://plus.google.com/share?url=&quot; + data:post.url + &quot;&amp;text=&quot; + data:post.title + &quot;&amp;hl=&quot; + data:blog.locale' style='background-color: #D64035;' target='_blank' title='Share to Google Plus'><i class='icon ion-logo-googleplus'/></a>
+                <a class='lighter' expr:href='&quot;https://www.facebook.com/sharer/sharer.php?u=&quot; + data:post.url' expr:title='data:top.shareToFacebookMsg' style='background-color: #385998;' target='_blank'><i class='icon ion-logo-facebook'/></a>
+                <a class='lighter' expr:href='&quot;https://pinterest.com/pin/create/link/?url=&quot; + data:post.url + &quot;&amp;media=&quot; + data:blog.postImageUrl + &quot;&amp;description=&quot; + data:post.title' expr:title='data:top.shareToPinterestMsg' style='background-color: #CB2027;' target='_blank'><i class='icon ion-logo-pinterest'/></a>
+                <!-- <a class='lighter' expr:href='&quot;https://www.linkedin.com/shareArticle?mini=true&amp;url=&quot; + data:post.url + &quot;&amp;title=&quot; + data:post.title + &quot;&amp;summary=&quot; + data:post.snippet' title='Share to LinkedIn' style='background-color: #007BB6;' target='_blank'><i class='icon ion-logo-linkedin'/></a>
+                <a class='lighter' expr:href='&quot;https://www.tumblr.com/widgets/share/tool?canonicalUrl=&quot; + data:post.url + &quot;&amp;title=&quot; + data:post.title + &quot;&amp;caption=&quot; + data:post.snippet' title='Share to Tumblr' style='background-color: #34465D;' target='_blank'><i class='icon ion-logo-tumblr'/></a>
+                <a class='lighter' expr:href='&quot;https://www.xing.com/app/user?op=share&amp;url=&quot; + data:post.url' title='Share to Xing' style='background-color: #026466;' target='_blank'><i class='icon ion-logo-xing'/></a>
+                <a class='lighter' expr:href='&quot;https://reddit.com/submit?url=&quot; + data:post.url + &quot;&amp;title=&quot; + data:post.title' title='Share to Reddit' style='background-color: #ff4500;' target='_blank'><i class='icon ion-logo-reddit'/></a> -->
+                <a class='lighter' expr:href='&quot;https://vk.com/share.php?url=&quot; + data:post.url + &quot;&amp;title=&quot; + data:post.title + &quot;&amp;image=&quot; + data:blog.postImageUrl + &quot;&amp;noparse=true&quot;' style='background-color: #4C739C;' target='_blank' title='Share to VK'><i class='icon ion-logo-vk'/></a>
+                <a class='lighter' expr:href='&quot;https://t.me/share/url?url=&quot; + data:post.url + &quot;&amp;text=&quot; + data:post.title' style='background-color: #0088cc;' target='_blank' title='Share to Telegram'><i class='icon ion-md-paper-plane'/></a>
+                <!-- <a class='lighter' expr:href='&quot;https://web.skype.com/share?url=&quot; + data:post.url + &quot;&amp;text=&quot; + data:post.title' title='Share to Skype' style='background-color: #00AEEF;' target='_blank'><i class='icon ion-logo-skype'/></a> -->
+                <a class='lighter' onclick='javascript:window.print()' style='cursor: pointer; background-color: #4d4f53;' title='Print'><i class='icon ion-md-print'/></a>
               </div>
+              <script type='text/javascript'>
+                // Fixed share buttons on post pages
+                // <![CDATA[
+                (function() {
+                  var shareFix = document.querySelector('.post-social-links');
+                  function stickyShare() {
+                    if (window.scrollY >= 232) {
+                      shareFix.classList.add('share-pin');
+                    } else if (window.scrollY < 232) {
+                      shareFix.classList.remove('share-pin');
+                    }
+                  }
+                  window.addEventListener('scroll', stickyShare);
+                })();
+                // ]]>
+              </script>
             </b:includable>
             <b:includable id='status-message'>
               <b:if cond='data:blog.pageType == &quot;archive&quot;'>
@@ -1425,7 +1437,9 @@
               // <![CDATA[
               (function() {
                 window.onload = function() {
-                  var nav = document.getElementById('post-sidebar'), style = window.getComputedStyle(nav), height = style.getPropertyValue('height');
+                  var nav = document.getElementById('post-sidebar'),
+                      style = window.getComputedStyle(nav),
+                      height = style.getPropertyValue('height');
                   var main = document.getElementById('main');
                   main.style.minHeight = 'calc(' + height + ')';
                 }
