@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html>
-<html b:css='true' b:templateVersion='2.1.7' b:version='2' expr:dir='data:blog.languageDirection' expr:lang='data:blog.locale' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<html b:css='true' b:templateVersion='2.1.8' b:version='2' expr:dir='data:blog.languageDirection' expr:lang='data:blog.locale' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
   <head>
     <title><b:if cond='data:blog.pageName'><data:blog.pageName/> | </b:if><data:blog.title/></title>
     <!-- Meta-tags -->
@@ -15,7 +15,7 @@
       <meta content='summary' name='twitter:card'/>
     </b:if>
     <meta content='@TWITTER-OF-YOUR-SITE' name='twitter:site'/>
-    <meta content='@YOUR-TWITTER-NICKNAME' name='twitter:creator'/>
+    <meta content='@YOUR-TWITTER_USERNAME' name='twitter:creator'/>
     <meta expr:content='data:blog.locale' property='og:locale'/>
     <meta expr:content='data:blog.title' property='og:site_name'/>
     <meta content='true' property='og:rich_attachment'/>
@@ -599,10 +599,10 @@
             <b:includable id='comments' var='post'>
               <b:if cond='data:post.allowComments'>
                 <div class='comments'>
-                  <b:if cond='data:post.numComments &gt; 0'>
+                  <div class='comments-header'>
                     <h4><data:post.commentLabelFull/></h4>
                     <b:include name='feedLinks'/>
-                  </b:if>
+                  </div>
                   <b:if cond='data:blogTeamBlogMessage'>
                     <div class='not-allowed'>
                       <data:blogTeamBlogMessage/>
@@ -686,19 +686,16 @@
             </b:includable>
             <b:includable id='feedLinks'>
               <b:loop values='data:posts' var='post'>
-                <b:if cond='data:post.allowComments'>
-                  <b:if cond='data:post.feedLinks'>
+                <b:if cond='data:post.feedLinks'>
                     <b:include data='post.feedLinks' name='feedLinksBody'/>
-                  </b:if>
                 </b:if>
               </b:loop>
             </b:includable>
             <b:includable id='feedLinksBody' var='links'>
-              <b:loop values='data:links' var='f'>
-                <a expr:href='data:f.url' expr:type='data:f.mimeType' rel='nofollow' target='_blank'>
-                  <img expr:alt='data:feedLinksMsg + &quot; &quot; + data:f.name + &quot; (&quot; + data:f.feedType + &quot;)&quot;' expr:title='data:feedLinksMsg + &quot; &quot; + data:f.name + &quot; (&quot; + data:f.feedType + &quot;)&quot;' src='//lh6.googleusercontent.com/-ENL8CrcndwU/VEacMqWFPTI/AAAAAAAAInk/5YZdklz7cz8/s20/rss.png'/>
-                </a>
-              </b:loop>
+              <b:if cond='data:post.allowNewComments and data:post.numComments &gt; 0'>
+                <a expr:href='data:blog.homepageUrl + &quot;feeds/&quot; + data:post.id + &quot;/comments/default?alt=rss&quot;' rel='nofollow' target='_blank' type='application/rss+xml'>RSS</a>
+              <b:else/>
+              </b:if>
             </b:includable>
             <b:includable id='iframe_comments' var='post'>
               <b:if cond='data:post.allowIframeComments'>
@@ -1097,7 +1094,7 @@
               <b:if cond='data:blog.pageType == &quot;index&quot;'>
                 <b:if cond='data:blog.searchQuery'>
                   <div class='status'>
-                    <span><data:numPosts/> Search results</span>
+                    <span><data:numPosts/> Search results</span><b:if cond='data:numPosts != 0'><span> | </span><a expr:href='data:blog.homepageUrl + &quot;feeds/posts/default?alt=rss&amp;q=&quot; + data:blog.searchQuery' rel='nofollow' title='Subscribe to posts with this search query' type='application/rss+xml'>RSS</a></b:if>
                     <form expr:action='data:blog.homepageUrl + &quot;search/&quot;' method='get'>
                       <input autocomplete='off' expr:value='data:blog.searchQuery' id='s' name='q' placeholder='Search..' type='search'/>
                     </form>
@@ -1112,7 +1109,7 @@
                 </b:if>
                 <b:if cond='data:blog.searchLabel'>
                   <div class='status'>
-                    <span>Posts with label</span>
+                    <span>Posts with label | </span><a expr:href='data:blog.homepageUrl + &quot;feeds/posts/default?alt=rss&amp;category=&quot; + data:blog.pageName' rel='nofollow' title='Subscribe to posts with this label' type='application/rss+xml'>RSS</a>
                     <h4><data:blog.pageName/></h4>
                     <span><script>document.write(&#39;Number of posts: &#39; + label_count);</script></span>
                   </div>
@@ -1128,7 +1125,6 @@
                 <a name='comment-form'/>
                 <a expr:href='data:post.commentFormIframeSrc' id='comment-editor-src'/>
                 <iframe allowtransparency='true' class='blogger-iframe-colorize blogger-comment-from-post' frameborder='0' id='comment-editor' name='comment-editor' src='' style='width: 100%; height: 240px !important;'/>
-                <data:post.friendConnectJs/>
                 <data:post.cmtfpIframe/>
                 <script type='text/javascript'>
                   BLOG_CMT_createIframe(&#39;<data:post.appRpcRelayPath/>&#39;, &#39;<data:post.communityId/>&#39;);
@@ -1303,10 +1299,10 @@
             </b:includable>
             <b:includable id='threaded_comments' var='post'>
               <div class='comments'>
-                <b:if cond='data:post.numComments &gt; 0'>
+                <div class='comments-header'>
                   <h4><data:post.commentLabelFull/></h4>
                   <b:include name='feedLinks'/>
-                </b:if>
+                </div>
                 <b:if cond='data:blogTeamBlogMessage'>
                   <div class='not-allowed'>
                     <data:blogTeamBlogMessage/>
@@ -1348,6 +1344,23 @@
                   </div>
                 </b:if>
               </div>
+              <script type='text/javascript'>
+                (function() {
+                // <![CDATA[
+                  var userAvatar = document.getElementsByClassName('avatar-image-container');
+                  for (i = 0; i < userAvatar.length; i++) {
+                    var userImage = userAvatar[i].firstChild;
+                    var userUrl = userImage.getAttribute('src');
+                    if (userUrl.includes("blogblog.com")) {
+                      userUrl = userImage.setAttribute('src', 'URL-TO-COMMENT-AUTHOR-DEFAULT-AVATAR');
+                    } else {
+                      var userSize = userUrl.replace("s35-c", "s48-c");
+                      userUrl = userImage.setAttribute('src', userSize);
+                    }
+                  }
+                // ]]>
+                })();
+              </script>
             </b:includable>
           </b:widget>
         </b:section>
