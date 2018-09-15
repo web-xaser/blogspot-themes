@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html>
-<html b:css='true' b:templateVersion='2.1.8' b:version='2' expr:dir='data:blog.languageDirection' expr:lang='data:blog.locale' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<html b:css='true' b:templateVersion='2.1.9' b:version='2' expr:dir='data:blog.languageDirection' expr:lang='data:blog.locale' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
   <head>
     <title><b:if cond='data:blog.pageName'><data:blog.pageName/> | </b:if><data:blog.title/></title>
     <!-- Meta-tags -->
@@ -8,33 +8,22 @@
     <meta content='width=device-width, initial-scale=1' name='viewport'/>
     <meta content='IE=edge' http-equiv='X-UA-Compatible'/>
     <!-- Open Graph & Twitter-->
+    <b:include data='blog' name='openGraphMetaData'/>
+    <b:if cond='data:blog.pageType in ["item", "static_page"]'>
+      <meta content='article' property='og:type'/>
+      <meta content='true' property='og:rich_attachment'/>
+    <b:else/>
+      <meta content='website' property='og:type'/>
+    </b:if>
+    <meta expr:content='data:blog.locale' property='og:locale'/>
+    <meta expr:content='data:blog.title' property='og:site_name'/>
     <b:if cond='data:blog.postImageUrl != &quot;&quot;'>
       <meta content='summary_large_image' name='twitter:card'/>
-      <meta expr:content='data:blog.postImageUrl' property='og:image'/>
     <b:else/>
       <meta content='summary' name='twitter:card'/>
     </b:if>
     <meta content='@TWITTER-OF-YOUR-SITE' name='twitter:site'/>
     <meta content='@YOUR-TWITTER_USERNAME' name='twitter:creator'/>
-    <meta expr:content='data:blog.locale' property='og:locale'/>
-    <meta expr:content='data:blog.title' property='og:site_name'/>
-    <meta content='true' property='og:rich_attachment'/>
-    <b:if cond='data:blog.pageName != &quot;&quot;'>
-      <meta expr:content='data:blog.pageName' property='og:title'/>
-    <b:else/>
-      <meta expr:content='data:blog.title' property='og:title'/>
-    </b:if>
-    <b:if cond='data:blog.pageType == &quot;item&quot; or data:blog.pageType == &quot;static_page&quot;'>
-      <meta content='article' property='og:type'/>
-    <b:else/>
-      <meta content='website' property='og:type'/>
-      <meta expr:content='data:blog.canonicalUrl' property='og:url'/>
-    </b:if>
-    <b:if cond='data:blog.metaDescription != &quot;&quot;'>
-      <meta expr:content='data:blog.metaDescription' name='og:description'/>
-    <b:else/>
-      <meta expr:content='data:blog.title + &quot;: &quot; + data:blog.pageName' name='og:description'/>
-    </b:if>
     <!-- Icons -->
     <link expr:href='data:blog.blogspotFaviconUrl' rel='icon' sizes='16x16' type='image/ico'/>
     <!-- <link rel='icon' type='image/png' href='PATH-TO-32x32-ICON' sizes='32x32'/> -->
@@ -59,90 +48,6 @@
     <link href='//fonts.googleapis.com/css?family=Roboto:300,400,700&amp;subset=cyrillic-ext,latin-ext' rel='stylesheet'/>
     <link href='//unpkg.com/ionicons@4.2.2/dist/css/ionicons.min.css' rel='stylesheet'/>
     <b:include data='blog' name='all-head-content'/>
-    <script type='text/javascript'>
-      //<![CDATA[
-        (function() {  
-          function $(id){  
-            return document.getElementById(id);  
-          }  
-          function goTop(acceleration, time) {  
-            acceleration = acceleration || 0.1;  
-            time = time || 12;  
-            var dx = 0;  
-            var dy = 0;  
-            var bx = 0;  
-            var by = 0;  
-            var wx = 0;  
-            var wy = 0;  
-            if (document.documentElement) {  
-              dx = document.documentElement.scrollLeft || 0;  
-              dy = document.documentElement.scrollTop || 0;  
-            }  
-            if (document.body) {  
-              bx = document.body.scrollLeft || 0;  
-              by = document.body.scrollTop || 0;  
-            }  
-            var wx = window.scrollX || 0;  
-            var wy = window.scrollY || 0;  
-            var x = Math.max(wx, Math.max(bx, dx));  
-            var y = Math.max(wy, Math.max(by, dy));  
-            var speed = 1 + acceleration;  
-            window.scrollTo(Math.floor(x / speed), Math.floor(y / speed));  
-            if(x > 0 || y > 0) {  
-              var invokeFunction = "top.goTop(" + acceleration + ", " + time + ")"  
-              window.setTimeout(invokeFunction, time);  
-            }  
-            return false;  
-          }  
-          function scrollTop(){  
-            var el = document.getElementById('gotop');  
-            var stop = (document.body.scrollTop || document.documentElement.scrollTop);  
-            if(stop>232){  
-              if(el.style.display!='block'){  
-                el.style.display='block';  
-                smoothopaque(el, 0, 100, 1);  
-              }  
-            }  
-            else  
-             el.style.display='none';  
-            return false;  
-      }   
-      function smoothopaque(el, startop, endop, inc){  
-        op = startop;  
-        setopacity(el, op);  
-        setTimeout(slowopacity, 1);  
-        function slowopacity(){  
-          if(startop < endop){  
-            op = op + inc;  
-            if(op < endop){  
-              setTimeout(slowopacity, 1);  
-            }  
-          } else {  
-            op = op - inc;  
-            if(op > endop){  
-             setTimeout(slowopacity, 1);  
-            }  
-          }  
-          setopacity(el, op);  
-          };  
-        };   
-        function setopacity(el, opacity){  
-          el.style.opacity = (opacity/100);  
-          el.style.filter = 'alpha(opacity=' + opacity + ')';  
-        };  
-        if (window.addEventListener){  
-          window.addEventListener("scroll", scrollTop, false);  
-          window.addEventListener("load", scrollTop, false);  
-        }  
-        else if (window.attachEvent){  
-          window.attachEvent("onscroll", scrollTop);  
-          window.attachEvent("onload", scrollTop);  
-        }     
-        window['top'] = {};  
-        window['top']['goTop'] = goTop;           
-      })();
-    //]]>
-  </script>
   </head>
   <body id='page'>
     <div class='content-outer'>
@@ -159,11 +64,11 @@
               <b:widget-setting name='displayWidth'>1600</b:widget-setting>
             </b:widget-settings>
             <b:includable id='main'>
-              <button class='hamburger-button' onclick='document.getElementById(&apos;slider&apos;).classList.toggle(&apos;closed&apos;),document.getElementById(&apos;dark00&apos;).classList.toggle(&apos;dark0&apos;),document.getElementById(&apos;page&apos;).classList.toggle(&apos;no-overflow&apos;);' title='Open menu'/>
+              <button class='hamburger-button' title='Open menu'/>
               <b:if cond='data:useImage'>
                 <img class='blog-logo' expr:alt='data:blog.title' expr:src='data:sourceUrl'/>
                 <style> .blog-title, .blog-description { margin-left: 64px !important; } </style>
-                <script type='text/javascript'> var blog_logo = &quot;<data:sourceUrl/>&quot;;</script>
+                <script>var blog_logo = &quot;<data:sourceUrl/>&quot;;</script>
               </b:if>
               <h1 class='blog-title'>
                 <b:include name='title'/>
@@ -173,7 +78,7 @@
                 <form class='search-form' expr:action='data:blog.homepageUrl + &quot;search/&quot;' method='get'>
                   <input autocomplete='off' autofocus='autofocus' class='search-input' id='s' name='q' placeholder='Search..' type='search'/>
                 </form>
-                <button class='search-button' onclick='document.getElementById(&apos;s&apos;).classList.toggle(&apos;active&apos;),document.getElementById(&apos;dark01&apos;).classList.toggle(&apos;dark1&apos;),document.getElementById(&apos;page&apos;).classList.toggle(&apos;no-overflow&apos;),document.getElementById(&apos;s&apos;).focus();' title='Search'/>
+                <button class='search-button' title='Search'/>
               </b:if>
             </b:includable>
             <b:includable id='description'>
@@ -215,40 +120,13 @@
                     </a>
                   </b:loop>
                 </ul>
-                <script type='text/javascript'>
-                  // <![CDATA[
-                  (function() {
-                    var baseUrl = document.getElementById('base-url').hostname;
-                    var basePath = document.getElementById('base-url').href;
-                    var link = document.getElementsByClassName('menu-link');
-                    var icon = document.getElementsByClassName('menu-icon');
-                    for (i=0; i < link.length; i++) {
-                      this.url = link[i].hostname;
-                      this.path = link[i].href;
-                      if (this.path == basePath) {
-                        icon[i].setAttribute('style', 'background-image: url(//lh3.googleusercontent.com/-pov6ygFeG48/W3SVar1mLMI/AAAAAAAAMQ8/nLSj_vQxc8YqrB8c3YBSoMWEIL8rSipTgCEwYBhgL/home.png);');
-                      } else if (this.url == baseUrl) {
-                        icon[i].setAttribute('style', 'background-image: url(//lh3.googleusercontent.com/-lA9ECEMzduU/W3R_1j_L2WI/AAAAAAAAMQk/sXAc2lMu_JQS2-LZLTfK1ybx5I3_u7E_QCEwYBhgL/article.png);');
-                      } else {
-                        icon[i].setAttribute('style', 'background-image: url(//lh3.googleusercontent.com/-7P41kBeLZ7s/W3STuFF3fVI/AAAAAAAAMQw/cuefYOP5OwEm07xY_6P8f3wV1sXTvX2OQCEwYBhgL/open-in-new.png);');
-                        link[i].setAttribute('target', '_blank');
-                        link[i].setAttribute('rel', 'noopener nofollow');
-                      }
-                    }
-                    var menuTitle = document.getElementsByClassName('menu-title');
-                    if (menuTitle != 'underfined') {
-                      menuTitle[0].setAttribute('style', 'background: transparent url(' + blog_logo + ') no-repeat scroll 16px;');
-                    }
-                  })();
-                  // ]]>
-                </script>
               </div>
             </b:includable>
           </b:widget>
         </b:section>
       </div>
       <div class='main-outer'>
-        <b:if cond='data:blog.pageType == &quot;index&quot; or data:blog.pageType == &quot;archive&quot; or data:blog.pageType == &quot;item&quot;'>
+        <b:if cond='data:blog.pageType in ["index", "archive", "item"]'>
           <b:if cond='data:blog.pageType != &quot;item&quot;'>
             <style>/* Styles for post-card elements */</style>
           </b:if>
@@ -263,37 +141,15 @@
               </b:widget-settings>
               <b:includable id='main'>
                 <ul class='main-menu' id='main-menu'>
-                  <button class='main-menu_button' onclick='document.getElementById(&apos;slider&apos;).classList.toggle(&apos;closed&apos;),document.getElementById(&apos;dark00&apos;).classList.toggle(&apos;dark0&apos;),document.getElementById(&apos;page&apos;).classList.toggle(&apos;no-overflow&apos;);' title='Menu'/>
+                  <button class='main-menu_button' title='Menu'/>
                   <b:loop values='data:links' var='link'>
                     <li><a class='darker' expr:href='data:link.target'><data:link.name/></a></li>
                   </b:loop>
-                  <button class='main-search_button' onclick='document.getElementById(&apos;s&apos;).classList.toggle(&apos;active&apos;),document.getElementById(&apos;dark01&apos;).classList.toggle(&apos;dark1&apos;),document.getElementById(&apos;page&apos;).classList.toggle(&apos;no-overflow&apos;),document.getElementById(&apos;s&apos;).focus();' title='Search'/>
+                  <button class='main-search_button' title='Search'/>
                 </ul>
               </b:includable>
             </b:widget>
           </b:section>
-          <script type='text/javascript'>
-            // Fixed horizontal navigation on index pages
-            // <![CDATA[
-            (function() {
-              var navFix = document.querySelector('#main-menu');
-              var searchFix = document.querySelector('.main-search_button');
-              var menuFix = document.querySelector('.main-menu_button');
-              function stickyNav() {
-                if (window.scrollY >= 232) {
-                  navFix.classList.add('nav-pin');
-                  menuFix.classList.add('menuFix');
-                  searchFix.classList.add('menuFix');
-                } else if (window.scrollY < 232) {
-                  navFix.classList.remove('nav-pin');
-                  menuFix.classList.remove('menuFix');
-                  searchFix.classList.remove('menuFix');
-                }
-              }
-              window.addEventListener('scroll', stickyNav);
-            })();
-            // ]]>
-          </script>
         </b:if>
         <div class='main-content'>
           <b:if cond='data:blog.url != data:blog.homepageUrl or data:mobile == &quot;false&quot;'>
@@ -485,21 +341,6 @@
                   </b:includable>
                 </b:widget>
               </b:section>
-              <script type='text/javascript'>
-                // Calculating min-height of #nav-sidebar for #main
-                // Fix #main-menu after scrolling 
-                // <![CDATA[
-                (function() {
-                  window.onload = function() {
-                    var nav = document.getElementById('nav-sidebar'),
-                        style = window.getComputedStyle(nav),
-                        height = style.getPropertyValue('height');
-                    var main = document.getElementById('main');
-                    main.style.minHeight = 'calc(' + height + ')';
-                  }
-                })();
-                // ]]>
-              </script>
             </b:if>
           </b:if>
         <b:section class='main' id='main' showaddelement='true'>
@@ -559,10 +400,8 @@
             <b:includable id='comment-form' var='post'>
               <div class='comment-form'>
                 <a name='comment-form'/>
-                <h4><data:postCommentMsg/></h4>
                 <a expr:href='data:post.commentFormIframeSrc' id='comment-editor-src'/>
                 <iframe allowtransparency='true' class='blogger-iframe-colorize blogger-comment-from-post' frameborder='0' id='comment-editor' name='comment-editor' src='' style='width: 100%; height: 240px !important;'/>
-                <data:post.friendConnectJs/>
                 <data:post.cmtfpIframe/>
                 <script type='text/javascript'>
                   BLOG_CMT_createIframe(&#39;<data:post.appRpcRelayPath/>&#39;, &#39;<data:post.communityId/>&#39;);
@@ -687,15 +526,14 @@
             <b:includable id='feedLinks'>
               <b:loop values='data:posts' var='post'>
                 <b:if cond='data:post.feedLinks'>
-                    <b:include data='post.feedLinks' name='feedLinksBody'/>
+                  <b:include data='post.feedLinks' name='feedLinksBody'/>
                 </b:if>
               </b:loop>
             </b:includable>
             <b:includable id='feedLinksBody' var='links'>
               <b:if cond='data:post.allowNewComments and data:post.numComments &gt; 0'>
                 <a expr:href='data:blog.homepageUrl + &quot;feeds/&quot; + data:post.id + &quot;/comments/default?alt=rss&quot;' rel='nofollow' target='_blank' type='application/rss+xml'>RSS</a>
-              <b:else/>
-              </b:if>
+              <b:else/></b:if>
             </b:includable>
             <b:includable id='iframe_comments' var='post'>
               <b:if cond='data:post.allowIframeComments'>
@@ -868,45 +706,14 @@
                 </b:if>
               </div>
               <b:if cond='data:blog.pageType == &quot;archive&quot;'>
-                <script type='text/javascript'>
-                  var numPosts = &#39;<data:posts.length/>&#39;;
-                  // <![CDATA[
-                  (function() {
-                    var pager = document.getElementById('pager');
-                    if (archive_count != null || archive_count != 0 || archive_count == numPosts) {
-                      pager.style.display = 'none';
-                    }
-                  })();
-                  // ]]>
-                </script>
+                <script>var numPosts = &#39;<data:posts.length/>&#39;;</script>
               </b:if>
               <b:if cond='data:blog.pageType == &quot;index&quot;'>
                 <b:if cond='data:blog.searchLabel'>
-                  <script type='text/javascript'>
-                    var numPosts = &#39;<data:posts.length/>&#39;;
-                    // <![CDATA[
-                    (function() {
-                      var pager = document.getElementById('pager');
-                      if (label_count != null || label_count != 0 || label_count == numPosts) {
-                        pager.style.display = 'none';
-                      }
-                    })();
-                    // ]]>
-                   </script>
+                  <script>var numPosts = &#39;<data:posts.length/>&#39;;</script>
                 </b:if>
                 <b:if cond='data:blog.searchQuery'>
-                  <script type='text/javascript'>
-                    var numPosts = &#39;<data:posts.length/>&#39;;
-                    var searchPosts= &#39;<data:numPosts/>&#39;;
-                    // <![CDATA[
-                    (function() {
-                      var pager = document.getElementById('pager');
-                      if (searchPosts != 0 || searchPosts == numPosts) {
-                        pager.style.display = 'none';
-                      }
-                    })();
-                    // ]]>
-                  </script>
+                  <script>var numPosts = &#39;<data:posts.length/>&#39;; var searchPosts= &#39;<data:numPosts/>&#39;;</script>
                 </b:if>
               </b:if>
             </b:includable>
@@ -916,10 +723,8 @@
                 <meta expr:content='data:post.url' name='twitter:url'/>
                 <b:if cond='data:blog.metaDescription != &quot;&quot;'>
                   <meta expr:content='data:blog.metaDescription' name='twitter:description'/>
-                  <meta expr:content='data:blog.metaDescription' property='og:description'/>
                 <b:else/>
                   <meta expr:content='data:post.snippet' name='twitter:description'/>
-                  <meta expr:content='data:post.snippet' property='og:description'/>
                 </b:if>
                 <b:if cond='data:post.firstImageUrl'>
                   <meta expr:content='data:post.firstImageUrl' name='twitter:image:src'/>
@@ -944,11 +749,11 @@
                     <b:if cond='data:post.dateHeader'>
                       <time expr:datetime='data:post.timestampISO8601' pubdate='pubdate'>
                         <data:post.dateHeader/>
-                        <script type='text/javascript'>postDate = &quot;<data:post.dateHeader/>&quot;;</script>
+                        <script>postDate = &quot;<data:post.dateHeader/>&quot;;</script>
                       </time>
                     <b:else/>
                       <time expr:datetime='data:post.timestampISO8601' pubdate='pubdate'>
-                        <script type='text/javascript'>document.write(postDate);</script>
+                        <script>document.write(postDate);</script>
                       </time>
                     </b:if>
                     <b:if cond='data:post.title'>
@@ -957,7 +762,7 @@
                     <span><b:eval expr='snippet(data:post.longSnippet, {length: 500})'/></span>
                   </a>
                   <span class='post-card_footer'>
-                    <a class='more darker' expr:href='data:post.url + &quot;#more&quot;'>
+                    <a class='more darker' expr:href='data:post.url'>
                       <data:post.jumpText/>
                     </a>
                     <b:include data='post' name='comment_count_picker'/>
@@ -1021,18 +826,6 @@
                     </b:if>
                   </article>
                   <b:include name='nextprev'/>
-                  <script type='text/javascript'>
-                    // Post reading time counter
-                    // <![CDATA[
-                    (function() {
-                      var post = document.getElementsByClassName('post-body')[0].innerText;
-                      var words = (post.length / 200) / 6;
-                      var time = Math.round(words);
-                      var out = document.getElementsByClassName('reading-time')[0];
-                      out.innerHTML = time + ' min read';
-                    })();
-                    // ]]>
-                  </script>
                 <b:else/>
                   <article class='page'>
                     <b:if cond='data:post.title'>
@@ -1066,22 +859,6 @@
                 <!-- <a class='lighter' expr:href='&quot;https://web.skype.com/share?url=&quot; + data:post.url + &quot;&amp;text=&quot; + data:post.title' title='Share to Skype' style='background-color: #00AEEF;' target='_blank'><i class='icon ion-logo-skype'/></a> -->
                 <a class='lighter' onclick='javascript:window.print()' style='cursor: pointer; background-color: #4d4f53;' title='Print'><i class='icon ion-md-print'/></a>
               </div>
-              <script type='text/javascript'>
-                // Fixed share buttons on post pages
-                // <![CDATA[
-                (function() {
-                  var shareFix = document.querySelector('.post-social-links');
-                  function stickyShare() {
-                    if (window.scrollY >= 232) {
-                      shareFix.classList.add('share-pin');
-                    } else if (window.scrollY < 232) {
-                      shareFix.classList.remove('share-pin');
-                    }
-                  }
-                  window.addEventListener('scroll', stickyShare);
-                })();
-                // ]]>
-              </script>
             </b:includable>
             <b:includable id='status-message'>
               <b:if cond='data:blog.pageType == &quot;archive&quot;'>
@@ -1094,7 +871,7 @@
               <b:if cond='data:blog.pageType == &quot;index&quot;'>
                 <b:if cond='data:blog.searchQuery'>
                   <div class='status'>
-                    <span><data:numPosts/> Search results</span><b:if cond='data:numPosts != 0'><span> | </span><a expr:href='data:blog.homepageUrl + &quot;feeds/posts/default?alt=rss&amp;q=&quot; + data:blog.searchQuery' rel='nofollow' title='Subscribe to posts with this search query' type='application/rss+xml'>RSS</a></b:if>
+                    <span><data:numPosts/> search results</span><b:if cond='data:numPosts != 0'><span> | </span><a expr:href='data:blog.homepageUrl + &quot;feeds/posts/default?alt=rss&amp;q=&quot; + data:blog.searchQuery' rel='nofollow' title='Subscribe to posts with this search query' type='application/rss+xml'>RSS</a></b:if>
                     <form expr:action='data:blog.homepageUrl + &quot;search/&quot;' method='get'>
                       <input autocomplete='off' expr:value='data:blog.searchQuery' id='s' name='q' placeholder='Search..' type='search'/>
                     </form>
@@ -1300,8 +1077,10 @@
             <b:includable id='threaded_comments' var='post'>
               <div class='comments'>
                 <div class='comments-header'>
-                  <h4><data:post.commentLabelFull/></h4>
-                  <b:include name='feedLinks'/>
+                  <b:if cond='data:post.numComments &gt; 0'>
+                    <h4><data:post.commentLabelFull/></h4>
+                    <b:include name='feedLinks'/>
+                  </b:if>
                 </div>
                 <b:if cond='data:blogTeamBlogMessage'>
                   <div class='not-allowed'>
@@ -1344,23 +1123,6 @@
                   </div>
                 </b:if>
               </div>
-              <script type='text/javascript'>
-                (function() {
-                // <![CDATA[
-                  var userAvatar = document.getElementsByClassName('avatar-image-container');
-                  for (i = 0; i < userAvatar.length; i++) {
-                    var userImage = userAvatar[i].firstChild;
-                    var userUrl = userImage.getAttribute('src');
-                    if (userUrl.includes("blogblog.com")) {
-                      userUrl = userImage.setAttribute('src', 'URL-TO-COMMENT-AUTHOR-DEFAULT-AVATAR');
-                    } else {
-                      var userSize = userUrl.replace("s35-c", "s48-c");
-                      userUrl = userImage.setAttribute('src', userSize);
-                    }
-                  }
-                // ]]>
-                })();
-              </script>
             </b:includable>
           </b:widget>
         </b:section>
@@ -1445,20 +1207,6 @@
                 </b:includable>
               </b:widget>
             </b:section>
-            <script type='text/javascript'>
-              // Calculating min-height of #post-sidebar for #main
-              // <![CDATA[
-              (function() {
-                window.onload = function() {
-                  var nav = document.getElementById('post-sidebar'),
-                      style = window.getComputedStyle(nav),
-                      height = style.getPropertyValue('height');
-                  var main = document.getElementById('main');
-                  main.style.minHeight = 'calc(' + height + ')';
-                }
-              })();
-              // ]]>
-            </script>
           </b:if>
         </div>
       </div>
@@ -1481,8 +1229,218 @@
         <svg class='footer-svg' fill='#000' height='18' viewBox='0 0 14 16' width='18' xmlns='http://www.w3.org/2000/svg'><path d='M9.5 3L8 4.5 11.5 8 8 11.5 9.5 13 14 8 9.5 3zm-5 0L0 8l4.5 5L6 11.5 2.5 8 6 4.5 4.5 3z'/></svg> with <svg class='footer-svg' fill='#000' height='18' viewBox='0 0 12 16' width='18' xmlns='http://www.w3.org/2000/svg'><path d='M11.2 3c-.52-.63-1.25-.95-2.2-1-.97 0-1.69.42-2.2 1-.51.58-.78.92-.8 1-.02-.08-.28-.42-.8-1-.52-.58-1.17-1-2.2-1-.95.05-1.69.38-2.2 1-.52.61-.78 1.28-.8 2 0 .52.09 1.52.67 2.67C1.25 8.82 3.01 10.61 6 13c2.98-2.39 4.77-4.17 5.34-5.33C11.91 6.51 12 5.5 12 5c-.02-.72-.28-1.39-.8-2.02V3z' fill-rule='evenodd'/></svg> by <a href='https://www.web-xaser.ru' rel='noopener' style='color: #000;' target='_blank'><b>@web_xaser</b></a>
       </footer>
     </div>
-    <a class='scrollTop lighter' href='#' id='gotop' onclick='top.goTop(); return false;' title='Go Top'/>
-    <div id='dark00' onclick='document.getElementById(&apos;slider&apos;).classList.toggle(&apos;closed&apos;),document.getElementById(&apos;dark00&apos;).classList.toggle(&apos;dark0&apos;),document.getElementById(&apos;page&apos;).classList.toggle(&apos;no-overflow&apos;);'/>
-    <div id='dark01' onclick='document.getElementById(&apos;s&apos;).classList.toggle(&apos;active&apos;),document.getElementById(&apos;dark01&apos;).classList.toggle(&apos;dark1&apos;),document.getElementById(&apos;page&apos;).classList.toggle(&apos;no-overflow&apos;);'/>
+    <a class='scrollTop lighter' title='Go Top'/>
+    <div id='dark00'/>
+    <div id='dark01'/>
+    <script type='text/javascript'>
+      //<![CDATA[
+      (function() {
+        // ===== Scroll to top button =====
+        function trackScroll() {
+          var scrolled = window.pageYOffset;
+          var coords = document.documentElement.clientHeight;
+          if (scrolled > 232) {
+            goTopBtn.classList.add('scrollTop-show');
+          } else {
+            goTopBtn.classList.remove('scrollTop-show');
+          }
+        }
+        function backToTop() {
+          if (window.pageYOffset > 0) {
+            window.scrollBy(0, -50);
+            setTimeout(backToTop, 0);
+          }
+        }
+        var goTopBtn = document.querySelector('.scrollTop');
+        window.addEventListener('scroll', trackScroll);
+        goTopBtn.addEventListener('click', backToTop);
+        // ===== Setting the header background & icons for a sidebar menu links =====
+        var baseUrl = document.getElementById('base-url').hostname;
+        var basePath = document.getElementById('base-url').href;
+        var link = document.getElementsByClassName('menu-link');
+        var icon = document.getElementsByClassName('menu-icon');
+        for (i=0; i < link.length; i++) {
+          this.url = link[i].hostname;
+          this.path = link[i].href;
+          if (this.path == basePath) {
+            icon[i].setAttribute('style', 'background-image: url(//lh3.googleusercontent.com/-pov6ygFeG48/W3SVar1mLMI/AAAAAAAAMQ8/nLSj_vQxc8YqrB8c3YBSoMWEIL8rSipTgCEwYBhgL/home.png);');
+          } else if (this.url == baseUrl) {
+            icon[i].setAttribute('style', 'background-image: url(//lh3.googleusercontent.com/-lA9ECEMzduU/W3R_1j_L2WI/AAAAAAAAMQk/sXAc2lMu_JQS2-LZLTfK1ybx5I3_u7E_QCEwYBhgL/article.png);');
+          } else {
+            icon[i].setAttribute('style', 'background-image: url(//lh3.googleusercontent.com/-7P41kBeLZ7s/W3STuFF3fVI/AAAAAAAAMQw/cuefYOP5OwEm07xY_6P8f3wV1sXTvX2OQCEwYBhgL/open-in-new.png);');
+            link[i].setAttribute('target', '_blank');
+            link[i].setAttribute('rel', 'noopener nofollow');
+          }
+        }
+        var menuTitle = document.getElementsByClassName('menu-title');
+        if (menuTitle != 'underfined') {
+          menuTitle[0].setAttribute('style', 'background: transparent url(' + blog_logo + ') no-repeat scroll 16px;');
+        }
+      })();
+      //]]>
+      <b:if cond='data:blog.pageType in ["index", "archive", "item"]'>
+      // <![CDATA[
+      (function() {
+        // ===== Open sidebar menu by clicking on black button =====
+        var blackMenuBtn = document.getElementsByClassName('main-menu_button')[0];
+        function menuOpen() {
+          var sliderClose = document.getElementById('slider').classList.toggle('closed');
+          var backgroundToggle = document.getElementById('dark00').classList.toggle('dark0');
+          var bodyOverflow = document.getElementById('page').classList.toggle('no-overflow');
+        }
+        blackMenuBtn.addEventListener('click', menuOpen, false);
+        // ===== Open search input by clicking on black button =====
+        var blackSearchBtn = document.getElementsByClassName('main-search_button')[0];
+        function searchOpen() {
+          var searchOpen = document.getElementById('s').classList.toggle('active');
+          var backgroundToggle = document.getElementById('dark01').classList.toggle('dark1');
+          var bodyOverflow = document.getElementById('page').classList.toggle('no-overflow');
+          var focus = document.getElementById('s').focus();
+        }
+        blackSearchBtn.addEventListener('click', searchOpen, false);
+        // ===== Fixed horizontal navigation on index pages =====
+        function stickyNav() {
+          var navFix = document.querySelector('#main-menu');
+          var searchFix = document.querySelector('.main-search_button');
+          var menuFix = document.querySelector('.main-menu_button');
+          if (window.scrollY >= 232) {
+            navFix.classList.add('nav-pin');
+            menuFix.classList.add('menuFix');
+            searchFix.classList.add('menuFix');
+          } else if (window.scrollY < 232) {
+            navFix.classList.remove('nav-pin');
+            menuFix.classList.remove('menuFix');
+            searchFix.classList.remove('menuFix');
+          }
+        }
+        window.addEventListener('scroll', stickyNav);
+      })();
+      //]]>
+      </b:if>
+      <b:if cond='data:blog.url != data:blog.homepageUrl and data:blog.pageType in ["index", "archive"]'>
+      // <![CDATA[
+      (function() {
+        // ===== Setting min-height of blog sidebar for main post block =====
+        var nav = document.getElementById('nav-sidebar'),
+            style = window.getComputedStyle(nav),
+            height = style.getPropertyValue('height');
+        var main = document.getElementById('main');
+        main.style.minHeight = 'calc(' + height + ')';
+      })();
+      // ]]>
+      </b:if>
+      <b:if cond='data:blog.pageType == "archive"'>
+      // <![CDATA[
+      (function() {
+        // ===== Hide pagination if number of visible posts less than archive posts =====
+        var pager = document.getElementById('pager');
+        if (archive_count != null || archive_count != 0 || archive_count == numPosts) {
+          pager.style.display = 'none';
+        }
+      })();
+      // ]]>
+      </b:if>
+      <b:if cond='data:blog.pageType == "index"'>
+        <b:if cond='data:blog.searchLabel'>
+        // <![CDATA[
+        (function() {
+          // ===== Hide pagination if number of visible posts less than label posts =====
+          var pager = document.getElementById('pager');
+          if (label_count != 0 || label_count <= numPosts) {
+            pager.style.display = 'none';
+          }
+        })();
+        // ]]>
+        </b:if>
+        <b:if cond='data:blog.searchQuery'>
+        // <![CDATA[
+        (function() {
+          // ===== Hide pagination if number of visible posts less than search posts =====
+          var pager = document.getElementById('pager');
+          if (searchPosts != 0 || searchPosts <= numPosts) {
+            pager.style.display = 'none';
+          }
+        })();
+        // ]]>
+        </b:if>
+      </b:if>
+      <b:if cond='data:blog.pageType == "item"'>
+      // <![CDATA[
+      (function() {
+        // ===== Post reading time counter =====
+        var post = document.getElementsByClassName('post-body')[0].innerText;
+        var words = (post.length / 200) / 6;
+        var time = Math.round(words);
+        var out = document.getElementsByClassName('reading-time')[0];
+        out.innerHTML = time + ' min read';
+        // ===== Fix share buttons =====
+        var shareFix = document.querySelector('.post-social-links');
+        function stickyShare() {
+          if (window.scrollY >= 232) {
+            shareFix.classList.add('share-pin');
+          } else if (window.scrollY < 232) {
+            shareFix.classList.remove('share-pin');
+          }
+        }
+        window.addEventListener('scroll', stickyShare);
+        // ===== Setting min-height of post sidebar for main post block =====
+        var nav = document.getElementById('post-sidebar'),
+            style = window.getComputedStyle(nav),
+            height = style.getPropertyValue('height');
+        var main = document.getElementById('main');
+        main.style.minHeight = 'calc(' + height + ')';
+        // ===== Default avatar for comment authors =====
+        var userAvatar = document.querySelectorAll('.avatar-image-container img');
+        for (i = 0; i < userAvatar.length; i++) {
+          var userUrl = userAvatar[i].getAttribute('src');
+          if (userUrl.includes("blogblog.com")) {
+            userUrl = userAvatar[i].setAttribute('src', '//www.shareicon.net/data/512x512/2017/06/21/887437_media_512x512.png');
+          } else if (userUrl.includes("googleusercontent.com")) {
+            var userSize = userUrl.replace("s35-c", "s64-c");
+            userUrl = userAvatar[i].setAttribute('src', userSize);
+          }
+        }
+      })();
+      // ]]>
+      </b:if>
+      // <![CDATA[
+      (function() {
+        // ===== Open sidebar menu by clicking on white button =====
+        var whiteMenuBtn = document.getElementsByClassName('hamburger-button')[0];
+        function menuOpen() {
+          var sliderClose = document.getElementById('slider').classList.toggle('closed');
+          var backgroundToggle = document.getElementById('dark00').classList.toggle('dark0');
+          var bodyOverflow = document.getElementById('page').classList.toggle('no-overflow');
+        }
+        whiteMenuBtn.addEventListener('click', menuOpen, false);
+        // ===== Open search input by clicking on white button =====
+        var whiteSearchBtn = document.getElementsByClassName('search-button')[0];
+        function searchOpen() {
+          var searchOpen = document.getElementById('s').classList.toggle('active');
+          var backgroundToggle = document.getElementById('dark01').classList.toggle('dark1');
+          var bodyOverflow = document.getElementById('page').classList.toggle('no-overflow');
+          var focus = document.getElementById('s').focus();
+        }
+        whiteSearchBtn.addEventListener('click', searchOpen, false);
+        // ===== Dark background for menu =====
+        var sliderBack = document.getElementById('dark00');
+        function sliderDark() {
+          var sliderClose = document.getElementById('slider').classList.toggle('closed');
+          var backgroundToggle = document.getElementById('dark00').classList.toggle('dark0');
+          var bodyOverflow = document.getElementById('page').classList.toggle('no-overflow');
+        }
+        sliderBack.addEventListener('click', sliderDark, false);
+        // ===== Dark background for search =====
+        var searchBack = document.getElementById('dark01');
+        function searchDark() {
+          var searchClose = document.getElementById('s').classList.toggle('active');
+          var backgrundToggle = document.getElementById('dark01').classList.toggle('dark1');
+          var boydOverflow = document.getElementById('page').classList.toggle('no-overflow');
+        }
+        searchBack.addEventListener('click', searchDark, false);
+      })();
+      //]]>
+    </script>
+    <b:include data='blog' name='google-analytics'/>
   </body>
 </html>
