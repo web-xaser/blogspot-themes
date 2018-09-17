@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html>
-<html b:css='true' b:templateVersion='2.1.9' b:version='2' expr:dir='data:blog.languageDirection' expr:lang='data:blog.locale' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<html b:css='true' b:templateVersion='2.1.10' b:version='2' expr:dir='data:blog.languageDirection' expr:lang='data:blog.locale' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
   <head>
     <title><b:if cond='data:blog.pageName'><data:blog.pageName/> | </b:if><data:blog.title/></title>
     <!-- Meta-tags -->
@@ -67,8 +67,8 @@
               <button class='hamburger-button' title='Open menu'/>
               <b:if cond='data:useImage'>
                 <img class='blog-logo' expr:alt='data:blog.title' expr:src='data:sourceUrl'/>
-                <style> .blog-title, .blog-description { margin-left: 64px !important; } </style>
-                <script>var blog_logo = &quot;<data:sourceUrl/>&quot;;</script>
+                <style type='text/css'> .blog-title, .blog-description { margin-left: 64px !important; } </style>
+                <script type='text/javascript'>var blog_logo = &quot;<data:sourceUrl/>&quot;;</script>
               </b:if>
               <h1 class='blog-title'>
                 <b:include name='title'/>
@@ -128,10 +128,10 @@
       <div class='main-outer'>
         <b:if cond='data:blog.pageType in ["index", "archive", "item"]'>
           <b:if cond='data:blog.pageType != &quot;item&quot;'>
-            <style>/* Styles for post-card elements */</style>
+            <style type='text/css'>/* Styles for post-card elements */</style>
           </b:if>
           <b:if cond='!data:view.isHomepage'>
-            <style>/* Styles for post-card elements on index pages */</style>
+            <style type='text/css'>/* Styles for post-card elements on index pages */</style>
           </b:if>
           <b:section class='menu-list' id='menu-list' maxwidgets='1' showaddelement='no'>
             <b:widget id='LinkList1' locked='true' title='Horizontal Menu' type='LinkList' version='1'>
@@ -154,7 +154,7 @@
         <div class='main-content'>
           <b:if cond='data:blog.url != data:blog.homepageUrl or data:mobile == &quot;false&quot;'>
             <b:if cond='data:blog.pageType == &quot;index&quot; or data:blog.pageType == &quot;archive&quot;'>
-              <style>.posts, .blog-pager { margin-left: 25%; }</style>
+               type='text/css'.posts, .blog-pager { margin-left: 25%; }</style>
               <b:section class='nav-sidebar' id='nav-sidebar' maxwidgets='3' showaddelement='yes'>
                 <b:widget id='Label1' locked='true' title='Tags' type='Label' version='1'>
                   <b:widget-settings>
@@ -203,7 +203,7 @@
                       </b:if>
                       <b:loop values='data:labels' var='label'>
                         <b:if cond='data:blog.url == data:label.url'>
-                          <script>var label_count = &#39;<data:label.count/>&#39;;</script>
+                          <script type='text/javascript'>var label_count = &#39;<data:label.count/>&#39;;</script>
                         </b:if>
                       </b:loop>
                   </b:includable>
@@ -249,7 +249,7 @@
                     </ul>
                     <b:loop values='data:data' var='i'>
                       <b:if cond='data:blog.url == data:i.url'>
-                        <script>var archive_count = &#39;<data:i.post-count/>&#39;;</script>
+                        <script type='text/javascript'>var archive_count = &#39;<data:i.post-count/>&#39;;</script>
                       </b:if>
                     </b:loop>
                   </b:includable>
@@ -272,7 +272,7 @@
                     </b:loop>
                     <b:loop values='data:intervalData' var='interval'>
                       <b:if cond='data:blog.url == data:interval.url'>
-                        <script>var archive_count = &#39;<data:interval.post-count/>&#39;;</script>
+                        <script type='text/javascript'>var archive_count = &#39;<data:interval.post-count/>&#39;;</script>
                       </b:if>
                     </b:loop>
                   </b:includable>
@@ -292,7 +292,7 @@
                     </select>
                     <b:loop values='data:data' var='i'>
                       <b:if cond='data:blog.url == data:i.url'>
-                        <script>var archive_count = &#39;<data:i.post-count/>&#39;;</script>
+                        <script type='text/javascript'>var archive_count = &#39;<data:i.post-count/>&#39;;</script>
                       </b:if>
                     </b:loop>
                   </b:includable>
@@ -410,11 +410,9 @@
             </b:includable>
             <b:includable id='commentDeleteIcon' var='comment'>
               <span expr:class='&quot;item-control &quot; + data:comment.adminClass'>
-                <div class='comment-footer'>
-                  <a class='comment-delete-icon' expr:href='data:comment.deleteUrl'>
-                    <data:top.deleteCommentMsg/>
-                  </a>
-                </div>
+                <a class='comment-delete-icon' expr:href='data:comment.deleteUrl'>
+                  <i class='icon ion-md-trash'/> Delete
+                </a>
               </span>
             </b:includable>
             <b:includable id='comment_count_picker' var='post'>
@@ -449,37 +447,43 @@
                   </b:if>
                   <div class='comments-block'>
                     <b:loop values='data:post.comments' var='comment'>
-                      <div class='comment' expr:id='data:comment.id'>
-                        <a expr:name='data:comment.anchorName'/>
+                      <div class='comment' expr:id='&quot;c&quot; + data:comment.id'>
                         <b:if cond='data:blog.enabledCommentProfileImages'>
                           <data:comment.authorAvatarImage/>
                         </b:if>
                         <div class='comment-header'>
                           <div class='comment-author'>
-                            <data:comment.author/>
+                            <b:if cond='data:comment.authorUrl'>
+                              <a expr:href='data:comment.authorUrl' rel='noopener nofollow' target='_blank'>
+                                <data:comment.author/>
+                              </a>
+                            <b:else/>
+                              <data:comment.author/>
+                            </b:if>
+                            <b:if cond='data:comment.inReplyTo'>
+                              <span class='reply'>
+                                <a class='darker' expr:href='&quot;#c&quot; + data:comment.inReplyTo'>
+                                  <i class='icon ion-md-undo'/> In reply to
+                                </a>
+                              </span>
+                            </b:if>
+                            <b:include data='comment' name='commentDeleteIcon'/>
                           </div>
                           <time>
-                            <a expr:href='&quot;#&quot; + data:comment.id' expr:title='data:commentLabel + &quot; link to comment&quot;' rel='nofollow'>
+                            <a class='darker' expr:href='&quot;#c&quot; + data:comment.id' rel='nofollow' title='Link to comment'>
                               <data:comment.timestamp/>
                             </a>
                           </time>
-                          <b:if cond='data:comment.inReplyTo'>
-                            in reply to
-                            <a expr:href='&quot;#&quot; + data:comment.inReplyTo'>
-                              this comment
-                            </a>
-                          </b:if>
                         </div>
                         <div class='comment-body'>
                           <b:if cond='data:comment.isDeleted'>
-                            <div style='font-style: italic; color: #888;'>
+                            <span class='deleted-comment'>
                               <data:comment.body/>
-                            </div>
+                            </span>
                           <b:else/>
                             <data:comment.body/>
                           </b:if>
                         </div>
-                        <b:include data='comment' name='commentDeleteIcon'/>
                       </div>
                     </b:loop>
                   </div>
@@ -509,7 +513,7 @@
                   <b:else/>
                     <b:if cond='data:post.allowComments'>
                       <div class='iframe-comments-link'>
-                        <a expr:href='data:post.addCommentUrl' expr:onclick='data:post.addCommentOnclick'>
+                        <a class='lighter' expr:href='data:post.addCommentUrl' expr:onclick='data:post.addCommentOnclick'>
                           <data:postCommentMsg/>
                         </a>
                       </div>
@@ -531,7 +535,7 @@
               </b:loop>
             </b:includable>
             <b:includable id='feedLinksBody' var='links'>
-              <b:if cond='data:post.allowNewComments and data:post.numComments &gt; 0'>
+              <b:if cond='data:post.allowNewComments or data:post.numComments &gt; 0'>
                 <a expr:href='data:blog.homepageUrl + &quot;feeds/&quot; + data:post.id + &quot;/comments/default?alt=rss&quot;' rel='nofollow' target='_blank' type='application/rss+xml'>RSS</a>
               <b:else/></b:if>
             </b:includable>
@@ -706,14 +710,14 @@
                 </b:if>
               </div>
               <b:if cond='data:blog.pageType == &quot;archive&quot;'>
-                <script>var numPosts = &#39;<data:posts.length/>&#39;;</script>
+                <script type='text/javascript'>var numPosts = &#39;<data:posts.length/>&#39;;</script>
               </b:if>
               <b:if cond='data:blog.pageType == &quot;index&quot;'>
                 <b:if cond='data:blog.searchLabel'>
-                  <script>var numPosts = &#39;<data:posts.length/>&#39;;</script>
+                  <script type='text/javascript'>var numPosts = &#39;<data:posts.length/>&#39;;</script>
                 </b:if>
                 <b:if cond='data:blog.searchQuery'>
-                  <script>var numPosts = &#39;<data:posts.length/>&#39;; var searchPosts= &#39;<data:numPosts/>&#39;;</script>
+                  <script type='text/javascript'>var numPosts = &#39;<data:posts.length/>&#39;; var searchPosts= &#39;<data:numPosts/>&#39;;</script>
                 </b:if>
               </b:if>
             </b:includable>
@@ -739,6 +743,7 @@
                     <meta expr:content='data:label.name' property='article:tag'/>
                   </b:loop>
                 </b:if>
+                <script type='text/javascript'>var pageUrl = &quot;<data:post.canonicalUrl/>&quot;;</script>
               </b:if>
               <b:if cond='data:blog.pageType != &quot;item&quot; and data:blog.pageType != &quot;static_page&quot;'>
                 <article class='post-card'>
@@ -749,11 +754,11 @@
                     <b:if cond='data:post.dateHeader'>
                       <time expr:datetime='data:post.timestampISO8601' pubdate='pubdate'>
                         <data:post.dateHeader/>
-                        <script>postDate = &quot;<data:post.dateHeader/>&quot;;</script>
+                        <script type='text/javascript'>postDate = &quot;<data:post.dateHeader/>&quot;;</script>
                       </time>
                     <b:else/>
                       <time expr:datetime='data:post.timestampISO8601' pubdate='pubdate'>
-                        <script>document.write(postDate);</script>
+                        <script type='text/javascript'>document.write(postDate);</script>
                       </time>
                     </b:if>
                     <b:if cond='data:post.title'>
@@ -865,7 +870,7 @@
                 <div class='status'>
                   <span>Blog Archive</span>
                   <h4><data:blog.pageName/></h4>
-                  <span><script>document.write(&#39;Number of posts: &#39; + archive_count);</script></span>
+                  <span><script type='text/javascript'>document.write(&#39;Number of posts: &#39; + archive_count);</script></span>
                 </div>
               </b:if>
               <b:if cond='data:blog.pageType == &quot;index&quot;'>
@@ -888,7 +893,7 @@
                   <div class='status'>
                     <span>Posts with label | </span><a expr:href='data:blog.homepageUrl + &quot;feeds/posts/default?alt=rss&amp;category=&quot; + data:blog.pageName' rel='nofollow' title='Subscribe to posts with this label' type='application/rss+xml'>RSS</a>
                     <h4><data:blog.pageName/></h4>
-                    <span><script>document.write(&#39;Number of posts: &#39; + label_count);</script></span>
+                    <span><script type='text/javascript'>document.write(&#39;Number of posts: &#39; + label_count);</script></span>
                   </div>
                 </b:if>
               </b:if>
@@ -1020,7 +1025,7 @@
                     if (replybox == null) {
                       replybox = document.getElementById('comment-editor');
                       if (replybox != null) {
-                        replybox.height = '220px';
+                        replybox.height = '240px';
                         replybox.style.display = 'block';
                         replyUrlParts = replybox.src.split('#');
                       }
@@ -1077,10 +1082,8 @@
             <b:includable id='threaded_comments' var='post'>
               <div class='comments'>
                 <div class='comments-header'>
-                  <b:if cond='data:post.numComments &gt; 0'>
-                    <h4><data:post.commentLabelFull/></h4>
-                    <b:include name='feedLinks'/>
-                  </b:if>
+                  <h4><data:post.commentLabelFull/></h4>
+                  <b:include name='feedLinks'/>
                 </div>
                 <b:if cond='data:blogTeamBlogMessage'>
                   <div class='not-allowed'>
@@ -1127,7 +1130,7 @@
           </b:widget>
         </b:section>
           <b:if cond='data:blog.pageType == &quot;item&quot;'>
-            <style>.posts { margin-right: 25%; }</style>
+            <style type='text/css'>.posts { margin-right: 25%; }</style>
             <b:section class='post-sidebar' id='post-sidebar' maxwidgets='5' showaddelement='true'>
               <b:widget id='FeaturedPost1' locked='false' title='Featured Post' type='FeaturedPost' version='1'>
                 <b:widget-settings>
@@ -1389,15 +1392,40 @@
             height = style.getPropertyValue('height');
         var main = document.getElementById('main');
         main.style.minHeight = 'calc(' + height + ')';
-        // ===== Default avatar for comment authors =====
-        var userAvatar = document.querySelectorAll('.avatar-image-container img');
-        for (i = 0; i < userAvatar.length; i++) {
-          var userUrl = userAvatar[i].getAttribute('src');
-          if (userUrl.includes("blogblog.com")) {
-            userUrl = userAvatar[i].setAttribute('src', '//www.shareicon.net/data/512x512/2017/06/21/887437_media_512x512.png');
-          } else if (userUrl.includes("googleusercontent.com")) {
-            var userSize = userUrl.replace("s35-c", "s64-c");
-            userUrl = userAvatar[i].setAttribute('src', userSize);
+        window.onload = function() {
+          // ===== Default avatar for comment authors =====
+          var userAvatar = document.querySelectorAll('.avatar-image-container img');
+          for (i = 0; i < userAvatar.length; i++) {
+            var userUrl = userAvatar[i].getAttribute('src');
+            if (userUrl.includes("blogblog.com")) {
+              userUrl = userAvatar[i].setAttribute('src', '//www.shareicon.net/data/512x512/2017/06/21/887437_media_512x512.png');
+            } else if (userUrl.includes("googleusercontent.com")) {
+              var userSize = userUrl.replace("s35-c", "s64-c");
+              userUrl = userAvatar[i].setAttribute('src', userSize);
+            }
+          }
+          // ===== New class & url for comments links, changing position of comment actions buttons =====
+          var commentTime = document.querySelectorAll('.datetime a');
+          for (t = 0; t < commentTime.length; t++) {
+            var commentId = document.querySelectorAll('.comment-block')[t].id;
+            commentTime[t].setAttribute('href', pageUrl + '#' + commentId);
+            commentTime[t].classList.add('darker');
+          }
+          var authorName = document.querySelectorAll('cite.user');
+          var actions = document.querySelectorAll('.comment-actions');
+          for (l = 0; l < authorName.length; ++l) {
+            var w = authorName[l].offsetWidth;
+            actions[l].setAttribute('style', 'left: calc(80px + ' + w + 'px);');
+          }
+          var replyElem = document.querySelectorAll('[o="r"]');
+          for (r = 0; r < replyElem.length; ++r) {
+            replyElem[r].insertAdjacentHTML('afterbegin', '<i class="icon ion-md-undo"/> ');
+            replyElem[r].classList.add('darker');
+          }
+          var deleteElem = document.querySelectorAll('[o="d"]');
+          for (d = 0; d < deleteElem.length; ++d) {
+            deleteElem[d].insertAdjacentHTML('afterbegin', '<i class="icon ion-md-trash"/> ');
+            deleteElem[d].classList.add('darker');
           }
         }
       })();
