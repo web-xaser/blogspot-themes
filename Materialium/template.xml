@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html>
-<html b:css='true' b:templateVersion='2.1.10' b:version='2' expr:dir='data:blog.languageDirection' expr:lang='data:blog.locale' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<html b:css='true' b:templateVersion='2.1.11' b:version='2' expr:dir='data:blog.languageDirection' expr:lang='data:blog.locale' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
   <head>
     <title><b:if cond='data:blog.pageName'><data:blog.pageName/> | </b:if><data:blog.title/></title>
     <!-- Meta-tags -->
@@ -76,7 +76,7 @@
               <b:include name='description'/>
               <b:if cond='data:blog.isMobile == &quot;false&quot;'>
                 <form class='search-form' expr:action='data:blog.homepageUrl + &quot;search/&quot;' method='get'>
-                  <input autocomplete='off' autofocus='autofocus' class='search-input' id='s' name='q' placeholder='Search..' type='search'/>
+                  <input aria-label='Search' autocomplete='off' autofocus='autofocus' class='search-input' id='s' name='q' placeholder='Search..' type='search'/>
                 </form>
                 <button class='search-button' title='Search'/>
               </b:if>
@@ -140,13 +140,13 @@
                 <b:widget-setting name='sorting'>NONE</b:widget-setting>
               </b:widget-settings>
               <b:includable id='main'>
+                <button class='main-menu_button' title='Menu'/>
                 <ul class='main-menu' id='main-menu'>
-                  <button class='main-menu_button' title='Menu'/>
                   <b:loop values='data:links' var='link'>
                     <li><a class='darker' expr:href='data:link.target'><data:link.name/></a></li>
                   </b:loop>
-                  <button class='main-search_button' title='Search'/>
                 </ul>
+                <button class='main-search_button' title='Search'/>
               </b:includable>
             </b:widget>
           </b:section>
@@ -154,7 +154,7 @@
         <div class='main-content'>
           <b:if cond='data:blog.url != data:blog.homepageUrl or data:mobile == &quot;false&quot;'>
             <b:if cond='data:blog.pageType == &quot;index&quot; or data:blog.pageType == &quot;archive&quot;'>
-               type='text/css'.posts, .blog-pager { margin-left: 25%; }</style>
+              <style type='text/css'>.posts, .blog-pager { margin-left: 25%; }</style>
               <b:section class='nav-sidebar' id='nav-sidebar' maxwidgets='3' showaddelement='yes'>
                 <b:widget id='Label1' locked='true' title='Tags' type='Label' version='1'>
                   <b:widget-settings>
@@ -410,9 +410,7 @@
             </b:includable>
             <b:includable id='commentDeleteIcon' var='comment'>
               <span expr:class='&quot;item-control &quot; + data:comment.adminClass'>
-                <a class='comment-delete-icon' expr:href='data:comment.deleteUrl'>
-                  <i class='icon ion-md-trash'/> Delete
-                </a>
+                <a class='comment-delete-icon darker icon ion-md-trash' expr:href='data:comment.deleteUrl'> Delete</a>
               </span>
             </b:includable>
             <b:includable id='comment_count_picker' var='post'>
@@ -462,9 +460,7 @@
                             </b:if>
                             <b:if cond='data:comment.inReplyTo'>
                               <span class='reply'>
-                                <a class='darker' expr:href='&quot;#c&quot; + data:comment.inReplyTo'>
-                                  <i class='icon ion-md-undo'/> In reply to
-                                </a>
+                                <a class='darker icon ion-md-undo' expr:href='&quot;#c&quot; + data:comment.inReplyTo'> In reply to</a>
                               </span>
                             </b:if>
                             <b:include data='comment' name='commentDeleteIcon'/>
@@ -567,10 +563,10 @@
                   </h2>
                   <div class='post-header'>
                     <b:if cond='data:post.dateHeader'>
-                      <data:post.dateHeader/>
-                      <script type='text/javascript'>postDate = &quot;<data:post.dateHeader/>&quot;;</script>
+                      <span class='post-time'><data:post.dateHeader/></span>
+                      <script type='text/javascript'>var postDate = &quot;<data:post.dateHeader/>&quot;;</script>
                     <b:else/>
-                      <script type='text/javascript'>document.write(postDate);</script>
+                      <span class='post-time'><script type='text/javascript'>var pubdate = document.querySelectorAll(&#39;.post-time&#39;)[1]; pubdate.innerText = postDate;</script></span>
                     </b:if>
                     <b:if cond='data:blog.pageType != &quot;item&quot;'>
                       <b:if cond='data:blog.pageType != &quot;static_page&quot;'>
@@ -749,16 +745,16 @@
                 <article class='post-card'>
                   <a expr:href='data:post.url'>
                     <b:if cond='data:post.firstImageUrl != &quot;&quot;'>
-                      <img expr:alt='data:post.title' expr:src='data:post.firstImageUrl resizeImage 1200 resizeImage &quot;2:1&quot;'/>
+                      <img expr:alt='data:post.title' expr:src='data:post.firstImageUrl resizeImage 800 resizeImage &quot;2:1&quot;'/>
                     </b:if>
                     <b:if cond='data:post.dateHeader'>
-                      <time expr:datetime='data:post.timestampISO8601' pubdate='pubdate'>
+                      <time class='post-card_time' expr:datetime='data:post.timestampISO8601'>
                         <data:post.dateHeader/>
-                        <script type='text/javascript'>postDate = &quot;<data:post.dateHeader/>&quot;;</script>
+                        <script type='text/javascript'>var postDate = &quot;<data:post.dateHeader/>&quot;;</script>
                       </time>
                     <b:else/>
-                      <time expr:datetime='data:post.timestampISO8601' pubdate='pubdate'>
-                        <script type='text/javascript'>document.write(postDate);</script>
+                      <time class='post-card_time' expr:datetime='data:post.timestampISO8601'>
+                        <script type='text/javascript'>var pubdate = document.querySelectorAll(&#39;.post-card_time&#39;)[1]; pubdate.innerText = postDate;</script>
                       </time>
                     </b:if>
                     <b:if cond='data:post.title'>
@@ -870,7 +866,7 @@
                 <div class='status'>
                   <span>Blog Archive</span>
                   <h4><data:blog.pageName/></h4>
-                  <span><script type='text/javascript'>document.write(&#39;Number of posts: &#39; + archive_count);</script></span>
+                  <span class='status-number'/>
                 </div>
               </b:if>
               <b:if cond='data:blog.pageType == &quot;index&quot;'>
@@ -878,7 +874,7 @@
                   <div class='status'>
                     <span><data:numPosts/> search results</span><b:if cond='data:numPosts != 0'><span> | </span><a expr:href='data:blog.homepageUrl + &quot;feeds/posts/default?alt=rss&amp;q=&quot; + data:blog.searchQuery' rel='nofollow' title='Subscribe to posts with this search query' type='application/rss+xml'>RSS</a></b:if>
                     <form expr:action='data:blog.homepageUrl + &quot;search/&quot;' method='get'>
-                      <input autocomplete='off' expr:value='data:blog.searchQuery' id='s' name='q' placeholder='Search..' type='search'/>
+                      <input aria-label='Search' autocomplete='off' expr:value='data:blog.searchQuery' id='ss' name='q' placeholder='Search..' type='search'/>
                     </form>
                     <b:if cond='data:numPosts &gt; 0'>
                       <span><a class='darker' expr:href='data:blog.homepageUrl + &quot;search/?q=&quot; + data:blog.searchQuery + &quot;&amp;by-date=false&quot;'>Sort by relevance</a> <a class='darker' expr:href='data:blog.homepageUrl + &quot;search/?q=&quot; + data:blog.searchQuery + &quot;&amp;by-date=true&quot;'>Sort by time</a></span>
@@ -893,7 +889,7 @@
                   <div class='status'>
                     <span>Posts with label | </span><a expr:href='data:blog.homepageUrl + &quot;feeds/posts/default?alt=rss&amp;category=&quot; + data:blog.pageName' rel='nofollow' title='Subscribe to posts with this label' type='application/rss+xml'>RSS</a>
                     <h4><data:blog.pageName/></h4>
-                    <span><script type='text/javascript'>document.write(&#39;Number of posts: &#39; + label_count);</script></span>
+                    <span class='status-number'/>
                   </div>
                 </b:if>
               </b:if>
@@ -1168,7 +1164,7 @@
                   </b:if>
                   <div class='follow-content'>
                     <form action='//feedburner.google.com/fb/a/mailverify' expr:onsubmit='&quot;window.open(\&quot;//feedburner.google.com/fb/a/mailverify?uri=&quot; + data:feedPath + &quot;\&quot;, \&quot;popupwindow\&quot;, \&quot;scrollbars=yes,width=550,height=520\&quot;); return true&quot;' method='post' target='popupwindow'>
-                      <input class='follow-input' name='email' onblur='this.placeholder = &apos;Email address..&apos;' onfocus='this.placeholder = &apos;&apos;' placeholder='Email address..' type='text'/>
+                      <input expr:aria-label='data:title' class='follow-input' name='email' onblur='this.placeholder = &apos;Email address..&apos;' onfocus='this.placeholder = &apos;&apos;' placeholder='Email address..' type='text'/>
                       <span class='follow-text'>E-mail</span>
                       <input expr:value='data:feedPath' name='uri' type='hidden'/>
                       <input expr:value='data:blog.locale' name='loc' type='hidden'/>
@@ -1235,6 +1231,7 @@
     <a class='scrollTop lighter' title='Go Top'/>
     <div id='dark00'/>
     <div id='dark01'/>
+    
     <script type='text/javascript'>
       //<![CDATA[
       (function() {
@@ -1277,6 +1274,7 @@
         }
         var menuTitle = document.getElementsByClassName('menu-title');
         if (menuTitle != 'underfined') {
+          blog_logo = blog_logo.replace('http://','https://');
           menuTitle[0].setAttribute('style', 'background: transparent url(' + blog_logo + ') no-repeat scroll 16px;');
         }
       })();
@@ -1340,6 +1338,9 @@
         if (archive_count != null || archive_count != 0 || archive_count == numPosts) {
           pager.style.display = 'none';
         }
+        // ===== Set number of archive posts =====
+        var sn_a = document.querySelector('.status-number');
+        sn_a.innerText = 'Number of posts: ' + archive_count;
       })();
       // ]]>
       </b:if>
@@ -1352,6 +1353,9 @@
           if (label_count != 0 || label_count <= numPosts) {
             pager.style.display = 'none';
           }
+          // ===== Set number of label posts =====
+          var sn_l = document.querySelector('.status-number');
+          sn_l.innerText = 'Number of posts: ' + label_count;
         })();
         // ]]>
         </b:if>
@@ -1404,13 +1408,11 @@
               userUrl = userAvatar[i].setAttribute('src', userSize);
             }
           }
-          // ===== New class & url for comments links, changing position of comment actions buttons =====
           var commentTime = document.querySelectorAll('.datetime a');
           for (t = 0; t < commentTime.length; t++) {
-            var commentId = document.querySelectorAll('.comment-block')[t].id;
-            commentTime[t].setAttribute('href', pageUrl + '#' + commentId);
             commentTime[t].classList.add('darker');
           }
+          // ===== Change position of comment actions buttons =====
           var authorName = document.querySelectorAll('cite.user');
           var actions = document.querySelectorAll('.comment-actions');
           for (l = 0; l < authorName.length; ++l) {
@@ -1426,6 +1428,12 @@
           for (d = 0; d < deleteElem.length; ++d) {
             deleteElem[d].insertAdjacentHTML('afterbegin', '<i class="icon ion-md-trash"/> ');
             deleteElem[d].classList.add('darker');
+          }
+          var commentTime = document.querySelectorAll('.datetime a');
+          for (ct = 0; ct < commentTime.length; ct++) {
+            var commentId = document.querySelectorAll('.comment-block')[ct].id;
+            var currentUrl = commentTime[ct].getAttribute('href');
+            var newUrl = commentTime[ct].setAttribute('href', pageUrl + '#c' + commentId);
           }
         }
       })();
