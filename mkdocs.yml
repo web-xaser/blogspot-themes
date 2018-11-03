@@ -1,0 +1,65 @@
+# Project information
+site_name: Blogspot Docs
+site_description: 'Документация для разработчиков тем/шаблонов Blogger/Blogspot.'
+site_author: 'Pavel Chistyakov'
+nav:
+- Главная информация: 'index.md'
+- Roadmap: 'roadmap.md'
+- Виджеты:
+    - 'Основные виджеты': 'settings/basic-widgets.md'
+    - 'Все виджеты': 'settings/all-widgets.md'
+    - 'Доп. возможности': 'settings/extra.md'
+    - 'Внешние расширения': 'settings/external.md'
+- Настройки:
+    - 'Настройки блога': 'settings/basic-settings.md'
+    - 'Настройки SEO': 'settings/seo.md'
+    - 'Дизайнер шаблонов': 'settings/template-designer.md'
+    - 'Прочие настройки': 'settings/other-settings.md'
+theme:
+  name: 'material'
+  language: 'ru'
+  direction: 'ltr'
+  favicon: 'images/favicon.ico'
+  logo: 'images/logo.png'
+  font:
+    text: 'Roboto'
+    code: 'monospaced'
+  palette:
+    primary: 'deep orange'
+    accent: 'deep orange'
+  feature:
+    tabs: 'true'
+extra:
+  search:
+    language: 'en, ru'
+use_directory_urls: true
+# Extensions
+markdown_extensions:
+  - meta
+  - toc:
+      permalink: true
+  - codehilite:
+      linenums: true
+  - admonition
+  - footnotes
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tilde
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.tasklist:
+      custom_checkbox: true
+# Repository
+repo_name: 'web-xaser/blogspot-themes'
+repo_url: 'https://github.com/web-xaser/blogspot-themes/docs'
+edit_uri: ''
+# Congif
+docs_dir: 'docs-data'
+site_dir: 'docs'
+# Copyright
+copyright: 'MIT License &copy; 2018 by <a href="https://www.web-xaser.ru" target="_blank" rel="noopener">@web_xaser</a>'
+# Analytics
+# google_analytics:
+# - 'UA-XXXXXXXX-X'
+# - 'auto'
