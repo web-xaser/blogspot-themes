@@ -14,6 +14,13 @@
       <data:blog.title/>
     </title>
     <b:skin><![CDATA[
+/*
+* Theme Name: Eleganium
+* Theme URL: https://github.com/web-xaser/blogspot-themes/tree/master/Eleganium
+* Author: Pavel Chistyakov
+* Author URL: https://www.web-xaser.ru
+* License: MIT License (https://web-xaser.mit-license.org)
+*/
 /* ---------- MAIN ---------- */
 #navbar-iframe, #uds-searchControl {
 display:none;

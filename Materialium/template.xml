@@ -35,14 +35,20 @@
     <meta content='#b0120a' name='msapplication-TileColor'/>
     <meta content='#b0120a' name='theme-color'/>
     <!-- Styles -->
-    <b:skin>
-      <![CDATA[
-        /*
-        * Author info & styles
-        */
-        <Variable name="keycolor" description="Main Color" type="color" default="#b0120a" value="#b0120a"/>
-        <Variable name="header.background" description="Header Background" type="background" color="$(keycolor)" default="$(color) url() no-repeat scroll bottom center" value="$(color) url(URL-TO-HEADER-BACKGROUND) no-repeat scroll bottom center"/>
-      ]]>
+    <b:skin><![CDATA[
+/*
+* Theme Name: Materialium
+* Theme URL: https://github.com/web-xaser/blogspot-themes/tree/master/Materialium
+* Author: Pavel Chistyakov
+* Author URL: https://www.web-xaser.ru
+* License: MIT License (https://web-xaser.mit-license.org)
+*/
+/*
+* Styles
+*/
+<Variable name="keycolor" description="Main Color" type="color" default="#b0120a" value="#b0120a"/>
+<Variable name="header.background" description="Header Background" type="background" color="$(keycolor)" default="$(color) url() no-repeat scroll bottom center" value="$(color) url(URL-TO-HEADER-BACKGROUND) no-repeat scroll bottom center"/>
+]]>
     </b:skin>
     <!-- Scripts, fonts & other -->
     <link href='//fonts.googleapis.com/css?family=Roboto:300,400,700&amp;subset=cyrillic-ext,latin-ext' rel='stylesheet'/>

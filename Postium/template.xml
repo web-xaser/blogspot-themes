@@ -5,14 +5,14 @@
     <title><b:if cond='data:blog.pageName'><data:blog.pageName/> - </b:if><data:blog.title/></title>
     <meta content='width=device-width, initial-scale=1' name='viewport'/>
     <!-- Styles -->
-    <b:skin><![CDATA[*/
------------------------------------------------
-Theme Name: Postium
-Theme URL: https://github.com/web-xaser/blogspot-themes/tree/master/Postium
-Author: Pavel Chistyakov
-Author URL: https://www.web-xaser.ru
-License: https://web-xaser.mit-license.org
------------------------------------------------ */
+    <b:skin><![CDATA[
+/*
+* Theme Name: Postium
+* Theme URL: https://github.com/web-xaser/blogspot-themes/tree/master/Postium
+* Author: Pavel Chistyakov
+* Author URL: https://www.web-xaser.ru
+* License: MIT License (https://web-xaser.mit-license.org)
+*/
 /********** GENERAL **********/
 * {
 margin: 0;
