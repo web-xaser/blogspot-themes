@@ -798,14 +798,10 @@ padding: 8px;
             .social-buttons .facebook {
               background-color: #385998;
             }
-            .social-buttons .googleplus {
-              background-color: #D64035;
-            }
           </style>
           <div class='social-buttons'>
             <span class='twiter'><i class='fa fa-twitter'/><a expr:href='&quot;https://twitter.com/intent/tweet?text=&quot; + data:post.title + &quot;&amp;url=&quot; + data:post.url + &quot;&amp;via=YOUR-TWITTER-NICKNAME&quot;' onclick='javascript:window.open(this.href,&apos;&apos;,&apos;menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=290,width=600&apos;);return false;'>Twitter</a></span>
             <span class='facebook'><i class='fa fa-facebook'/><a expr:href='&quot;https://www.facebook.com/sharer/sharer.php?u=&quot; + data:post.url' onclick='javascript:window.open(this.href,&apos;&apos;,&apos;menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=700,width=610&apos;);return false;'>Facebook</a></span>
-            <span class='googleplus'><i class='fa fa-google-plus'/><a expr:href='&quot;https://plus.google.com/share?url=&quot; + data:post.url' onclick='javascript:window.open(this.href,&apos;&apos;,&apos;menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=400&apos;);return false;'>Google+</a></span>
           </div>
         </b:includable>
         <b:includable id='status-message'>
@@ -1536,7 +1532,6 @@ padding: 8px;
           <b:widget-setting name='content'>&lt;nav id=&quot;social&quot;&gt;
             &lt;a class=&quot;twitter&quot; href=&quot;https://twitter.com/YOUR-TWITTER-NICKNAME&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&lt;i class=&quot;fa fa-twitter&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
 &lt;a class=&quot;medium&quot; href=&quot;https://medium.com/@YOUR-MEDIUM-NICKNAME&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&lt;i class=&quot;fa fa-medium&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
-&lt;a class=&quot;google-plus&quot; href=&quot;https://plus.google.com/+YOUR-GOOGLE-PLUS-NICKNAME&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&lt;i class=&quot;fa fa-google-plus&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
 &lt;a class=&quot;facebook&quot; href=&quot;https://www.facebook.com/YOUR-FACEBOOK-NICKNAME&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&lt;i class=&quot;fa fa-facebook-square&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
 &lt;/nav&gt;</b:widget-setting>
         </b:widget-settings>

@@ -1231,7 +1231,7 @@ padding: 16px 16px 0;
           <div class='post__share'>
             <b:include name='feedLinksBody'/>
             <script async='async' src='//yastatic.net/share2/share.js'/>
-            <div class='ya-share2' data-services='twitter,vkontakte,facebook,gplus,collections,pocket' expr:data-description='data:post.snippet' expr:data-image='data:postFirstImageUrl' expr:data-lang='data:blog.locale' expr:data-title='data:post.title' expr:data-url='data:post.url'/>
+            <div class='ya-share2' data-services='twitter,vkontakte,facebook,collections,pocket' expr:data-description='data:post.snippet' expr:data-image='data:postFirstImageUrl' expr:data-lang='data:blog.locale' expr:data-title='data:post.title' expr:data-url='data:post.url'/>
           </div>
         </b:includable>
         <b:includable id='status-message'>
@@ -1567,9 +1567,6 @@ padding: 16px 16px 0;
                 </li>
                 <li>
                   <a href='LINK-TO-YOUR-FACEBOOK' target='_blank' title='Facebook'><i class='ion-social-facebook' style='color: #3b5999;'/></a>
-                </li>
-                <li>
-                  <a href='LINK-TO-YOUR-GOOGLE-PLUS' target='_blank' title='Google+'><i class='ion-social-googleplus' style='color: #dd4b39;'/></a>
                 </li>
                 <li>
                   <a href='LINK-TO-YOUR-GITHUB' target='_blank' title='Github'><i class='ion-social-github' style='color: #171515;'/></a>

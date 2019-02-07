@@ -1139,7 +1139,7 @@ font-size: 1em;
           <b:includable id='shareButtons' var='post'>
             <script src='//yastatic.net/es5-shims/0.0.2/es5-shims.min.js'/>
             <script src='//yastatic.net/share2/share.js'/>
-            <div class='ya-share2' data-services='twitter,vkontakte,facebook,gplus,collections,pocket'/>
+            <div class='ya-share2' data-services='twitter,vkontakte,facebook,collections,pocket'/>
           </b:includable>
           <b:includable id='status-message'>
             <div class='status'>
@@ -1404,7 +1404,6 @@ font-size: 1em;
             <b:widget-settings>
               <b:widget-setting name='content'>&lt;nav id=&quot;social&quot;&gt;&lt;a class=&quot;twitter&quot; href=&quot;https://twitter.com/YOUR-TWITTER-NICKNAME&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; title=&quot;Twitter&quot;&gt;&lt;i class=&quot;ion ion-social-twitter&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
 &lt;a class=&quot;github&quot; href=&quot;https://github.com/YOUR-GITHUB-NICKNAME&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; title=&quot;Github&quot;&gt;&lt;i class=&quot;ion ion-social-github&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
-&lt;a class=&quot;google-plus&quot; href=&quot;https://plus.google.com/+YOUR-GOOGLE-PLUS-NICKNAME&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; title=&quot;Google+&quot;&gt;&lt;i class=&quot;ion ion-social-googleplus&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
 &lt;a class=&quot;facebook&quot; href=&quot;https://www.facebook.com/YOUR-FACEBOOK-NICKNAME&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; title=&quot;Facebook&quot;&gt;&lt;i class=&quot;ion ion-social-facebook&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
 &lt;/nav&gt;&lt;style type=&#39;text/css&#39;&gt;#HTML1 #social { position: absolute; right: 88px; top: 6.5px; } #HTML1 #social .ion { font-size: 32px; padding: 8px; } @media (max-width: 1012px) { #HTML1 #social { position: static; } } @media (max-width: 664px) { #HTML1 #social .ion { font-size: 24px; } }&lt;/style&gt;</b:widget-setting>
             </b:widget-settings>

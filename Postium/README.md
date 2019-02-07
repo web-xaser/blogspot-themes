@@ -8,7 +8,7 @@ You can use all advantages of Blogger with this theme: stick widgets, internal s
 
 ## FAQ
 
-1. Replace `@TWITTER-OF-YOUR-SITE` to your site Twitter account nickname, `@YOUR-TWITTER-USERNAME` and `YOUR-TWITTER-NICKNAME` to your own Twitter account nickname, `LINK-TO-YOUR-TWITTER` to your Twitter profile URL, `LINK-TO-YOUR-FACEBOOK` to your Facebook profile URL, `LINK-TO-YOUR-GOOGLE-PLUS` to your Google+ profile URL, `LINK-TO-YOUR-GITHUB` to your Github profile URL, `LINK-TO-YOUR-INSTAGRAM` to your Instagram profile URL, `LINK-TO-YOUR-PINTEREST` to your Pinterest profile URL, `LINK-TO-YOUR-YOUTUBE` to your YouTube channel URL
+1. Replace `@TWITTER-OF-YOUR-SITE` to your site Twitter account nickname, `@YOUR-TWITTER-USERNAME` and `YOUR-TWITTER-NICKNAME` to your own Twitter account nickname, `LINK-TO-YOUR-TWITTER` to your Twitter profile URL, `LINK-TO-YOUR-FACEBOOK` to your Facebook profile URL, `LINK-TO-YOUR-GITHUB` to your Github profile URL, `LINK-TO-YOUR-INSTAGRAM` to your Instagram profile URL, `LINK-TO-YOUR-PINTEREST` to your Pinterest profile URL, `LINK-TO-YOUR-YOUTUBE` to your YouTube channel URL
 2. Replace `PATH-TO-32x32-ICON` to URL of your logo (with a width of 32px), `PATH-TO-48x48-ICON` to URL of your logo (with a width of 48px), `PATH-TO-180x180-ICON` to URL of your logo (with a width of 180px), `PATH-TO-144x144-ICON` to URL of your logo (with a width of 144px), `PATH-TO-YOUR-BLOG-LOGO` to URL of your blog logo image (if enabled)
 3. Delete first `<!-- ... -->` in post includable for working code highlighting ([how to use?](https://highlightjs.org/usage/))
 4. Delete second `<!-- ... -->` in post includable for working Disqus widget.

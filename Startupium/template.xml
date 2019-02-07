@@ -1434,7 +1434,6 @@ font: 400 16px/2 'Open Sans', Helvetica, Arial, sans-serif;
             <b:widget-settings>
               <b:widget-setting name='content'>&lt;nav id=&quot;social&quot;&gt;&lt;a class=&quot;twitter&quot; href=&quot;URL-TO-TWITTER-PROFILE&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; title=&quot;Twitter&quot;&gt;&lt;i class=&quot;icon ion-logo-twitter&quot;&gt;&lt;/i&gt;&lt;/a&gt;
 &lt;a class=&quot;github&quot; href=&quot;URL-TO-GITHUB-PROFILE&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; title=&quot;Github&quot;&gt;&lt;i class=&quot;icon ion-logo-github&quot;&gt;&lt;/i&gt;&lt;/a&gt;
-&lt;a class=&quot;google-plus&quot; href=&quot;URL-TO-GOOGLE-PLUS-PAGE&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; title=&quot;Google+&quot;&gt;&lt;i class=&quot;icon ion-logo-googleplus&quot;&gt;&lt;/i&gt;&lt;/a&gt;
 &lt;a class=&quot;facebook&quot; href=&quot;URL-TO-FACEBOOK-PAGE&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; title=&quot;Facebook&quot;&gt;&lt;i class=&quot;icon ion-logo-facebook&quot;&gt;&lt;/i&gt;&lt;/a&gt;
 &lt;/nav&gt;&lt;style type=&#39;text/css&#39;&gt;#HTML10 #social { position: absolute; right: 5%; top: 16px; } #HTML10 #social .icon { font-size: 32px; padding: 8px; } @media (max-width: 1012px) { #HTML10 #social { position: static; } } @media (max-width: 664px) { #HTML10 #social .icon { font-size: 24px; } }&lt;/style&gt;</b:widget-setting>
             </b:widget-settings>

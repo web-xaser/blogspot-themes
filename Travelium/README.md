@@ -8,7 +8,7 @@ You can use all advantages of Blogger with this theme: image in header, internal
 
 ## FAQ
 
-1. Replace `@TWITTER-OF-YOUR-SITE` to your site Twitter account nickname, `@YOUR-TWITTER-USERNAME` and `YOUR-TWITTER-NICKNAME` to your own Twitter account nickname, `YOUR-GITHUB-NICKNAME` to your Github account nickname, `YOUR-GOOGLE-PLUS-NICKNAME` to your Google Plus profile nickname or ID, `YOUR-FACEBOOK-NICKNAME` to your Facebook profile nickname, `YOUR-MEDIUM-NICKNAME` to your Medium profile nickname
+1. Replace `@TWITTER-OF-YOUR-SITE` to your site Twitter account nickname, `@YOUR-TWITTER-USERNAME` and `YOUR-TWITTER-NICKNAME` to your own Twitter account nickname, `YOUR-GITHUB-NICKNAME` to your Github account nickname, `YOUR-FACEBOOK-NICKNAME` to your Facebook profile nickname, `YOUR-MEDIUM-NICKNAME` to your Medium profile nickname
 2. Replace `PATH-TO-32x32-ICON` to URL of your logo (with a width of 32px), `PATH-TO-48x48-ICON` to URL of your logo (with a width of 48px), `PATH-TO-180x180-ICON` to URL of your logo (with a width of 180px), `PATH-TO-144x144-ICON` to URL of your logo (with a width of 144px), `PATH-TO-COVER-IMG` to URL of your blog cover image (if enabled), `PATH-TO-BANNER-IMG` to URL of ad banner image (under blog header) and `BANNER-LINK` to URL of ad link (if enabled), `PATH-TO-311x311-SIDEBAR-BANNER-IMG` to URL of ad banner image (in blog sidebar) and `SIDEBAR-BANNER-LINK` to URL of ad link (if enabled)
 3. Delete `<!-- ... -->` in comments includable for working Disqus widget.
 4. Replace `YOUR-DISQUS-NAME` to your Disqus community shortname ([what's a shortname?](https://help.disqus.com/customer/en/portal/articles/466208-what-s-a-shortname-))
